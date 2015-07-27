@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>NodeTrix</title>
+		<link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css"></script>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<style type="text/css">
+			.visualization { position: absolute; left: 5%; top: 70px; width: 90%; }
+			.background { stroke: transparent; stroke-width: 1px; fill: white; }
+			.brush { fill: transparent; stroke: gray; strokeWidth: 1px; }
+			.node-label rect { fill: white; } .node-label text { font-size: 9px; } .node { opacity: 0.3; }
+		</style>
+	</head>
+	<body>
+		<div class="visualization">
+
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-3">
+						<div class="row" style="margin-bottom: 20px;">
+							<label for="clusteringSelector">Clustering:</label>
+							<select id="clusteringSelector"  class="form-control" onchange="switchClustering(this);">
+								<option>labels</option>
+								<option>none</option>
+							</select>
+						</div>
+						<div class="row" style="margin-bottom: 20px;">
+							<label for="orderingSelector">Reordering:</label>
+							<select id="orderingSelector" class="form-control" onchange="switchOrdering(this);">
+								<option>clustering</option>
+								<option>labels</option>
+								<option>none</option>
+							</select>
+						</div>
+						<div class="row" style="font-size: 9px; line-height: 20px;">
+							<div>Infos:</div>
+							<div>To create a matrix with a lasso: press "a".</div>
+							<div>To create a matrix from a label: double click the colorscale.</div>
+							<div>To delete a matrix: double click on it.</div>
+							<div>To pan/zoom: press "alt" and drag / scroll.</div>
+							<div>To recenter: double click on the background canvas.</div>
+						</div>
+					</div>
+					<div class="col-xs-8">
+						<div id="nodetrix_spinner" style="width: 100px; margin: auto;">
+							<i class="fa fa-5x fa-spinner fa-spin"></i>
+							<div style="margin-top: 20px; font-size: 9px;">Computing the layout...</div>
+						</div>
+						<div id="nodetrix" style="margin-left: 5%; width: 90%; height: 500px; display: none;"></div>
+					</div>
+					<div class="col-xs-1">
+						<div id="colorscale" style="width: 100%; height: 302px;"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-3"></div>
+					<div class="col-xs-8">
+						<div style="margin: 10px; margin-left: 5%; font-size: 9px;">Force layout using <a target="_blank" href="https://github.com/mbostock/d3/wiki/Force-Layout">d3.js</a>. Data based on character coappearence in Victor Hugo's Les Misérables, compiled by <a target="_blank" href="http://www-cs-faculty.stanford.edu/~uno/sgb.html">Donald Knuth</a>.</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
+		<script type="text/javascript" src="/lib/keymaster.js"></script>
+		<script type="text/javascript" src="/lib/science.v1.js"></script>
+		<script type="text/javascript" src="/lib/reorder.v1.min.js"></script>
+
+		<script type="text/javascript" src="/src/context.js"></script>
+		<script type="text/javascript" src="/src/widgets/graph.js"></script>
+		<script type="text/javascript" src="/src/widgets/matrix.js"></script>
+		<script type="text/javascript" src="/src/widgets/nodetrix.js"></script>
+		<script type="text/javascript" src="/src/widgets/colorscale.js"></script>
+		<script type="text/javascript" src="/src/interactions/lasso.js"></script>
+		<script type="text/javascript" src="/src/interactions/zoom.js"></script>
+		<script type="text/javascript" src="/src/interactions/brush.js"></script>
+
+		<script type="text/javascript">
+		// interactions / visual encoding
+		var panNzoom;
+		var bindInteractions = function(data) {
+				var nodeHandler = $.context.widgets.nodetrix.nodeHandler, groupHandler = $.context.widgets.colorscale.groupHandler,
+					matrixHandler = $.context.widgets.nodetrix.matrixHandler, viewHandler = $.context.widgets.nodetrix.viewHandler,
+					selectedGroup = $.context.widgets.colorscale.selectedGroup;
+
+				nodeHandler.click = function(event, widget, d) { if (widget.config.allowHighlight) $.context.highlight(d.raw); };
+				nodeHandler.mouseover = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.nodetrix.highlight($.context.highlighted.concat([d.raw])); };
+				nodeHandler.mouseout = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.nodetrix.highlight($.context.highlighted); };
+				nodeHandler.dblclick = function(event, widget, d) { d.fixed = d.sticky = !d.sticky; $.context.widgets.nodetrix.render(); };
+
+				groupHandler.click = function(event, widget, d) { if (widget.config.allowHighlight) d.items.forEach(function(node) { $.context.highlight(node); }); };
+				groupHandler.mouseover = function(event, widget, d) { if ($.inArray(d, selectedGroup) < 0) { d.isHighlighted = true; widget.render(); } };
+				groupHandler.mouseout = function(event, widget, d) { if ($.inArray(d, selectedGroup) < 0) { d.isHighlighted = false; widget.render(); } };
+				groupHandler.dblclick = function(event, widget, d) { var cluster = []; d.items.forEach(function(node) { cluster.push(data.nodes.indexOf(node)); }); $.context.widgets.nodetrix.createNodetrix(cluster); };
+
+				matrixHandler.click = function(event, widget, d) { d.parent.fixed = d.parent.sticky = true; };
+				matrixHandler.dblclick = function(event, widget, d) { var list = []; $.context.highlighted.forEach(function(d) { list.push(d); }); list.forEach(function(d) { $.context.highlight(d); });	$.context.widgets.nodetrix.deleteNodetrix(d.parent); };
+
+				var item = null;
+				matrixHandler.mouseover = function(event, widget, d) {
+					item = d;
+					//setTimeout(function() {
+						if (item) {
+							item.parent.matrix.opacity = function(dd) { return dd.y === d.y || dd.x == d.y ? 1.0 : 0.2; };
+							item.parent.matrix.stroke = function(dd) { return dd.y === d.y || dd.x == d.y ? "gray" : "white"; };
+							$.context.widgets.nodetrix.cell_id = item && item.node ? item.node.id : -1;
+							$.context.widgets.nodetrix.bridgeStrokeWidth = function(dd) {
+								if ( (dd.originalSource && dd.originalSource.id == $.context.widgets.nodetrix.cell_id)
+									|| (dd.originalTarget && dd.originalTarget.id == $.context.widgets.nodetrix.cell_id) )
+								return 4; else return 1;
+						 	};
+							$.context.widgets.nodetrix.render();
+						}
+					//}, 600);
+					return false;
+				};
+				matrixHandler.mouseout = function(event, widget, d) {
+					item = null;
+					d.parent.matrix.opacity = function(dd) { return 1.0; };
+					d.parent.matrix.stroke = function(dd) { return "white"; };
+					$.context.widgets.nodetrix.bridgeStrokeWidth = function(dd) { return -1; };
+					$.context.widgets.nodetrix.render();
+					return false;
+				};
+
+				var keyDown = false; panNzoom = new interaction.Zoom($.context.widgets.nodetrix);
+				d3.select("body").on("keydown", function() { if (d3.event.altKey) { if (!keyDown) { keyDown = true; panNzoom.bind(); } } });
+				d3.select("body").on("keyup", function() { if (keyDown) { keyDown = false; panNzoom.unbind(); } });
+
+				var lasso = new interaction.Lasso($.context.widgets.nodetrix, 'nodesLayer', function(cluster) {
+					var node = []; cluster.forEach(function(d) { node.push(data.nodes.indexOf(d)); });
+					$.context.widgets.nodetrix.createNodetrix(cluster);
+				}, {});
+				lasso.bind('a');
+		};
+
+		// data loading
+		var load = function(data) {
+				var labels = []; data.nodes.forEach(function(d) { labels.push(d.name); });
+				$.context.widgets.nodetrix.bind(data, labels);
+				bindInteractions(data);
+				$.context.setLoaded();
+		};
+
+		// extract labels from data
+		var index = function(items, getGroup) {
+			var index = {}, reversed =  {};
+			items.forEach(function(d, i) { var label = getGroup(d, i); if (!(label in index)) index[label] = []; index[label].push(d); reversed[d.name] = label; });
+			return { index: index, reversed: reversed };
+		};
+
+		$.context = new d3Context(function() { d3.json("/data/miserables.json", function (data) { load(data); }); });
+		$.context.waitLoaded(function() {
+
+			// Compute a graph clustering
+			var nodes = []; $.context.widgets.nodetrix.graph.nodes.forEach(function(node) { nodes.push('raw' in node ? node.raw : node); });
+			var links = []; $.context.widgets.nodetrix.graph.links.forEach(function(link) { links.push('raw' in link ? link.raw : link); });
+
+			$.context.clustering = {};
+			$.context.clustering.labels = index(nodes, function(d) { return d.group; });
+			$.context.clustering.none = { index: {}, reversed: {} };
+
+			$.context.widgets.nodetrix.clustering = $.context.clustering.labels.index;
+
+			$.context.widgets.nodetrix.graph.nodes.forEach(function(d) { d.label = -1; d.labels = false; });
+
+			$.context.widgets.nodetrix.d3cola.on("end", function() { $("#nodetrix_spinner").hide(); $("#nodetrix").show(); /* panNzoom.centering(); */ });
+
+			var updateClustering = function() {
+				$.context.widgets.colorscale.bind($.context.clustering[$.currentClustering].index);
+				$.context.widgets.nodetrix.graph.nodes.forEach(function(d) { d.label = $.context.clustering[$.currentClustering].reversed[d.raw.name]; });
+				$.context.widgets.nodetrix.nodeColor = function(d) { return d.label !== undefined ? $.context.widgets.colorscale.coloring( d.label ) : $.context.widgets.nodetrix.config.nodeColor; };
+				$.context.widgets.nodetrix.render();
+			};
+			$.currentClustering = "labels"; updateClustering();
+
+			// Clustering selector
+			switchClustering = function(selector) { $.currentClustering = selector.value; updateClustering(); }
+
+			var updateOrdering = function() {
+				$.context.widgets.nodetrix.config.ordering = $.currentOrdering
+				$.context.widgets.nodetrix.update();
+			};
+			$.currentOrdering = "clustering"; updateOrdering();
+
+			switchOrdering = function(selector) { $.currentOrdering = selector.value; updateOrdering(); }
+		});
+
+		// Bind d3 widget to div elements
+		$.context.createWidget("nodetrix", nodetrix.NodeTrix, $("#nodetrix").width(), $("#nodetrix").height(), { nodecolor: "lightGray", nodestroke: "gray", linkstroke: "lightGray", allowlabels: true, nodesize: 10, cellsize: 12, round: 100, nodestrokewidth: 1 });
+		$.context.createWidget("colorscale", multiviz.Clustering, $("#colorscale").width(), $("#colorscale").height(), { hue: 220 });
+
+		// Save / Load buttons
+		$("#save").on("click", function() { $("#save").attr("href", 'data:attachment/json,' + $.context.widgets.nodetrix.toJSON()); });
+		$("#files").on("change", function(evt) { var file = evt.target.files[0]; var reader = new FileReader(); reader.onload = (function() { return function(e) { load( JSON.parse(e.target.result) ); }; })(file); reader.readAsText(file); });
+
+		</script>
+
+	</body>
+</html>
