@@ -1,28 +1,23 @@
+(function(nodetrix) {
 
-(function()
-{
-	/**
-	 * Represents a Context.
-	 * @constructor
-	 * @param {string} callback - callback.
-	 */
-	var d3Context = function(callback) { 
+	nodetrix.Context = function(callback) {
 		var ready = [], loaded = [];
-		var context = { 
-			widgets: {}, id: [], isReady: false, isLoaded: false,						
-			register : function(id) { this.id.push(id); },
+		var context = {
+			widgets: {},
+			ids: [],
+			isReady: false, isLoaded: false,
+			register : function(id) { this.ids.push(id); },
 			waitReady : function(callback) { if (!this.isReady) ready.push(callback); else callback(); },
 			waitLoaded : function(callback) { if (!this.isLoaded) loaded.push(callback); else callback(); },
 			update : function(id, content) {
-				this.widgets[id] = content; 
-				if (this.id.length === Object.keys(this.widgets).length) {
+				this.widgets[id] = content;
+				if (this.ids.length === Object.keys(this.widgets).length) {
 					this.setReady();
-					window.onresize = function() { for(var widget in context.widgets) if ("autoResize" in context.widgets[widget].config && ! context.widgets[widget].config.autoResize) context.widgets[widget].resize($(context.widgets[widget].rootID).parent().parent().width(), $(context.widgets[widget].rootID).parent().parent().height()); };
+					window.onresize = function() { for(var widget in context.widgets) if ("autoResize" in context.widgets[widget].config && ! context.widgets[widget].config.autoResize) context.widgets[widget].resize($(context.widgets[widget].id).parent().parent().width(), $(context.widgets[widget].id).parent().parent().height()); };
 				}
 			},
 			setReady: function() { this.isReady = true; while(ready.length > 0) { var callback = ready.pop(); callback(); } },
-			setLoaded: function() { this.isLoaded = true; for(var i = 0; i < loaded.length; i++) loaded[i](); }, //while(loaded.length > 0) { var callback = loaded.pop(); callback(); } },
-			
+			setLoaded: function() { this.isLoaded = true; for(var i = 0; i < loaded.length; i++) loaded[i](); },
 			dispatcher: d3.dispatch("highlight", "select"),
 			highlighted: [], lock: false,
 			clear : function() { this.lock = true; this.highlighted.splice(0, this.highlighted.length); this.dispatcher.highlight(this.highlighted); },
@@ -32,24 +27,14 @@
 		ready.push(callback);
 		d3.rebind(context, context.dispatcher, "on");
 		context.on("highlight", context.highlighting);
-		context.createWidget = function(id, widget, width, height, config) { 
-			$.context.register(id); 
-			$(document).ready(function() { $.context.update(id, new widget("#"+id, width, height, config)); }); 
+		context.createWidget = function(id, widget, width, height, config) {
+			$.context.register(id);
+			$(document).ready(function() { $.context.update(id, new widget("#"+id, width, height, config)); });
 		};
 		return context;
 	};
-	if (typeof define === "function" && define.amd) define(d3Context); else if (typeof module === "object" && module.exports) module.exports = d3Context;
-	this.d3Context = window.d3Context = d3Context;
-} () );
 
-
-(function()
-{
-	/**
-	 * Represents a Interaction.
-	 * @constructor
-	 */
-	d3Handler = function(widget) {
+	nodetrix.Handler = function(widget) {
 		var handler = {
 			mouseenter : function(event, widget, d) { },
 			mouseover : function(event, widget, d) { },
@@ -81,48 +66,75 @@
 		return handler;
 	};
 
-	if (typeof define === "function" && define.amd) define(d3Handler); else if (typeof module === "object" && module.exports) module.exports = d3Handler;
-	this.d3Handler = window.d3Handler = d3Handler;
-} () );
+})
+(this.nodetrix = this.nodetrix ? this.nodetrix : {});
 
+/**************************************************************/
 
-(function()
-{
-	/**
-	 * Represents a View.
-	 * @constructor
-	 * @param {string} root - root div.
-	 */
-	var d3View = function(rootID, width, height) {
+(function(nodetrix) {
+	if (!nodetrix.model) nodetrix.model = {};
 
-		this.rootID = rootID;
+	nodetrix.model.View = function(id, width, height) {
+		this.id = id;
 		this.width = width;
 		this.height = height;
 
 		this.zoom = d3.behavior.zoom();
-
-		this.svg = d3.select(rootID).append("svg").attr("width", this.width).attr("height", this.height);
-
-		this.layer = this.svg.append('rect').attr('class', 'background').attr('width', "100%").attr('height', "100%");
-		
-		this.vis = this.svg.append('g');
-
-		this.viewHandler = new window.d3Handler(this);
 	};
 
-	/** This method recenters the view. */
-	d3View.prototype.recenter = function() { return { translate: [0,0], scale: 1.0 }; };
+	nodetrix.model.View.prototype.update = function() { };
 
-	/** This method recenters the view. */
-	d3View.prototype.update = function() { this.viewHandler.bind(this.svg); this.svg.attr("width", this.width).attr("height", this.height); this.viewHandler.bind(this.svg); };
+	nodetrix.model.View.prototype.render = function() { };
 
-	/** This method recenters the view. */
-	d3View.prototype.render = function() {  };
+	nodetrix.model.View.prototype.resize = function(width, height) { this.width = width; this.height = height; };
+})
+(this.nodetrix = this.nodetrix ? this.nodetrix : {});
 
-	/** This method recenters the view. */
-	d3View.prototype.resize = function(width, height) { this.width = width; this.height = height; this.update(); };	
+/**************************************************************/
 
-	if (typeof define === "function" && define.amd) define(d3View); else if (typeof module === "object" && module.exports) module.exports = d3View;
-	this.d3View = window.d3View = d3View;
-} () );
+(function(nodetrix) {
+	if (!nodetrix.d3) nodetrix.d3 = {};
 
+	nodetrix.d3.View = function(id, width, height) {
+		nodetrix.model.View.call(this, id, width, height);
+
+		this.svg = d3.select(id).append("svg").attr("width", this.width).attr("height", this.height);
+
+		this.layer = this.svg.append('rect').attr('class', 'background').attr('width', "100%").attr('height', "100%");
+
+		this.vis = this.svg.append('g');
+
+		this.viewHandler = new nodetrix.Handler(this);
+	};
+
+	// Inheritance
+	for (var proto in nodetrix.model.View.prototype) nodetrix.d3.View.prototype[proto] = nodetrix.model.View.prototype[proto];
+
+	nodetrix.d3.View.prototype.update = function() { this.viewHandler.bind(this.svg); this.svg.attr("width", this.width).attr("height", this.height); this.viewHandler.bind(this.svg); };
+})
+(this.nodetrix = this.nodetrix ? this.nodetrix : {});
+
+/**************************************************************/
+
+(function(nodetrix) {
+	if (!nodetrix.three) nodetrix.three = {};
+
+	nodetrix.three.View = function(id, width, height) {
+		nodetrix.model.View.call(this, id, width, height);
+
+		this.renderer = new THREE.WebGLRenderer({alpha: true});
+		this.renderer.setSize(width, height);
+		$(id).append(this.renderer.domElement);
+
+		this.camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, 1, 10000);
+		this.camera.position.z = 1000;
+
+		this.scene = new THREE.Scene();
+		this.scene.add(this.camera);
+	};
+
+	// Inheritance
+	for (var proto in nodetrix.model.View.prototype) nodetrix.three.View.prototype[proto] = nodetrix.model.View.prototype[proto];
+
+})
+(this.nodetrix = this.nodetrix ? this.nodetrix : {});

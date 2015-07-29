@@ -1,19 +1,17 @@
-
-(function()
-{
+(function() {
 	/**
 	 * Represents a View.
 	 * @constructor
 	 * @param {string} root - root div.
 	 */
-	window.multiviz.Clustering = function(rootID, width, height, config) {
-		window.d3View.call(this, rootID, width, height);
+	nodetrix.Clustering = function(rootID, width, height, config) {
+		d3View.call(this, rootID, width, height);
 
 		// default visual properties
 		this.config = {
 			nodeSize: 'nodesize' in config ? config.nodesize : 15,
 			nodeStrokeWidth: 'nodestrokewidth' in config ? config.nodestrokewidth : 1,
-			colorscale: 'colorscale' in config ? config.colorscale : new window.multiviz.colorscale.Category(),
+			colorscale: 'colorscale' in config ? config.colorscale : new nodetrix.colorscale.Category(),
 			allowHighlight: 'allowHighlight' in config ? config.allowHighlight : true
 		};
 
@@ -29,7 +27,7 @@
 		this.group = this.groupLayer.selectAll(".group");
 		this.label = this.labelLayer.selectAll(".label");
 
-		this.groupHandler = new window.d3Handler(this);
+		this.groupHandler = new d3Handler(this);
 
 		// colorscale properties
 		this.precision = 10.0;
@@ -37,17 +35,17 @@
 	};
 
 	// Inheritance
-	for (var proto in window.d3View.prototype) window.multiviz.Clustering.prototype[proto] = window.d3View.prototype[proto];
+	for (var proto in d3View.prototype) nodetrix.Clustering.prototype[proto] = d3View.prototype[proto];
 
-	/** 
-	 * This method recenters the view. 
+	/**
+	 * This method recenters the view.
 	 */
-	window.multiviz.Clustering.prototype.resize = function(width, height) { };	
+	nodetrix.Clustering.prototype.resize = function(width, height) { };
 
 	/**
 	 * This method binds data
 	 */
-	window.multiviz.Clustering.prototype.bind = function(data) {
+	nodetrix.Clustering.prototype.bind = function(data) {
 		this.groups.splice(0, this.groups.length);
 		this.reversed = {};
 
@@ -57,7 +55,7 @@
 				items: data[group], // group items
 				id: i, // group id
 				label: group,
-				x: _this.config.nodeSize, y: _this.config.nodeSize + i * Math.round( (_this.height-_this.config.nodeSize*2) / (_this.precision) *100) / 100.0, // position 
+				x: _this.config.nodeSize, y: _this.config.nodeSize + i * Math.round( (_this.height-_this.config.nodeSize*2) / (_this.precision) *100) / 100.0, // position
 				isHighlighted: false,
 				size: function() { return _this.nodeSize(this); },
 				strokeWidth: function() { return _this.nodeStrokeWidth(this); },
@@ -70,16 +68,16 @@
 		this.update();
 	};
 
-	/** 
+	/**
 	 * This method updates the different layers
 	 */
-	window.multiviz.Clustering.prototype.update = function() {
+	nodetrix.Clustering.prototype.update = function() {
 		var _this = this;
 
 		this.group = this.group.data(_this.groups, function(d) { return d.id; });
 		this.group.enter().append('rect').attr("class", "group" );
 		this.group.exit().remove();
-	
+
 		this.label = this.label.data(_this.groups, function(d) { return d.id; });
 		this.label.enter().append('text').attr("class", "label" );
 		this.label.exit().remove();
@@ -90,10 +88,10 @@
 	};
 
 
-	/** 
+	/**
 	 * This method renders the different layers
 	 */
-	window.multiviz.Clustering.prototype.render = function() {			
+	nodetrix.Clustering.prototype.render = function() {
 
 		this.group.attr("transform", function(d, i) { return !isNaN(d.x) && !isNaN(d.y) ? "translate("+(d.x-d.size()/2.0)+","+(d.y-d.size()/2.0)+")" : "translate(0,0)"; })
 			.attr("width", function(d) { return d.size(); }).attr("height", function (d) { return d.size(); }).attr("rx", 0).attr("ry", 0)
@@ -104,10 +102,10 @@
 
 	};
 
-	/** 
+	/**
 	 * This method updates the different layers
 	 */
-	window.multiviz.Clustering.prototype.highlight = function(nodes) {
+	nodetrix.Clustering.prototype.highlight = function(nodes) {
 		var _this = this;
 
 		this.groups.forEach(function(d) { d.isHighlighted = false; });
@@ -118,23 +116,23 @@
 		this.render();
 	};
 
-	/** 
+	/**
 	 * This method returns the size of the nodes
 	 */
-	window.multiviz.Clustering.prototype.nodeSize = function(d) { return this.config.nodeSize; };
+	nodetrix.Clustering.prototype.nodeSize = function(d) { return this.config.nodeSize; };
 
-	/** 
+	/**
 	 * This method returns the stroke-width of the nodes
 	 */
-	window.multiviz.Clustering.prototype.nodeStrokeWidth = function(d) { return d.isHighlighted ? this.config.nodeStrokeWidth * 3 : this.config.nodeStrokeWidth; };
+	nodetrix.Clustering.prototype.nodeStrokeWidth = function(d) { return d.isHighlighted ? this.config.nodeStrokeWidth * 3 : this.config.nodeStrokeWidth; };
 
-	/** 
+	/**
 	 * This method returns the coloring
 	 */
-	window.multiviz.Clustering.prototype.coloring = function(val) { return this.config.colorscale ? this.config.colorscale.get(1-val) : d3.rgb("white"); };
+	nodetrix.Clustering.prototype.coloring = function(val) { return this.config.colorscale ? this.config.colorscale.get(1-val) : d3.rgb("white"); };
 
 }
-( (window.multiviz = window.multiviz || {}) && (window.multiviz = window.multiviz || {}) ));
+( (nodetrix = nodetrix || {}) && (nodetrix = nodetrix || {}) ));
 
 
 
@@ -145,13 +143,13 @@
 	 * @constructor
 	 * @param {string} root - root div.
 	 */
-	window.multiviz.Colorscale = function(rootID, width, height, config) {
-		window.d3View.call(this, rootID, width, height);
+	nodetrix.Colorscale = function(rootID, width, height, config) {
+		d3View.call(this, rootID, width, height);
 
 		// default visual properties
 		this.config = {
 			nodeSize: 'nodesize' in config ? config.nodesize : 1,
-			colorscale: 'colorscale' in config ? config.colorscale : new window.multiviz.colorscale.Gray(0, 220)
+			colorscale: 'colorscale' in config ? config.colorscale : new nodetrix.colorscale.Gray(0, 220)
 		};
 
 		// data model
@@ -166,7 +164,7 @@
 		this.group = this.groupLayer.selectAll(".group");
 		this.label = this.labelLayer.selectAll(".label");
 
-		this.groupHandler = new window.d3Handler(this);
+		this.groupHandler = new d3Handler(this);
 
 		// colorscale properties
 		this.precision = 10.0;
@@ -174,17 +172,17 @@
 	};
 
 	// Inheritance
-	for (var proto in window.d3View.prototype) window.multiviz.Colorscale.prototype[proto] = window.d3View.prototype[proto];
+	for (var proto in d3View.prototype) nodetrix.Colorscale.prototype[proto] = d3View.prototype[proto];
 
-	/** 
-	 * This method recenters the view. 
+	/**
+	 * This method recenters the view.
 	 */
-	window.multiviz.Colorscale.prototype.resize = function(width, height) { };	
+	nodetrix.Colorscale.prototype.resize = function(width, height) { };
 
 	/**
 	 * This method binds data
 	 */
-	window.multiviz.Colorscale.prototype.bind = function(data) {
+	nodetrix.Colorscale.prototype.bind = function(data) {
 		this.groups.splice(0, this.groups.length);
 		this.reversed = {};
 
@@ -194,7 +192,7 @@
 				items: data[group], // group items
 				id: i, // group id
 				label: group,
-				x: _this.config.nodeSize, y: _this.config.nodeSize + i * Math.round( (_this.height-_this.config.nodeSize*2) / (_this.precision) *100) / 100.0, // position 
+				x: _this.config.nodeSize, y: _this.config.nodeSize + i * Math.round( (_this.height-_this.config.nodeSize*2) / (_this.precision) *100) / 100.0, // position
 				isHighlighted: false,
 				size: function() { return _this.nodeSize(this); },
 				strokeWidth: function() { return _this.nodeStrokeWidth(this); },
@@ -207,16 +205,16 @@
 		this.update();
 	};
 
-	/** 
+	/**
 	 * This method updates the different layers
 	 */
-	window.multiviz.Colorscale.prototype.update = function() {
+	nodetrix.Colorscale.prototype.update = function() {
 		var _this = this;
 
 		this.group = this.group.data(_this.groups, function(d) { return d.id; });
 		this.group.enter().append('rect').attr("class", "group" );
 		this.group.exit().remove();
-	
+
 		this.label = this.label.data(_this.groups, function(d) { return d.id; });
 		this.label.enter().append('text').attr("class", "label" );
 		this.label.exit().remove();
@@ -227,10 +225,10 @@
 	};
 
 
-	/** 
+	/**
 	 * This method renders the different layers
 	 */
-	window.multiviz.Colorscale.prototype.render = function() {			
+	nodetrix.Colorscale.prototype.render = function() {
 
 		this.group.attr("transform", function(d, i) { return !isNaN(d.x) && !isNaN(d.y) ? "translate("+(d.x-d.size()/2.0)+","+(d.y-d.size()/2.0)+")" : "translate(0,0)"; })
 			.attr("width", function(d) { return d.size(); }).attr("height", function (d) { return d.size(); }).attr("rx", 0).attr("ry", 0)
@@ -241,23 +239,22 @@
 
 	};
 
-	/** 
+	/**
 	 * This method returns the coloring
 	 */
-	window.multiviz.Colorscale.prototype.coloring = function(val) { return this.config.colorscale ? this.config.colorscale.get(1-val) : d3.rgb("white"); };
-
-}
-( (window.multiviz = window.multiviz || {}) && (window.multiviz = window.multiviz || {}) ));
+	nodetrix.Colorscale.prototype.coloring = function(val) { return this.config.colorscale ? this.config.colorscale.get(1-val) : d3.rgb("white"); };
 
 
-(function() 
-{
-	window.multiviz.colorscale.Hue = function(hueMin, hueMax) {
+
+	nodetrix.colorscale = nodetrix.colorscale ? nodetrix.colorscale :{};
+
+
+	nodetrix.colorscale.Hue = function(hueMin, hueMax) {
 		return { get: function(value, threshold, precision) { return d3.hsl( (hueMin + (hueMax -hueMin) * (1 - value)) % 360, 1.0, 0.5 ).rgb(); } };
 	};
 
-	window.multiviz.colorscale.Gray = function() {
-		return { 
+	nodetrix.colorscale.Gray = function() {
+		return {
 			get: function(value) {
 				value = value; //*0.7;
 				var x = 0.299 * value * 255 + 0.587 * value * 255 + 0.114 * value * 255;
@@ -266,17 +263,17 @@
 		};
 	};
 
-	window.multiviz.colorscale.Category = function(hue) { /*
+	nodetrix.colorscale.Category = function(hue) { /*
 		var category20 = [
 			"#1f77b4", "#aec7e8",
 			"#ff7f0e", "#ffbb78",
 			"#2ca02c", "#98df8a",
 			"#bcbd22", "#dbdb8d","#ff9896",
-			"#d62728" 
+			"#d62728"
 			/*"#9467bd", "#c5b0d5"
 			/*"#8c564b", "#c49c94",
 			"#e377c2", "#f7b6d2",
-			"#7f7f7f", "#c7c7c7",		 
+			"#7f7f7f", "#c7c7c7",
 			"#17becf", "#9edae5"
 		];
 		var ddd_category10 = [
@@ -286,8 +283,8 @@
 		category10 = function() { return d3.scale.ordinal().range(scale_category10); };
 		var category1 = new d3.scale.category10();//category10();// new d3.scale.category10();
 		var category2 = new d3.scale.category20();
-		return { domain: function(val) { category1.domain(val); category2.domain(val); }, 
+		return { domain: function(val) { category1.domain(val); category2.domain(val); },
 		get: function(value, threshold, precision) { if (precision >= 10) return d3.rgb(category2(value)); else return d3.rgb(category1(value)); } };
 	};
-}
-( (window.colorscale = window.multiviz || {}) && (window.multiviz.colorscale = window.multiviz.colorscale || {}) ));
+
+})(this);

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<style type="text/css">
+			.background { stroke: transparent; stroke-width: 1px; fill: white; }
+			.brush { fill: transparent; stroke: gray; strokeWidth: 1px; }
+			.node-label rect { fill: white; } .node-label text { font-size: 9px; } .node { opacity: 0.3; }
+		</style>
+	</head>
+	<body>
+		<div id="graph" style="width: 500px; height: 500px; border: 1px gray solid; float: left;"></div>
+		<div id="colorscale" style="width: 100px; height: 302px; float: left;"></div>
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js" charset="utf-8"></script>
+
+		<script type="text/javascript" src="/lib/d3.min.js"></script>
+
+		<script type="text/javascript" src="/src/context.js"></script>
+		<script type="text/javascript" src="/src/widgets/graph.js"></script>
+	<!--		<script type="text/javascript" src="/src/interactions/zoom.js"></script>
+			<script type="text/javascript" src="/src/widgets/colorscale.js"></script> -->
+
+		<script type="text/javascript">
+		// interactions / visual encoding
+		var panNzoom;
+		var bindInteractions = function(data) {
+				var keyDown = false; panNzoom = new interaction.Zoom($.context.widgets.graph);
+				d3.select("body").on("keydown", function() { if (d3.event.altKey) { if (!keyDown) { keyDown = true; panNzoom.bind(); } } });
+				d3.select("body").on("keyup", function() { if (keyDown) { keyDown = false; panNzoom.unbind(); } });
+		};
+
+		// data loading
+		var load = function(data) {
+				var labels = []; data.nodes.forEach(function(d) { labels.push(d.name); });
+				$.context.widgets.graph.bind(data, labels);
+				//bindInteractions(data);
+				$.context.setLoaded();
+		};
+
+		// extract labels from data
+		var index = function(items, getGroup) {
+			var index = {}, reversed =  {};
+			items.forEach(function(d, i) { var label = getGroup(d, i); if (!(label in index)) index[label] = []; index[label].push(d); reversed[d.name] = label; });
+			return { index: index, reversed: reversed };
+		};
+
+		$.context = new nodetrix.Context(function() { d3.json("/data/miserables.json", function (data) { console.log(data); load(data); }); });
+		$.context.waitLoaded(function() {
+
+			// Compute a graph clustering
+			var nodes = []; $.context.widgets.graph.graph.nodes.forEach(function(node) { nodes.push('raw' in node ? node.raw : node); });
+			var links = []; $.context.widgets.graph.graph.links.forEach(function(link) { links.push('raw' in link ? link.raw : link); });
+
+			$.context.clustering = {};
+			$.context.clustering.labels = index(nodes, function(d) { return d.group; });
+			$.context.clustering.none = { index: {}, reversed: {} };
+
+			$.context.widgets.graph.clustering = $.context.clustering.labels.index;
+			$.context.widgets.graph.graph.nodes.forEach(function(d) { d.label = -1; d.labels = false; });
+
+			var updateClustering = function() {
+				//$.context.widgets.colorscale.bind($.context.clustering[$.currentClustering].index);
+				$.context.widgets.graph.graph.nodes.forEach(function(d) { d.label = $.context.clustering[$.currentClustering].reversed[d.raw.name]; });
+				//$.context.widgets.graph.nodeColor = function(d) { return d.label !== undefined ? $.context.widgets.colorscale.coloring( d.label ) : $.context.widgets.nodetrix.config.nodeColor; };
+				$.context.widgets.graph.render();
+			};
+			$.currentClustering = "labels"; updateClustering();
+
+		});
+
+		// Bind d3 widget to div elements
+		$.context.createWidget("graph", nodetrix.three.Graph, $("#graph").width(), $("#graph").height(), { nodecolor: "lightGray", nodestroke: "gray", linkstroke: "lightGray", allowlabels: true, nodesize: 10, cellsize: 12, round: 100, nodestrokewidth: 1 });
+
+		//$.context.createWidget("colorscale", nodetrix.Clustering, $("#colorscale").width(), $("#colorscale").height(), { hue: 220 });
+
+		</script>
+
+	</body>
+</html>

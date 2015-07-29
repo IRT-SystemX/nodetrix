@@ -43,14 +43,17 @@
 	window.interaction.Lasso.prototype.bind = function(keyBinding) {
 		var _this = this;
 
-		if (keyBinding) key(keyBinding, function() { $(event).css('cursor', 'crosshair'); });
+		//if (keyBinding) key(keyBinding, function() { $(event).css('cursor', 'crosshair'); });
+
+		var currentKey = keyBinding;
+		var isPressed = function(key) { return key == currentKey; }
 
 		this.widget.viewHandler.mousedown = function(event, widget, d) {
-			if (!keyBinding || key.isPressed(keyBinding)) { _this.isMouseDown = true; }
+			if (!keyBinding || isPressed(keyBinding)) { _this.isMouseDown = true; }
 		};
 
 		this.widget.viewHandler.mousemove = function(event, widget, d) {
-			if (!keyBinding || key.isPressed(keyBinding)) {
+			if (!keyBinding || isPressed(keyBinding)) {
 				$(event).css('cursor', 'crosshair');
 				var pos = { x: (d3.mouse(event)[0] - _this.widget.zoom.translate()[0]) / _this.widget.zoom.scale(), y: (d3.mouse(event)[1] - _this.widget.zoom.translate()[1]) / _this.widget.zoom.scale() };
 				if (_this.isMouseDown) {

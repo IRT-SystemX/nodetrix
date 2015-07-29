@@ -32,11 +32,11 @@ Already included :
 https://github.com/jdfekete/reorder.js/
 Copyright (c) 2015, Jean-Daniel Fekete
 Released under BSD license.
+* science.js
+https://github.com/jasondavies/science.js/
+Copyright (c) 2011, Jason Davies
+Released under BSD license.
 * d3.js
 http://d3js.org/
 Copyright (c) 2012, Michael Bostock
 Released under BSD license.
-* keymaster.js
-https://github.com/madrobby/keymaster
-Copyright (c) 2011-2013, Thomas Fuchs
-Released under the MIT license.
