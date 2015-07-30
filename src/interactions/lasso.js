@@ -1,12 +1,9 @@
+(function(nodetrix) {
+	if (!nodetrix.d3) nodetrix.d3 = {};
+	if (!nodetrix.d3.interaction) nodetrix.d3.interaction = {};
 
-(function()
-{
-	/**
-	 * Represents a Pan and Zoom interaction.
-	 * @constructor
-	 * @param {string} root - root div.
-	 */
-	window.interaction.Lasso = function(widget, layerName, callback, config) {
+	// Constructor
+	nodetrix.d3.interaction.Lasso = function(widget, layerName, callback, config) {
 
 		// default visual properties
 		this.config = {
@@ -26,10 +23,8 @@
 		this.lasso = widget[layerName].selectAll(".lasso");
 	};
 
-	/**
-	 * This method renders the different layers
-	 */
-	window.interaction.Lasso.prototype.update = function() {
+	// Update
+nodetrix.d3.interaction.Lasso.prototype.update = function() {
 		var _this = this;
 		this.lasso.remove();
 		this.lasso = this.lasso.data(this.points);
@@ -37,10 +32,8 @@
 		this.lasso.attr("d", this.lineFunction(this.points)).style("fill", "none").style("stroke", function(d) { return _this.stroke(); }).style("stroke-width", function(d) { return _this.strokeWidth(); });
 	};
 
-	/**
-	 * This method updates the different layers
-	 */
-	window.interaction.Lasso.prototype.bind = function(keyBinding) {
+	// Data binding
+	nodetrix.d3.interaction.Lasso.prototype.bind = function(keyBinding) {
 		var _this = this;
 
 		//if (keyBinding) key(keyBinding, function() { $(event).css('cursor', 'crosshair'); });
@@ -94,24 +87,17 @@
 		};
 	};
 
-	/**
-	 * This method updates the different layers
-	 */
-	window.interaction.Lasso.prototype.unbind = function() {
+	nodetrix.d3.interaction.Lasso.prototype.unbind = function() {
 		this.widget.viewHandler.mousedown = null;
 		this.widget.viewHandler.mousemove = null;
 		this.widget.viewHandler.mouseup = null;
 	};
 
-	/**
-	 * This method returns the stroke of the links
-	 */
-	window.interaction.Lasso.prototype.stroke = function(d) { return this.config.stroke; };
 
-	/**
-	 * This method returns the stroke-width of the links
-	 */
-	window.interaction.Lasso.prototype.strokeWidth = function(d) { return this.config.strokeWidth; };
+	// Extra methods
+	nodetrix.d3.interaction.Lasso.prototype.stroke = function(d) { return this.config.stroke; };
 
-}
-( (window.interaction = window.interaction || {}) ));
+	nodetrix.d3.interaction.Lasso.prototype.strokeWidth = function(d) { return this.config.strokeWidth; };
+
+})
+(this.nodetrix = this.nodetrix ? this.nodetrix : {});

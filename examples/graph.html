@@ -20,14 +20,15 @@
 
 		<script type="text/javascript" src="/src/context.js"></script>
 		<script type="text/javascript" src="/src/widgets/graph.js"></script>
-	<!--		<script type="text/javascript" src="/src/interactions/zoom.js"></script>
-			<script type="text/javascript" src="/src/widgets/colorscale.js"></script> -->
+		<script type="text/javascript" src="/src/widgets/colorscale.js"></script>
+		<script type="text/javascript" src="/src/interactions/zoom.js"></script>
 
 		<script type="text/javascript">
+		var renderer =  "d3"; //"gl";
+
 		// interactions / visual encoding
-		var panNzoom;
 		var bindInteractions = function(data) {
-				var keyDown = false; panNzoom = new interaction.Zoom($.context.widgets.graph);
+				var keyDown = false; var panNzoom = new nodetrix[renderer].interaction.Zoom($.context.widgets.graph);
 				d3.select("body").on("keydown", function() { if (d3.event.altKey) { if (!keyDown) { keyDown = true; panNzoom.bind(); } } });
 				d3.select("body").on("keyup", function() { if (keyDown) { keyDown = false; panNzoom.unbind(); } });
 		};
@@ -36,7 +37,9 @@
 		var load = function(data) {
 				var labels = []; data.nodes.forEach(function(d) { labels.push(d.name); });
 				$.context.widgets.graph.bind(data, labels);
-				//bindInteractions(data);
+
+				//bindInteractions(data); >> TODO: gl layer for interactions ???
+
 				$.context.setLoaded();
 		};
 
@@ -62,9 +65,9 @@
 			$.context.widgets.graph.graph.nodes.forEach(function(d) { d.label = -1; d.labels = false; });
 
 			var updateClustering = function() {
-				//$.context.widgets.colorscale.bind($.context.clustering[$.currentClustering].index);
+				$.context.widgets.colorscale.bind($.context.clustering[$.currentClustering].index);
 				$.context.widgets.graph.graph.nodes.forEach(function(d) { d.label = $.context.clustering[$.currentClustering].reversed[d.raw.name]; });
-				//$.context.widgets.graph.nodeColor = function(d) { return d.label !== undefined ? $.context.widgets.colorscale.coloring( d.label ) : $.context.widgets.nodetrix.config.nodeColor; };
+				$.context.widgets.graph.nodeColor = function(d) { return d.label !== undefined ? $.context.widgets.colorscale.coloring( d.label ) : $.context.widgets.nodetrix.config.nodeColor; };
 				$.context.widgets.graph.render();
 			};
 			$.currentClustering = "labels"; updateClustering();
@@ -72,9 +75,8 @@
 		});
 
 		// Bind d3 widget to div elements
-		$.context.createWidget("graph", nodetrix.three.Graph, $("#graph").width(), $("#graph").height(), { nodecolor: "lightGray", nodestroke: "gray", linkstroke: "lightGray", allowlabels: true, nodesize: 10, cellsize: 12, round: 100, nodestrokewidth: 1 });
-
-		//$.context.createWidget("colorscale", nodetrix.Clustering, $("#colorscale").width(), $("#colorscale").height(), { hue: 220 });
+		$.context.createWidget("graph", nodetrix[renderer].Graph, $("#graph").width(), $("#graph").height(), { nodecolor: "lightGray", nodestroke: "gray", linkstroke: "lightGray", allowlabels: true, nodesize: 10, cellsize: 12, round: 100, nodestrokewidth: 1 });
+		$.context.createWidget("colorscale", nodetrix.d3.Legend, $("#colorscale").width(), $("#colorscale").height(), { hue: 220 });
 
 		</script>
 

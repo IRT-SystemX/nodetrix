@@ -86,6 +86,8 @@
 
 	nodetrix.model.View.prototype.render = function() { };
 
+	nodetrix.model.View.prototype.recenter = function() { return { translate: [0.0, 0.0], scale: 1.0 }; };
+
 	nodetrix.model.View.prototype.resize = function(width, height) { this.width = width; this.height = height; };
 })
 (this.nodetrix = this.nodetrix ? this.nodetrix : {});
@@ -117,9 +119,9 @@
 /**************************************************************/
 
 (function(nodetrix) {
-	if (!nodetrix.three) nodetrix.three = {};
+	if (!nodetrix.gl) nodetrix.gl = {};
 
-	nodetrix.three.View = function(id, width, height) {
+	nodetrix.gl.View = function(id, width, height) {
 		nodetrix.model.View.call(this, id, width, height);
 
 		this.renderer = new THREE.WebGLRenderer({alpha: true});
@@ -134,7 +136,7 @@
 	};
 
 	// Inheritance
-	for (var proto in nodetrix.model.View.prototype) nodetrix.three.View.prototype[proto] = nodetrix.model.View.prototype[proto];
+	for (var proto in nodetrix.model.View.prototype) nodetrix.gl.View.prototype[proto] = nodetrix.model.View.prototype[proto];
 
 })
 (this.nodetrix = this.nodetrix ? this.nodetrix : {});

@@ -48,7 +48,7 @@
 							<i class="fa fa-5x fa-spinner fa-spin"></i>
 							<div style="margin-top: 20px; font-size: 9px;">Computing the layout...</div>
 						</div>
-						<div id="nodetrix" style="margin-left: 5%; width: 90%; height: 500px; display: none;"></div>
+						<div id="graph" style="margin-left: 5%; width: 90%; height: 500px; display: none;"></div>
 					</div>
 					<div class="col-xs-1">
 						<div id="colorscale" style="width: 100%; height: 302px;"></div>
@@ -82,24 +82,23 @@
 
 		<script type="text/javascript">
 		// interactions / visual encoding
-		var panNzoom;
 		var bindInteractions = function(data) {
-				var nodeHandler = $.context.widgets.nodetrix.nodeHandler, groupHandler = $.context.widgets.colorscale.groupHandler,
-					matrixHandler = $.context.widgets.nodetrix.matrixHandler, viewHandler = $.context.widgets.nodetrix.viewHandler,
+				var nodeHandler = $.context.widgets.graph.nodeHandler, groupHandler = $.context.widgets.colorscale.groupHandler,
+					matrixHandler = $.context.widgets.graph.matrixHandler, viewHandler = $.context.widgets.graph.viewHandler,
 					selectedGroup = $.context.widgets.colorscale.selectedGroup;
 
 				nodeHandler.click = function(event, widget, d) { if (widget.config.allowHighlight) $.context.highlight(d.raw); };
-				nodeHandler.mouseover = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.nodetrix.highlight($.context.highlighted.concat([d.raw])); };
-				nodeHandler.mouseout = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.nodetrix.highlight($.context.highlighted); };
-				nodeHandler.dblclick = function(event, widget, d) { d.fixed = d.sticky = !d.sticky; $.context.widgets.nodetrix.render(); };
+				nodeHandler.mouseover = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.graph.highlight($.context.highlighted.concat([d.raw])); };
+				nodeHandler.mouseout = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.graph.highlight($.context.highlighted); };
+				nodeHandler.dblclick = function(event, widget, d) { d.fixed = d.sticky = !d.sticky; $.context.widgets.graph.render(); };
 
 				groupHandler.click = function(event, widget, d) { if (widget.config.allowHighlight) d.items.forEach(function(node) { $.context.highlight(node); }); };
 				groupHandler.mouseover = function(event, widget, d) { if ($.inArray(d, selectedGroup) < 0) { d.isHighlighted = true; widget.render(); } };
 				groupHandler.mouseout = function(event, widget, d) { if ($.inArray(d, selectedGroup) < 0) { d.isHighlighted = false; widget.render(); } };
-				groupHandler.dblclick = function(event, widget, d) { var cluster = []; d.items.forEach(function(node) { cluster.push(data.nodes.indexOf(node)); }); $.context.widgets.nodetrix.createNodetrix(cluster); };
+				groupHandler.dblclick = function(event, widget, d) { var cluster = []; d.items.forEach(function(node) { cluster.push(data.nodes.indexOf(node)); }); $.context.widgets.graph.createNodetrix(cluster); };
 
 				matrixHandler.click = function(event, widget, d) { d.parent.fixed = d.parent.sticky = true; };
-				matrixHandler.dblclick = function(event, widget, d) { var list = []; $.context.highlighted.forEach(function(d) { list.push(d); }); list.forEach(function(d) { $.context.highlight(d); });	$.context.widgets.nodetrix.deleteNodetrix(d.parent); };
+				matrixHandler.dblclick = function(event, widget, d) { var list = []; $.context.highlighted.forEach(function(d) { list.push(d); }); list.forEach(function(d) { $.context.highlight(d); });	$.context.widgets.graph.deleteNodetrix(d.parent); };
 
 				var item = null;
 				matrixHandler.mouseover = function(event, widget, d) {
@@ -108,13 +107,13 @@
 						if (item) {
 							item.parent.matrix.opacity = function(dd) { return dd.y === d.y || dd.x == d.y ? 1.0 : 0.2; };
 							item.parent.matrix.stroke = function(dd) { return dd.y === d.y || dd.x == d.y ? "gray" : "white"; };
-							$.context.widgets.nodetrix.cell_id = item && item.node ? item.node.id : -1;
-							$.context.widgets.nodetrix.bridgeStrokeWidth = function(dd) {
-								if ( (dd.originalSource && dd.originalSource.id == $.context.widgets.nodetrix.cell_id)
-									|| (dd.originalTarget && dd.originalTarget.id == $.context.widgets.nodetrix.cell_id) )
+							$.context.widgets.graph.cell_id = item && item.node ? item.node.id : -1;
+							$.context.widgets.graph.bridgeStrokeWidth = function(dd) {
+								if ( (dd.originalSource && dd.originalSource.id == $.context.widgets.graph.cell_id)
+									|| (dd.originalTarget && dd.originalTarget.id == $.context.widgets.graph.cell_id) )
 								return 4; else return 1;
 						 	};
-							$.context.widgets.nodetrix.render();
+							$.context.widgets.graph.render();
 						}
 					//}, 600);
 					return false;
@@ -123,18 +122,18 @@
 					item = null;
 					d.parent.matrix.opacity = function(dd) { return 1.0; };
 					d.parent.matrix.stroke = function(dd) { return "white"; };
-					$.context.widgets.nodetrix.bridgeStrokeWidth = function(dd) { return -1; };
-					$.context.widgets.nodetrix.render();
+					$.context.widgets.graph.bridgeStrokeWidth = function(dd) { return -1; };
+					$.context.widgets.graph.render();
 					return false;
 				};
 
-				var keyDown = false; panNzoom = new interaction.Zoom($.context.widgets.nodetrix);
+				var keyDown = false, panNzoom = new nodetrix.d3.interaction.Zoom($.context.widgets.graph);
 				d3.select("body").on("keydown", function() { if (d3.event.altKey) { if (!keyDown) { keyDown = true; panNzoom.bind(); } } });
 				d3.select("body").on("keyup", function() { if (keyDown) { keyDown = false; panNzoom.unbind(); } });
 
-				var lasso = new interaction.Lasso($.context.widgets.nodetrix, 'nodesLayer', function(cluster) {
+				var lasso = new nodetrix.d3.interaction.Lasso($.context.widgets.graph, 'nodesLayer', function(cluster) {
 					var node = []; cluster.forEach(function(d) { node.push(data.nodes.indexOf(d)); });
-					$.context.widgets.nodetrix.createNodetrix(cluster);
+					$.context.widgets.graph.createNodetrix(cluster);
 				}, {});
 				lasso.bind('a');
 		};
@@ -142,7 +141,7 @@
 		// data loading
 		var load = function(data) {
 				var labels = []; data.nodes.forEach(function(d) { labels.push(d.name); });
-				$.context.widgets.nodetrix.bind(data, labels);
+				$.context.widgets.graph.bind(data, labels);
 				bindInteractions(data);
 				$.context.setLoaded();
 		};
@@ -154,28 +153,28 @@
 			return { index: index, reversed: reversed };
 		};
 
-		$.context = new d3Context(function() { d3.json("/data/miserables.json", function (data) { console.log(data); load(data); }); });
+		$.context = new nodetrix.Context(function() { d3.json("/data/miserables.json", function (data) { console.log(data); load(data); }); });
 		$.context.waitLoaded(function() {
 
 			// Compute a graph clustering
-			var nodes = []; $.context.widgets.nodetrix.graph.nodes.forEach(function(node) { nodes.push('raw' in node ? node.raw : node); });
-			var links = []; $.context.widgets.nodetrix.graph.links.forEach(function(link) { links.push('raw' in link ? link.raw : link); });
+			var nodes = []; $.context.widgets.graph.graph.nodes.forEach(function(node) { nodes.push('raw' in node ? node.raw : node); });
+			var links = []; $.context.widgets.graph.graph.links.forEach(function(link) { links.push('raw' in link ? link.raw : link); });
 
 			$.context.clustering = {};
 			$.context.clustering.labels = index(nodes, function(d) { return d.group; });
 			$.context.clustering.none = { index: {}, reversed: {} };
 
-			$.context.widgets.nodetrix.clustering = $.context.clustering.labels.index;
+			$.context.widgets.graph.clustering = $.context.clustering.labels.index;
 
-			$.context.widgets.nodetrix.graph.nodes.forEach(function(d) { d.label = -1; d.labels = false; });
+			$.context.widgets.graph.graph.nodes.forEach(function(d) { d.label = -1; d.labels = false; });
 
-			$.context.widgets.nodetrix.d3cola.on("end", function() { $("#nodetrix_spinner").hide(); $("#nodetrix").show(); /* panNzoom.centering(); */ });
+			$.context.widgets.graph.d3cola.on("end", function() { $("#nodetrix_spinner").hide(); $("#graph").show(); /* panNzoom.centering(); */ });
 
 			var updateClustering = function() {
 				$.context.widgets.colorscale.bind($.context.clustering[$.currentClustering].index);
-				$.context.widgets.nodetrix.graph.nodes.forEach(function(d) { d.label = $.context.clustering[$.currentClustering].reversed[d.raw.name]; });
-				$.context.widgets.nodetrix.nodeColor = function(d) { return d.label !== undefined ? $.context.widgets.colorscale.coloring( d.label ) : $.context.widgets.nodetrix.config.nodeColor; };
-				$.context.widgets.nodetrix.render();
+				$.context.widgets.graph.graph.nodes.forEach(function(d) { d.label = $.context.clustering[$.currentClustering].reversed[d.raw.name]; });
+				$.context.widgets.graph.nodeColor = function(d) { return d.label !== undefined ? $.context.widgets.colorscale.coloring( d.label ) : $.context.widgets.graph.config.nodeColor; };
+				$.context.widgets.graph.render();
 			};
 			$.currentClustering = "labels"; updateClustering();
 
@@ -183,8 +182,8 @@
 			switchClustering = function(selector) { $.currentClustering = selector.value; updateClustering(); }
 
 			var updateOrdering = function() {
-				$.context.widgets.nodetrix.config.ordering = $.currentOrdering
-				$.context.widgets.nodetrix.update();
+				$.context.widgets.graph.config.ordering = $.currentOrdering
+				$.context.widgets.graph.update();
 			};
 			$.currentOrdering = "clustering"; updateOrdering();
 
@@ -192,11 +191,11 @@
 		});
 
 		// Bind d3 widget to div elements
-		$.context.createWidget("nodetrix", nodetrix.NodeTrix, $("#nodetrix").width(), $("#nodetrix").height(), { nodecolor: "lightGray", nodestroke: "gray", linkstroke: "lightGray", allowlabels: true, nodesize: 10, cellsize: 12, round: 100, nodestrokewidth: 1 });
-		$.context.createWidget("colorscale", nodetrix.Clustering, $("#colorscale").width(), $("#colorscale").height(), { hue: 220 });
+		$.context.createWidget("graph", nodetrix.d3.NodeTrix, $("#graph").width(), $("#graph").height(), { nodecolor: "lightGray", nodestroke: "gray", linkstroke: "lightGray", allowlabels: true, nodesize: 10, cellsize: 12, round: 100, nodestrokewidth: 1 });
+		$.context.createWidget("colorscale", nodetrix.d3.Legend, $("#colorscale").width(), $("#colorscale").height(), { hue: 220 });
 
 		// Save / Load buttons
-		$("#save").on("click", function() { $("#save").attr("href", 'data:attachment/json,' + $.context.widgets.nodetrix.toJSON()); });
+		$("#save").on("click", function() { $("#save").attr("href", 'data:attachment/json,' + $.context.widgets.graph.toJSON()); });
 		$("#files").on("change", function(evt) { var file = evt.target.files[0]; var reader = new FileReader(); reader.onload = (function() { return function(e) { load( JSON.parse(e.target.result) ); }; })(file); reader.readAsText(file); });
 
 		</script>

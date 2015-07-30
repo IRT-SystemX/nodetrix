@@ -8,10 +8,10 @@
 			// default visual properties
 			this.config = {
 				nodeSize: config && 'nodesize' in config ? config.nodesize : 10,
-				nodeColor: config && 'nodecolor' in config ? config.nodecolor : "#0000FF",
-				nodeStroke: config && 'nodestroke' in config ? config.nodestroke : "#0000FF",
+				nodeColor: config && 'nodecolor' in config ? config.nodecolor : "#D3D3D3",
+				nodeStroke: config && 'nodestroke' in config ? config.nodestroke : "#808080",
 				nodeStrokeWidth: config && 'nodestrokewidth' in config ? config.nodestrokewidth : 1,
-				linkStroke: config && 'linkstroke' in config ? config.linkstroke : "#0000FF",
+				linkStroke: config && 'linkstroke' in config ? config.linkstroke : "#D3D3D3",
 				linkStrokeWidth: config && 'linkstrokewidth' in config ? config.linkstrokewidth : 1,
 
 				linkDistance: config && 'linkdistance' in config ? config.linkdistance : 60,
@@ -44,17 +44,19 @@
 	// Inheritance
 	for (var proto in nodetrix.model.View.prototype) nodetrix.model.Graph.prototype[proto] = nodetrix.model.View.prototype[proto];
 
+	// Recenter
+	nodetrix.model.Graph.prototype.recenter = function() {
+			var x = Number.POSITIVE_INFINITY, X = Number.NEGATIVE_INFINITY, y = Number.POSITIVE_INFINITY, Y = Number.NEGATIVE_INFINITY;
+			this.node.each(function (v) { x = Math.min(x, v.x - v.width / 2); X = Math.max(X, v.x + v.width / 2); y = Math.min(y, v.y - v.height / 2); Y = Math.max(Y, v.y + v.height / 2); });
+			var w = X - x, h = Y - y, cw = this.width, ch = this.height, s = Math.min(cw / w, ch / h), tx = (-x * s + (cw / s - w) * s / 2), ty = (-y * s + (ch / s - h) * s / 2);
+			return { translate: [tx, ty], scale: s };
+	};
+
 	// Resize
 	nodetrix.model.Graph.prototype.resize = function(width, height) {
 			nodetrix.model.View.prototype.resize.call(this);
 
 			this.d3cola.size([this.width, this.height]);
-
-			// re-center
-			var x = Number.POSITIVE_INFINITY, X = Number.NEGATIVE_INFINITY, y = Number.POSITIVE_INFINITY, Y = Number.NEGATIVE_INFINITY;
-			this.node.each(function (v) { x = Math.min(x, v.x - v.width / 2); X = Math.max(X, v.x + v.width / 2); y = Math.min(y, v.y - v.height / 2); Y = Math.max(Y, v.y + v.height / 2); });
-			var w = X - x, h = Y - y, cw = this.width, ch = this.height, s = Math.min(cw / w, ch / h), tx = (-x * s + (cw / s - w) * s / 2), ty = (-y * s + (ch / s - h) * s / 2);
-			var correction = { translate: [tx, ty], scale: s };
 
 			this.zoom.translate(correction.translate).scale(correction.scale);
 	};
@@ -189,8 +191,8 @@
 
 	// Constructor
 	nodetrix.d3.Graph = function(id, width, height, config) {
-			nodetrix.model.Graph.call(this, id, width, height);
 			nodetrix.d3.View.call(this, id, width, height);
+			nodetrix.model.Graph.call(this, id, width, height, config);
 
 			// visual layers
 			this.edgesLayer = this.vis.append("g");
@@ -309,12 +311,12 @@
 /**************************************************************/
 
 (function(nodetrix) {
-	if (!nodetrix.three) nodetrix.three = {};
+	if (!nodetrix.gl) nodetrix.gl = {};
 
 	// Constructor
-	nodetrix.three.Graph = function(id, width, height, config) {
-		nodetrix.model.Graph.call(this, id, width, height);
-		nodetrix.three.View.call(this, id, width, height);
+	nodetrix.gl.Graph = function(id, width, height, config) {
+		nodetrix.gl.View.call(this, id, width, height);
+		nodetrix.model.Graph.call(this, id, width, height, config);
 
 			/*
 			d3.timer(function(d) {
@@ -340,17 +342,17 @@
 	};
 
 	// Inheritance
-	for (var proto in nodetrix.model.Graph.prototype) nodetrix.three.Graph.prototype[proto] = nodetrix.model.Graph.prototype[proto];
+	for (var proto in nodetrix.model.Graph.prototype) nodetrix.gl.Graph.prototype[proto] = nodetrix.model.Graph.prototype[proto];
 
 	// Resize
-	nodetrix.three.Graph.prototype.resize = function(width, height) {
+	nodetrix.gl.Graph.prototype.resize = function(width, height) {
 		nodetrix.model.Graph.prototype.resize.call(this);
 		//this.vis.transition().attr("transform", "translate(" + this.zoom.translate() + ") scale(" + this.zoom.scale() + ")");
 		this.update();
 	};
 
 	// Update
-	nodetrix.three.Graph.prototype.update = function(width, height) {
+	nodetrix.gl.Graph.prototype.update = function(width, height) {
 
 			var particles = 1000
 			var mouseIdx = 200
@@ -388,7 +390,7 @@
 	};
 
 	// Render
-	nodetrix.three.Graph.prototype.render = function(width, height) {
+	nodetrix.gl.Graph.prototype.render = function(width, height) {
 
 			var _this = this;
 
