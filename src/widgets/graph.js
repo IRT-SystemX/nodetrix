@@ -18,7 +18,8 @@
 
 				round: config && 'round' in config ? config.round : 5,
 				allowHighlight: config && 'allowhighlight' in config ? config.allowhighlight : true,
-				allowLabels: config && 'allowlabels' in config ? config.allowlabels : true
+				allowLabels: config && 'allowlabels' in config ? config.allowlabels : true,
+				allowLayout: config && 'allowlayout' in config ? config.allowlayout : true
 			};
 
 			// data model
@@ -28,15 +29,7 @@
 
 			// force layout
 			//this.d3cola = cola.d3adaptor().linkDistance(this.config.linkDistance).size([this.width, this.height]).avoidOverlaps(true).nodes(this.forcegraph.nodes).links(this.forcegraph.links); //.convergenceThreshold(0.1);
-			this.d3cola = d3.layout.force().charge(-120).linkDistance(30).size([width, height])
-				.nodes(this.forcegraph.nodes).links(this.forcegraph.links);
-
-			this.tick = function() { _this.render(); };
-
-			this.layout = true;
-			// TODO: radial layout
-			// vax.herokuapp.com  view-source:http://mbostock.github.io/d3/talk/20111116/force-collapsible.html
-			// http://bl.ocks.org/mbostock/7607999
+			this.d3cola = d3.layout.force().charge(-120).linkDistance(30).size([width, height]);
 
 			this.nodeHandler = new nodetrix.Handler(this);
 	};
@@ -65,9 +58,12 @@
 	nodetrix.model.Graph.prototype.update = function() {
 			nodetrix.model.View.prototype.update.call(this);
 
-			var _this = this;
-			this.d3cola.on("tick", function() { _this.render(); });
-			this.d3cola.start();
+			if (this.config.allowLayout) {
+				var _this = this;
+				this.d3cola.nodes(this.forcegraph.nodes).links(this.forcegraph.links);
+				this.d3cola.on("tick", function() { _this.render(); });
+				this.d3cola.start();
+			}
 	};
 
 	// Render
@@ -87,7 +83,7 @@
 					raw: 'raw' in node ? node.raw : node, // raw node
 					id: i, //'id' in node ? node.id : i, // node id
 					fixed: 'fixed' in node ? node.fixed : false, // indicates if the node is fixed in the force layout
-					x: 'x' in node ? node.x : 0, y: 'y' in node ? node.y : 0, // position in the force layout
+					x: 'x' in node ? node.x : _this.width/2, y: 'y' in node ? node.y : _this.height/2, // position in the force layout
 					width: 'width' in node ? node.width : _this.config.nodeSize, height: 'height' in node ? node.height : _this.config.nodeSize, // size of the box to avoid overlap in d3cola and visual size
 					size: function() { return _this.nodeSize(this); },
 					fill: function() { return _this.nodeColor(this); }, // node color
@@ -151,13 +147,13 @@
 
 	nodetrix.model.Graph.prototype.nodeSize = function(d) { return d.isHighlighted ? this.config.nodeSize * 2.0 : this.config.nodeSize; };
 
-	nodetrix.model.Graph.prototype.nodeColor = function(d) { return this.config.nodeColor; };
+	nodetrix.model.Graph.prototype.nodeColor = function(d) { return d3.rgb(this.config.nodeColor); };
 
-	nodetrix.model.Graph.prototype.nodeStroke = function(d) { return this.config.nodeStroke; };
+	nodetrix.model.Graph.prototype.nodeStroke = function(d) { return d3.rgb(this.config.nodeStroke); };
 
 	nodetrix.model.Graph.prototype.nodeStrokeWidth = function(d) { return d.isHighlighted ? this.config.nodeStrokeWidth * 2 : this.config.nodeStrokeWidth; };
 
-	nodetrix.model.Graph.prototype.linkStroke = function(d) { return this.config.linkStroke; };
+	nodetrix.model.Graph.prototype.linkStroke = function(d) { return d3.rgb(this.config.linkStroke); };
 
 	nodetrix.model.Graph.prototype.linkStrokeWidth = function(d) { return this.config.linkStrokeWidth; };
 
@@ -318,27 +314,19 @@
 		nodetrix.gl.View.call(this, id, width, height);
 		nodetrix.model.Graph.call(this, id, width, height, config);
 
-			/*
-			d3.timer(function(d) {
-			  force.start()
-			  mouseNode.x = mousePosition[0], mouseNode.y = mousePosition[1]
-			  for(var i = 0; i + 1 < nodes.length; i++) {
-			    positions[i * 3] = nodes[i].x - width / 2
-			    positions[i * 3 + 1] = - (nodes[i].y - height / 2)
-			  }
-			  posBuff.needsUpdate = true // Important!
-			  renderer.render(scene, camera)
-			})
+			this.raycaster = new THREE.Raycaster(); this.raycaster.params.PointCloud.threshold = 0.1;
+			this.mouse = new THREE.Vector2();
 
-			d3.select('canvas')
-			  .on('mousemove', updateMouse)
-			  .call(d3.behavior.drag().on('drag', updateMouse))
+			var _this = this;
+			d3.select(this.id)
+				.on('mousemove', function() {
+					_this.mouse = d3.mouse(this); //console.log(_this.nodes.geometry.boundingBox);
+					_this.raycaster.setFromCamera(_this.mouse, _this.camera);
+					var intersects = _this.raycaster.intersectObject(_this.nodes);
+					if ( intersects.length > 0 ) console.log(intersects[0]);
+				})
+				.call(d3.behavior.drag().on('drag', function() { _this.mouse = d3.mouse(this); }));
 
-			function updateMouse() {
-			  var p = d3.mouse(this)
-			  mousePosition = p
-			}
-			*/
 	};
 
 	// Inheritance
@@ -351,60 +339,155 @@
 		this.update();
 	};
 
+	function roundRect(ctx, x, y, w, h, r) {
+		ctx.beginPath();
+		ctx.moveTo(x+r, y);
+		ctx.lineTo(x+w-r, y);
+		ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+		ctx.lineTo(x+w, y+h-r);
+		ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+		ctx.lineTo(x+r, y+h);
+		ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+		ctx.lineTo(x, y+r);
+		ctx.quadraticCurveTo(x, y, x+r, y);
+		ctx.closePath();
+		ctx.fill();
+		ctx.stroke();
+	}
+
+	function generateSprite() {
+		var canvas = document.createElement( 'canvas' );
+		canvas.width = 128; canvas.height = 128;
+		var context = canvas.getContext( '2d' );
+		var centerX = canvas.width / 2.0, centerY = canvas.height / 2.0;
+		var radius = canvas.width / 4.0;
+		context.beginPath();
+		context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+		context.fillStyle = 'rgba(255,255,255,1)';
+		context.fill();
+		context.lineWidth = canvas.width / 10.0;
+		context.strokeStyle = '#000000';
+		context.stroke();
+
+/*var gradient = context.createRadialGradient( canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2 );
+gradient.addColorStop( 0, 'rgba(255,255,255,1)' );
+gradient.addColorStop( 0.2, 'rgba(0,255,255,1)' );
+gradient.addColorStop( 0.8, 'rgba(0,0,64,1)' );
+gradient.addColorStop( 1, 'rgba(0,0,0,0)' );
+context.fillStyle = gradient;
+context.fillRect( 0, 0, canvas.width, canvas.height );
+context.fillStyle = "rgba(0, 0, 0, 0.0)";
+context.fillRect( 0, 0, canvas.width, canvas.height );
+var borderThickness = 2, fontsize = 12, fontface = "Arial";
+var message = "o";
+var canvas = document.createElement('canvas');
+var context = canvas.getContext('2d');
+context.font = "Bold " + fontsize + "px " + fontface;
+var metrics = context.measureText( message );
+var textWidth = metrics.width;
+// background color
+context.fillStyle   = "rgba(" + 255 + "," + 255 + "," + 255 + "," + 1 + ")";
+// border color
+context.strokeStyle = "rgba(" + 0 + "," + 0 + ","  + 0 + "," + 1 + ")";
+context.lineWidth = borderThickness;
+roundRect(context, borderThickness/2, borderThickness/2, textWidth + borderThickness, fontsize * 1.4 + borderThickness, 6);
+// text color
+context.fillStyle = "rgba(0, 0, 0, 1.0)";
+context.fillText( message, borderThickness, fontsize + borderThickness);
+*/
+		var texture = new THREE.Texture(canvas)
+		texture.needsUpdate = true;
+		return texture;
+	}
+
 	// Update
 	nodetrix.gl.Graph.prototype.update = function(width, height) {
+		var _this = this;
 
-			var particles = 1000
-			var mouseIdx = 200
-			this.positions = new Float32Array(particles * 3)
-			var dx = 2
-			var norm = d3.random.normal(0, 100)
-			for(var i = 0; i < this.positions.length; i+=3) {
-					var x = norm(), y = norm(), z = norm()
-					if (i / 3 < particles / 3) x -= 0.5, y += 1, z -= 0.5
-					else if (i / 3 < particles / 3 * 2) x += dx, y += dx, z += dx
-					else x -= dx, y -= dx, z -= dx
-					this.positions[i] = x, this.positions[i + 1] = y, this.positions[i + 2] = z;
+		if (! this.buffers) {
+			this.buffers = {
+				nodes: {
+					positions: new THREE.BufferAttribute(new Float32Array(this.visualgraph.nodes.length * 3), 3),
+					colors: new THREE.BufferAttribute(new Float32Array(this.visualgraph.nodes.length * 3), 3),
+					sizes: new THREE.BufferAttribute(new Float32Array(this.visualgraph.nodes.length), 1)
+				},
+				links: {
+					positions: new THREE.BufferAttribute(new Float32Array(this.visualgraph.links.length * 6), 3),
+					colors: new THREE.BufferAttribute(new Float32Array(this.visualgraph.links.length * 6), 3)
+				}
+			};
+
+			var uniforms = { rawsize: { type: "f", value: 25.0 }, texture: { type: "t", value: generateSprite() } };
+			var vertexShader = "attribute float size; uniform float rawsize; varying vec3 vColor; void main() { vColor = color; gl_PointSize = size; gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }";
+			var fragmentShader = "uniform sampler2D texture; varying vec3 vColor; void main() { gl_FragColor = vec4(vColor, 1.0) * texture2D(texture, gl_PointCoord); }";
+
+			//var indices = new Uint16Array(this.visualgraph.nodes.length); for (var i = 0; i < this.visualgraph.nodes.length; i++) indices[i] = i;
+
+			var geometry = new THREE.BufferGeometry();
+			geometry.addAttribute('position', this.buffers.nodes.positions);
+			geometry.addAttribute('color', this.buffers.nodes.colors);
+			geometry.addAttribute('size', this.buffers.nodes.sizes);
+			//geometry.addAttribute('index', new THREE.BufferAttribute(indices, 1));
+			//geometry.offsets.push({ start: 0, count: this.visualgraph.nodes.length, index: 0 });
+			var material = new THREE.ShaderMaterial({
+				vertexColors: THREE.VertexColors, size: 0.05, sizeAttenuation: false, opacity: 1.0, transparent: true,
+				attributes: { size: { type: 'f', value: [] } }, uniforms: uniforms, vertexShader: vertexShader, fragmentShader: fragmentShader
+			});
+			this.nodes = new THREE.PointCloud(geometry, material);
+
+			geometry = new THREE.BufferGeometry();
+			geometry.addAttribute('position', this.buffers.links.positions);
+			geometry.addAttribute('color', this.buffers.links.colors);
+			material = new THREE.LineBasicMaterial({ linewidth: 1, vertexColors: THREE.VertexColors, dashSize: 0, gapSize: 0 });
+			this.links = new THREE.Line(geometry, material, THREE.LinePieces);
+
+			this.scene.add(this.links);
+			this.scene.add(this.nodes);
+		}
+
+		if (!this.config.allowLayout) {
+			function animate() {
+				requestAnimationFrame(animate);
+				_this.render();
 			}
+			animate();
+		}
 
-			var sizes = new Float32Array(particles)
-			for(var i = 0; i < particles; i++) sizes[i] = Math.random() * 10 + 3
-
-			this.nodes = d3.range(particles).map(function(d) { return {} });
-
-			this.d3cola = d3.layout.force().size([this.width, this.height])
-			.nodes(this.nodes).charge(function(d, i) { return -sizes[i] || -500 })
-
-			this.posBuff = new THREE.BufferAttribute(this.positions, 3)
-
-			var cloudGeom = new THREE.BufferGeometry();
-			cloudGeom.addAttribute('position', this.posBuff);
-			cloudGeom.addAttribute('size', new THREE.BufferAttribute(sizes, 1));
-			cloudGeom.computeBoundingSphere();
-
-			var cloudMat = new THREE.PointCloudMaterial({ color: 0x3498db, size: 10.0, sizeAttenuation: false });
-
-			this.scene.add(new THREE.PointCloud(cloudGeom, cloudMat))
-
-			nodetrix.model.Graph.prototype.update.call(this);
+		nodetrix.model.Graph.prototype.update.call(this);
 	};
 
 	// Render
 	nodetrix.gl.Graph.prototype.render = function(width, height) {
-
 			var _this = this;
 
-			//mouseNode.x = mousePosition[0], mouseNode.y = mousePosition[1]
+			this.visualgraph.nodes.forEach(function(d, i) {
+				_this.buffers.nodes.positions.array[3*i] = d.x, _this.buffers.nodes.positions.array[3*i+1] = d.y, _this.buffers.nodes.positions.array[3*i+2] = 0;
+				_this.buffers.nodes.colors.array[3*i] = d.fill().r/255.0, _this.buffers.nodes.colors.array[3*i+1] = d.fill().g/255.0, _this.buffers.nodes.colors.array[3*i+2] = d.fill().b/255.0;
+				_this.buffers.nodes.sizes.array[i] = 20.0;
+			});
+			this.buffers.nodes.positions.needsUpdate = true;
+			this.buffers.nodes.colors.needsUpdate = true;
+			this.buffers.nodes.sizes.needsUpdate = true;
+			//this.nodes.geometry.computeBoundingBox(); this.nodes.geometry.computeBoundingSphere();
 
-			for(var i = 0; i + 1 < this.nodes.length; i++) {
-				this.positions[i * 3] = this.nodes[i].x - this.width / 2;
-				this.positions[i * 3 + 1] = - (this.nodes[i].y - this.height / 2);
-			}
-			this.posBuff.needsUpdate = true; // Important!
+			this.visualgraph.links.forEach(function(d, i) {
+				_this.buffers.links.positions.array[6*i] = d.source.x, _this.buffers.links.positions.array[6*i+1] = d.source.y, _this.buffers.links.positions.array[6*i+2] = -1;
+				_this.buffers.links.positions.array[6*i+3] = d.target.x, _this.buffers.links.positions.array[6*i+4] = d.target.y, _this.buffers.links.positions.array[6*i+5] = -1;
+				_this.buffers.links.colors.array[6*i] = d.stroke().r/255.0, _this.buffers.links.colors.array[6*i+1] = d.stroke().g/255.0, _this.buffers.links.colors.array[6*i+2] = d.stroke().b/255.0;
+				_this.buffers.links.colors.array[6*i+3] = d.stroke().r/255.0, _this.buffers.links.colors.array[6*i+4] = d.stroke().g/255.0, _this.buffers.links.colors.array[6*i+5] = d.stroke().b/255.0;
+			});
+			this.buffers.links.positions.needsUpdate = true;
+			this.buffers.links.colors.needsUpdate = true;
+			//this.links.geometry.computeBoundingSphere();
+
+			this.camera.position.x = this.width / 2.0; this.camera.position.y = this.height / 2.0;
+			this.camera.updateMatrixWorld();
+
 			this.renderer.render(this.scene, this.camera);
 
 			nodetrix.model.Graph.prototype.render.call(this);
 	};
+
 
 })
 (this.nodetrix = this.nodetrix ? this.nodetrix : {});

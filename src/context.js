@@ -124,7 +124,9 @@
 	nodetrix.gl.View = function(id, width, height) {
 		nodetrix.model.View.call(this, id, width, height);
 
-		this.renderer = new THREE.WebGLRenderer({alpha: true});
+		this.renderer = new THREE.WebGLRenderer({  antialias: true, alpha: true });
+		this.renderer.setClearColor( 0xffffff ); //0xffffff );
+		this.renderer.setPixelRatio( window.devicePixelRatio );
 		this.renderer.setSize(width, height);
 		$(id).append(this.renderer.domElement);
 
