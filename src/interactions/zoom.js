@@ -49,13 +49,20 @@
 		var _this = this;
 		this.widget = widget;
 
-		this.zooming = function() { _this.widget.vis.attr("transform", "translate(" + _this.widget.zoom.translate() + ") scale(" + _this.widget.zoom.scale() + ")"); };
-		this.centering = function() { var correction = _this.widget.recenter(); _this.widget.zoom.translate(correction.translate).scale(correction.scale); _this.zooming(); };
+		this.zooming = function() {
+			_this.widget.camera.position.x = _this.widget.zoom.translate()[0]; //(_this.widget.zoom.translate()[0]/_this.widget.width)*2.0 - 1;
+			_this.widget.camera.position.y = _this.widget.zoom.translate()[1];//-(_this.widget.zoom.translate()[1] / _this.widget.height)*2.0 + 1;
+			_this.widget.camera.zoom = _this.widget.zoom.scale(); // < 1 ? _this.widget.zoom.scale() : 1;
+			_this.widget.camera.updateProjectionMatrix();
+			console.log(_this.widget.camera.position)
+		};
+		this.centering = function() { var correction = _this.widget.recenter(); _this.widget.zoom.translate(correction.translate).scale(correction.scale); _this.zooming();	};
 		this.widget.layer.call( this.widget.zoom.on("zoom", this.zooming) );
 
 		this.mousedownZoom = this.widget.layer.on("mousedown.zoom");
 		this.mousemoveZoom = this.widget.layer.on("mousemove.zoom");
 		this.touchstartZoom = this.widget.layer.on("touchstart.zoom");
+
 		this.widget.layer.on("mousedown.zoom", null);
 		this.widget.layer.on("mousemove.zoom", null);
 		this.widget.layer.on("touchstart.zoom", null);

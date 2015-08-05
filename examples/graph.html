@@ -30,11 +30,10 @@
 
 		// interactions / visual encoding
 		var bindInteractions = function(data) {
-			if (renderer == "d3") {
-				var keyDown = false; var panNzoom = new nodetrix[renderer].interaction.Zoom($.context.widgets.graph);
-				d3.select("body").on("keydown", function() { if (d3.event.altKey) { if (!keyDown) { keyDown = true; panNzoom.bind(); } } });
-				d3.select("body").on("keyup", function() { if (keyDown) { keyDown = false; panNzoom.unbind(); } });
-			}
+			var keyDown = false; var panNzoom = new nodetrix[renderer].interaction.Zoom($.context.widgets.graph);
+			d3.select("body").on("keydown", function() { if (d3.event.altKey) { if (!keyDown) { keyDown = true; panNzoom.bind(); } } });
+			d3.select("body").on("keyup", function() { if (keyDown) { keyDown = false; panNzoom.unbind(); } });
+
 			$.context.widgets.graph.nodeHandler.mouseover = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.graph.highlight($.context.highlighted.concat([d.raw])); };
 			$.context.widgets.graph.nodeHandler.mouseout = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.graph.highlight($.context.highlighted); };
 
@@ -86,9 +85,9 @@
 
 			if (renderer == "gl") {
 				stats = new Stats(); stats.domElement.style.position = 'absolute'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement);
-				var render = $.context.widgets.graph.render;
-				$.context.widgets.graph.render = function() {
-					render.call(this);
+				var animate = $.context.widgets.graph.animate;
+				$.context.widgets.graph.animate = function() {
+					animate.call(this);
 					stats.update();
 				};
 			}

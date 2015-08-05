@@ -123,6 +123,7 @@
 
 	nodetrix.gl.View = function(id, width, height) {
 		nodetrix.model.View.call(this, id, width, height);
+		var _this = this;
 
 		this.renderer = new THREE.WebGLRenderer({  antialias: true, alpha: true });
 		this.renderer.setClearColor( 0xffffff ); //0xffffff );
@@ -131,13 +132,15 @@
 		this.renderer.sortObjects = false;
 		$(id).append(this.renderer.domElement);
 
+		this.layer = d3.select(this.id);
+
 		this.scene = new THREE.Scene();
-		this.camera = new THREE.OrthographicCamera(0, width, 0, height, -500, 10000); this.camera.position.z = 1;
+		//this.camera = new THREE.OrthographicCamera(0, width, 0, height, -500, 10000); this.camera.position.z = 1;
+		this.camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, -500, 10000); this.camera.position.z = 1;
 
 		this.raycaster = new THREE.Raycaster();
 		this.mouse = new THREE.Vector2();
-		
-		var _this = this;
+
 		this.handler = {
 			mousedown : function(d) { },
 			mouseup : function(d) { },

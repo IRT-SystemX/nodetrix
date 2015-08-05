@@ -40,7 +40,7 @@
 	// Recenter
 	nodetrix.model.Graph.prototype.recenter = function() {
 		var x = Number.POSITIVE_INFINITY, X = Number.NEGATIVE_INFINITY, y = Number.POSITIVE_INFINITY, Y = Number.NEGATIVE_INFINITY;
-		this.node.each(function (v) { x = Math.min(x, v.x - v.width / 2); X = Math.max(X, v.x + v.width / 2); y = Math.min(y, v.y - v.height / 2); Y = Math.max(Y, v.y + v.height / 2); });
+		this.visualgraph.nodes.forEach(function (v) { x = Math.min(x, v.x - v.width / 2); X = Math.max(X, v.x + v.width / 2); y = Math.min(y, v.y - v.height / 2); Y = Math.max(Y, v.y + v.height / 2); });
 		var w = X - x, h = Y - y, cw = this.width, ch = this.height, s = Math.min(cw / w, ch / h), tx = (-x * s + (cw / s - w) * s / 2), ty = (-y * s + (ch / s - h) * s / 2);
 		return { translate: [tx, ty], scale: s };
 	};
@@ -338,22 +338,6 @@
 		this.update();
 	};
 
-	function roundRect(ctx, x, y, w, h, r) {
-		ctx.beginPath();
-		ctx.moveTo(x+r, y);
-		ctx.lineTo(x+w-r, y);
-		ctx.quadraticCurveTo(x+w, y, x+w, y+r);
-		ctx.lineTo(x+w, y+h-r);
-		ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
-		ctx.lineTo(x+r, y+h);
-		ctx.quadraticCurveTo(x, y+h, x, y+h-r);
-		ctx.lineTo(x, y+r);
-		ctx.quadraticCurveTo(x, y, x+r, y);
-		ctx.closePath();
-		ctx.fill();
-		ctx.stroke();
-	}
-
 	function generateSprite() {
 		var canvas = document.createElement( 'canvas' );
 		canvas.width = 128; canvas.height = 128;
@@ -367,33 +351,6 @@
 		context.lineWidth = canvas.width / 10.0;
 		context.strokeStyle = '#000000';
 		context.stroke();
-
-/*var gradient = context.createRadialGradient( canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2 );
-gradient.addColorStop( 0, 'rgba(255,255,255,1)' );
-gradient.addColorStop( 0.2, 'rgba(0,255,255,1)' );
-gradient.addColorStop( 0.8, 'rgba(0,0,64,1)' );
-gradient.addColorStop( 1, 'rgba(0,0,0,0)' );
-context.fillStyle = gradient;
-context.fillRect( 0, 0, canvas.width, canvas.height );
-context.fillStyle = "rgba(0, 0, 0, 0.0)";
-context.fillRect( 0, 0, canvas.width, canvas.height );
-var borderThickness = 2, fontsize = 12, fontface = "Arial";
-var message = "o";
-var canvas = document.createElement('canvas');
-var context = canvas.getContext('2d');
-context.font = "Bold " + fontsize + "px " + fontface;
-var metrics = context.measureText( message );
-var textWidth = metrics.width;
-// background color
-context.fillStyle   = "rgba(" + 255 + "," + 255 + "," + 255 + "," + 1 + ")";
-// border color
-context.strokeStyle = "rgba(" + 0 + "," + 0 + ","  + 0 + "," + 1 + ")";
-context.lineWidth = borderThickness;
-roundRect(context, borderThickness/2, borderThickness/2, textWidth + borderThickness, fontsize * 1.4 + borderThickness, 6);
-// text color
-context.fillStyle = "rgba(0, 0, 0, 1.0)";
-context.fillText( message, borderThickness, fontsize + borderThickness);
-*/
 		var texture = new THREE.Texture(canvas);
 		texture.needsUpdate = true;
 		return texture;
@@ -425,7 +382,7 @@ context.fillText( message, borderThickness, fontsize + borderThickness);
 			geometry.addAttribute('color', this.buffers.nodes.colors);
 			geometry.addAttribute('size', this.buffers.nodes.sizes);
 			var material = new THREE.ShaderMaterial({
-				vertexColors: THREE.VertexColors, size: 0.05, sizeAttenuation: false, opacity: 1.0, transparent: true,
+				vertexColors: THREE.VertexColors, size: 0.05, sizeAttenuation: true, opacity: 1.0, transparent: true,
 				attributes: { size: { type: 'f', value: [] } }, uniforms: uniforms, vertexShader: vertexShader, fragmentShader: fragmentShader
 			});
 			this.nodes = new THREE.PointCloud(geometry, material);
@@ -440,12 +397,23 @@ context.fillText( message, borderThickness, fontsize + borderThickness);
 			this.scene.add(this.nodes);
 		}
 
-		if (!this.config.allowLayout) {
-			var animate = function () {
-				requestAnimationFrame(animate);
-				_this.render();
-			};
-			animate();
+		if (!this.animate) {
+			if (!this.config.allowLayout && !this.animate) {
+				this.animate = function () {
+					requestAnimationFrame(_this.animate);
+					_this.renderer.render(_this.scene, _this.camera);
+				};
+				this.animate();
+			} else {
+				this.d3cola.nodes(this.forcegraph.nodes).links(this.forcegraph.links);
+				this.animate = function () {
+					requestAnimationFrame(_this.animate);
+					_this.renderer.render(_this.scene, _this.camera);
+				};
+				this.animate();
+				this.d3cola.on("tick", function() {	_this.render();	});
+				this.d3cola.start();
+			}
 		}
 
 		var last = null;
@@ -454,15 +422,13 @@ context.fillText( message, borderThickness, fontsize + borderThickness);
 			_this.mouse.x = ( d3.mouse(this)[0] / _this.width ) * 2 - 1;
 			_this.mouse.y = - ( d3.mouse(this)[1] / _this.height ) * 2 + 1;
 			_this.raycaster.setFromCamera(_this.mouse, _this.camera);
-			var intersects = _this.raycaster.intersectObjects(_this.scene.children);
+			var intersects = _this.raycaster.intersectObject(_this.nodes); //_this.scene.children);
 			if ( intersects.length > 0 ) { last = _this.visualgraph.nodes[intersects[0].index]; if (last) _this.handler.mouseover(last); }
 			else { if (last) _this.handler.mouseout(last); last = null; }
-		});
-		//.call(d3.behavior.drag().on('drag', function() { _this.mouse = d3.mouse(this); }));
+		})
+		//.call(d3.behavior.drag().on('drag', function() { console.log("drag"); _this.render(); }));
 
 		this.nodeHandler.bind(_this.handler);
-
-		nodetrix.model.Graph.prototype.update.call(this);
 	};
 
 	// Render
@@ -487,11 +453,8 @@ context.fillText( message, borderThickness, fontsize + borderThickness);
 		this.buffers.links.positions.needsUpdate = true;
 		this.buffers.links.colors.needsUpdate = true;
 
-		this.renderer.render(this.scene, this.camera);
-
 		nodetrix.model.Graph.prototype.render.call(this);
 	};
-
 
 })
 (this.nodetrix = this.nodetrix ? this.nodetrix : {});
