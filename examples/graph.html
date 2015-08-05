@@ -29,19 +29,26 @@
 
 		// interactions / visual encoding
 		var bindInteractions = function(data) {
+			if (renderer == "d3") {
 				var keyDown = false; var panNzoom = new nodetrix[renderer].interaction.Zoom($.context.widgets.graph);
 				d3.select("body").on("keydown", function() { if (d3.event.altKey) { if (!keyDown) { keyDown = true; panNzoom.bind(); } } });
 				d3.select("body").on("keyup", function() { if (keyDown) { keyDown = false; panNzoom.unbind(); } });
+			}
+			$.context.widgets.graph.nodeHandler.mouseover = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.graph.highlight($.context.highlighted.concat([d.raw])); };
+			$.context.widgets.graph.nodeHandler.mouseout = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.graph.highlight($.context.highlighted); };
+
+			var selectedGroup = $.context.widgets.colorscale.selectedGroup;
+			$.context.widgets.colorscale.groupHandler.click = function(event, widget, d) { if (widget.config.allowHighlight) d.items.forEach(function(node) { $.context.highlight(node); }); };
+			$.context.widgets.colorscale.groupHandler.mouseover = function(event, widget, d) { if ($.inArray(d, selectedGroup) < 0) { d.isHighlighted = true; widget.render(); } };
+			$.context.widgets.colorscale.groupHandler.mouseout = function(event, widget, d) { if ($.inArray(d, selectedGroup) < 0) { d.isHighlighted = false; widget.render(); } };
 		};
 
 		// data loading
 		var load = function(data) {
-				var labels = []; data.nodes.forEach(function(d) { labels.push(d.name); });
-				$.context.widgets.graph.bind(data, labels);
-
-				//bindInteractions(data); >> TODO: gl layer for interactions ???
-
-				$.context.setLoaded();
+			var labels = []; data.nodes.forEach(function(d) { labels.push(d.name); });
+			$.context.widgets.graph.bind(data, labels);
+			bindInteractions(data);
+			$.context.setLoaded();
 		};
 
 		// extract labels from data

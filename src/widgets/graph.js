@@ -3,35 +3,35 @@
 
 	// Constructor
 	nodetrix.model.Graph = function(id, width, height, config) {
-			nodetrix.model.View.call(this, id, width, height);
+		nodetrix.model.View.call(this, id, width, height);
 
-			// default visual properties
-			this.config = {
-				nodeSize: config && 'nodesize' in config ? config.nodesize : 10,
-				nodeColor: config && 'nodecolor' in config ? config.nodecolor : "#D3D3D3",
-				nodeStroke: config && 'nodestroke' in config ? config.nodestroke : "#808080",
-				nodeStrokeWidth: config && 'nodestrokewidth' in config ? config.nodestrokewidth : 1,
-				linkStroke: config && 'linkstroke' in config ? config.linkstroke : "#D3D3D3",
-				linkStrokeWidth: config && 'linkstrokewidth' in config ? config.linkstrokewidth : 1,
+		// default visual properties
+		this.config = {
+			nodeSize: config && 'nodesize' in config ? config.nodesize : 10,
+			nodeColor: config && 'nodecolor' in config ? config.nodecolor : "#D3D3D3",
+			nodeStroke: config && 'nodestroke' in config ? config.nodestroke : "#808080",
+			nodeStrokeWidth: config && 'nodestrokewidth' in config ? config.nodestrokewidth : 1,
+			linkStroke: config && 'linkstroke' in config ? config.linkstroke : "#D3D3D3",
+			linkStrokeWidth: config && 'linkstrokewidth' in config ? config.linkstrokewidth : 1,
 
-				linkDistance: config && 'linkdistance' in config ? config.linkdistance : 60,
+			linkDistance: config && 'linkdistance' in config ? config.linkdistance : 60,
 
-				round: config && 'round' in config ? config.round : 5,
-				allowHighlight: config && 'allowhighlight' in config ? config.allowhighlight : true,
-				allowLabels: config && 'allowlabels' in config ? config.allowlabels : true,
-				allowLayout: config && 'allowlayout' in config ? config.allowlayout : true
-			};
+			round: config && 'round' in config ? config.round : 5,
+			allowHighlight: config && 'allowhighlight' in config ? config.allowhighlight : true,
+			allowLabels: config && 'allowlabels' in config ? config.allowlabels : true,
+			allowLayout: config && 'allowlayout' in config ? config.allowlayout : true
+		};
 
-			// data model
-			this.graph = { nodes: [], links: [] };
-			this.visualgraph = { nodes: [], links: [] }; // it contains the visible parts of the graph
-			this.forcegraph = { nodes: [], links: [] }; // it contains the force based parts of the graph
+		// data model
+		this.graph = { nodes: [], links: [] };
+		this.visualgraph = { nodes: [], links: [] }; // it contains the visible parts of the graph
+		this.forcegraph = { nodes: [], links: [] }; // it contains the force based parts of the graph
 
-			// force layout
-			//this.d3cola = cola.d3adaptor().linkDistance(this.config.linkDistance).size([this.width, this.height]).avoidOverlaps(true).nodes(this.forcegraph.nodes).links(this.forcegraph.links); //.convergenceThreshold(0.1);
-			this.d3cola = d3.layout.force().charge(-120).linkDistance(30).size([width, height]);
+		// force layout
+		//this.d3cola = cola.d3adaptor().linkDistance(this.config.linkDistance).size([this.width, this.height]).avoidOverlaps(true).nodes(this.forcegraph.nodes).links(this.forcegraph.links); //.convergenceThreshold(0.1);
+		this.d3cola = d3.layout.force().charge(-120).linkDistance(30).size([width, height]);
 
-			this.nodeHandler = new nodetrix.Handler(this);
+		this.nodeHandler = new nodetrix.Handler(this);
 	};
 
 	// Inheritance
@@ -39,110 +39,110 @@
 
 	// Recenter
 	nodetrix.model.Graph.prototype.recenter = function() {
-			var x = Number.POSITIVE_INFINITY, X = Number.NEGATIVE_INFINITY, y = Number.POSITIVE_INFINITY, Y = Number.NEGATIVE_INFINITY;
-			this.node.each(function (v) { x = Math.min(x, v.x - v.width / 2); X = Math.max(X, v.x + v.width / 2); y = Math.min(y, v.y - v.height / 2); Y = Math.max(Y, v.y + v.height / 2); });
-			var w = X - x, h = Y - y, cw = this.width, ch = this.height, s = Math.min(cw / w, ch / h), tx = (-x * s + (cw / s - w) * s / 2), ty = (-y * s + (ch / s - h) * s / 2);
-			return { translate: [tx, ty], scale: s };
+		var x = Number.POSITIVE_INFINITY, X = Number.NEGATIVE_INFINITY, y = Number.POSITIVE_INFINITY, Y = Number.NEGATIVE_INFINITY;
+		this.node.each(function (v) { x = Math.min(x, v.x - v.width / 2); X = Math.max(X, v.x + v.width / 2); y = Math.min(y, v.y - v.height / 2); Y = Math.max(Y, v.y + v.height / 2); });
+		var w = X - x, h = Y - y, cw = this.width, ch = this.height, s = Math.min(cw / w, ch / h), tx = (-x * s + (cw / s - w) * s / 2), ty = (-y * s + (ch / s - h) * s / 2);
+		return { translate: [tx, ty], scale: s };
 	};
 
 	// Resize
 	nodetrix.model.Graph.prototype.resize = function(width, height) {
-			nodetrix.model.View.prototype.resize.call(this);
+		nodetrix.model.View.prototype.resize.call(this);
 
-			this.d3cola.size([this.width, this.height]);
+		this.d3cola.size([this.width, this.height]);
 
-			this.zoom.translate(correction.translate).scale(correction.scale);
+		this.zoom.translate(correction.translate).scale(correction.scale);
 	};
 
 	// Update
 	nodetrix.model.Graph.prototype.update = function() {
-			nodetrix.model.View.prototype.update.call(this);
+		nodetrix.model.View.prototype.update.call(this);
 
-			if (this.config.allowLayout) {
-				var _this = this;
-				this.d3cola.nodes(this.forcegraph.nodes).links(this.forcegraph.links);
-				this.d3cola.on("tick", function() { _this.render(); });
-				this.d3cola.start();
-			}
+		if (this.config.allowLayout) {
+			var _this = this;
+			this.d3cola.nodes(this.forcegraph.nodes).links(this.forcegraph.links);
+			this.d3cola.on("tick", function() { _this.render(); });
+			this.d3cola.start();
+		}
 	};
 
 	// Render
 	nodetrix.model.Graph.prototype.render = function() {
-			nodetrix.model.View.prototype.render.call(this);
+		nodetrix.model.View.prototype.render.call(this);
 	};
 
 
 	// Data binding
 	nodetrix.model.Graph.prototype.bind = function(data) {
-			this.graph.nodes.splice(0, this.graph.nodes.length);
-			this.graph.links.splice(0, this.graph.links.length);
+		this.graph.nodes.splice(0, this.graph.nodes.length);
+		this.graph.links.splice(0, this.graph.links.length);
 
-			var _this = this;
-			data.nodes.forEach(function(node, i) {
-				var visualNode = {
-					raw: 'raw' in node ? node.raw : node, // raw node
-					id: i, //'id' in node ? node.id : i, // node id
-					fixed: 'fixed' in node ? node.fixed : false, // indicates if the node is fixed in the force layout
-					x: 'x' in node ? node.x : _this.width/2, y: 'y' in node ? node.y : _this.height/2, // position in the force layout
-					width: 'width' in node ? node.width : _this.config.nodeSize, height: 'height' in node ? node.height : _this.config.nodeSize, // size of the box to avoid overlap in d3cola and visual size
-					size: function() { return _this.nodeSize(this); },
-					fill: function() { return _this.nodeColor(this); }, // node color
-					stroke: function() { return _this.nodeStroke(this); }, // border color
-					strokeWidth: function() { return _this.nodeStrokeWidth(this); }, // border thickness
-					round: function() { return _this.round(this); },
-					clip: function() { return _this.clip(this); },
-					highlighted: 'highlighted' in node ? node.highlighted : false,
-					sticky: 'fixed' in node ? node.fixed : false,
-					labels: 'labels' in node ? node.labels : true,
-					images: 'images' in node ? node.images : true,
-					links: []
-				};
-				_this.graph.nodes.push(visualNode);
-			});
+		var _this = this;
+		data.nodes.forEach(function(node, i) {
+			var visualNode = {
+				raw: 'raw' in node ? node.raw : node, // raw node
+				id: i, //'id' in node ? node.id : i, // node id
+				fixed: 'fixed' in node ? node.fixed : false, // indicates if the node is fixed in the force layout
+				x: 'x' in node ? node.x : _this.width/2, y: 'y' in node ? node.y : _this.height/2, // position in the force layout
+				width: 'width' in node ? node.width : _this.config.nodeSize, height: 'height' in node ? node.height : _this.config.nodeSize, // size of the box to avoid overlap in d3cola and visual size
+				size: function() { return _this.nodeSize(this); },
+				fill: function() { return _this.nodeColor(this); }, // node color
+				stroke: function() { return _this.nodeStroke(this); }, // border color
+				strokeWidth: function() { return _this.nodeStrokeWidth(this); }, // border thickness
+				round: function() { return _this.round(this); },
+				clip: function() { return _this.clip(this); },
+				highlighted: 'highlighted' in node ? node.highlighted : false,
+				sticky: 'fixed' in node ? node.fixed : false,
+				labels: 'labels' in node ? node.labels : true,
+				images: 'images' in node ? node.images : true,
+				links: []
+			};
+			_this.graph.nodes.push(visualNode);
+		});
 
-			data.links.forEach(function(link, i) {
-				var source = 'raw' in link ? link.raw.source : link.source;
-				var target = 'raw' in link ? link.raw.target : link.target;
+		data.links.forEach(function(link, i) {
+			var source = 'raw' in link ? link.raw.source : link.source;
+			var target = 'raw' in link ? link.raw.target : link.target;
 
-				var visualLink = {
-					id: 'id' in link ? link.id : i,
-					raw: 'raw' in link ? link.raw : link, // raw link
-					source: _this.graph.nodes[source], // visual node leaving
-					target: _this.graph.nodes[target], // visual node arriving
-					stroke: function() { return _this.linkStroke(this); }, // link color
-					strokeWidth: function() { return _this.linkStrokeWidth(this); } // link thickness
-				};
-				_this.graph.links.push(visualLink); visualLink.source.links.push(visualLink.id); visualLink.target.links.push(visualLink.id);
-			});
+			var visualLink = {
+				id: 'id' in link ? link.id : i,
+				raw: 'raw' in link ? link.raw : link, // raw link
+				source: _this.graph.nodes[source], // visual node leaving
+				target: _this.graph.nodes[target], // visual node arriving
+				stroke: function() { return _this.linkStroke(this); }, // link color
+				strokeWidth: function() { return _this.linkStrokeWidth(this); } // link thickness
+			};
+			_this.graph.links.push(visualLink); visualLink.source.links.push(visualLink.id); visualLink.target.links.push(visualLink.id);
+		});
 
-			//if ('layout' in data) this.layout = data.layout;
+		//if ('layout' in data) this.layout = data.layout;
 
-			var rawNodes = []; _this.graph.nodes.forEach(function(node) { rawNodes.push(node.raw); });
-			this.selection(rawNodes);
+		var rawNodes = []; _this.graph.nodes.forEach(function(node) { rawNodes.push(node.raw); });
+		this.selection(rawNodes);
 
-			this.update();
+		this.update();
 	};
 
 	// Extra methods
 	nodetrix.model.Graph.prototype.highlight = function(nodes) {
-			this.graph.nodes.forEach(function(d,i) { if ($.inArray(d.raw, nodes) >= 0) { d.isHighlighted = d.labels = true; } else d.isHighlighted = d.labels = false; });
-			this.render();
+		this.graph.nodes.forEach(function(d,i) { if ($.inArray(d.raw, nodes) >= 0) { d.isHighlighted = d.labels = true; } else { d.isHighlighted = d.labels = false; } });
+		this.render();
 	};
 
 	nodetrix.model.Graph.prototype.selection = function(nodes) {
-			var _this = this;
+		var _this = this;
 
-			this.visualgraph.nodes.splice(0, this.visualgraph.nodes.length); this.visualgraph.links.splice(0, this.visualgraph.links.length);
-			this.forcegraph.nodes.splice(0, this.forcegraph.nodes.length); this.forcegraph.links.splice(0, this.forcegraph.links.length);
+		this.visualgraph.nodes.splice(0, this.visualgraph.nodes.length); this.visualgraph.links.splice(0, this.visualgraph.links.length);
+		this.forcegraph.nodes.splice(0, this.forcegraph.nodes.length); this.forcegraph.links.splice(0, this.forcegraph.links.length);
 
-			this.graph.nodes.filter(function(node,i) { return !nodes || $.inArray(node.raw, nodes) >= 0; }).forEach(function(node) {
-				_this.visualgraph.nodes.push(node); _this.forcegraph.nodes.push(node); node.links.forEach(function(link) {
-					link = _this.graph.links[link];
-					if ( (!nodes || ($.inArray(link.source.raw, nodes) >= 0 && $.inArray(link.target.raw, nodes) >= 0)) && $.inArray(link, _this.visualgraph.links) < 0) { _this.visualgraph.links.push(link); _this.forcegraph.links.push(link); }
-				});
+		this.graph.nodes.filter(function(node,i) { return !nodes || $.inArray(node.raw, nodes) >= 0; }).forEach(function(node) {
+			_this.visualgraph.nodes.push(node); _this.forcegraph.nodes.push(node); node.links.forEach(function(link) {
+				link = _this.graph.links[link];
+				if ( (!nodes || ($.inArray(link.source.raw, nodes) >= 0 && $.inArray(link.target.raw, nodes) >= 0)) && $.inArray(link, _this.visualgraph.links) < 0) { _this.visualgraph.links.push(link); _this.forcegraph.links.push(link); }
 			});
+		});
 
-			this.update();
+		this.update();
 	};
 
 	nodetrix.model.Graph.prototype.nodeSize = function(d) { return d.isHighlighted ? this.config.nodeSize * 2.0 : this.config.nodeSize; };
@@ -162,20 +162,20 @@
 	nodetrix.model.Graph.prototype.clip = function(d) { return  null; };
 
 	nodetrix.model.Graph.prototype.toJSON = function() {
-			var _this = this;
-			this.graph.nodes.forEach(function(node) { delete node.variable; delete node.bounds; delete node.index; });
-			this.graph.links.forEach(function(link) { delete link.source; delete link.target; });
-			var serial = JSON.stringify({
-				width: this.width,
-				height: this.height,
-				config: this.config,
-				layout: false,
-				nodes: this.graph.nodes,
-				links: this.graph.links
-			});
-			this.graph.links.forEach(function(link) { link.source = _this.graph.nodes[link.raw.source]; link.target = _this.graph.nodes[link.raw.target]; });
-			this.update();
-			return serial;
+		var _this = this;
+		this.graph.nodes.forEach(function(node) { delete node.variable; delete node.bounds; delete node.index; });
+		this.graph.links.forEach(function(link) { delete link.source; delete link.target; });
+		var serial = JSON.stringify({
+			width: this.width,
+			height: this.height,
+			config: this.config,
+			layout: false,
+			nodes: this.graph.nodes,
+			links: this.graph.links
+		});
+		this.graph.links.forEach(function(link) { link.source = _this.graph.nodes[link.raw.source]; link.target = _this.graph.nodes[link.raw.target]; });
+		this.update();
+		return serial;
 	};
 })
 (this.nodetrix = this.nodetrix ? this.nodetrix : {});
@@ -248,7 +248,6 @@
 			//.attr("x", function(d) { return _this.config.nodeSize/1.0; }).attr("y", function (d) { return _this.config.nodeSize/1.0; })
 			//.attr("width", function(d) { return _this.config.nodeSize*4; }).attr("height", function (d) { return _this.config.nodeSize*4; });
 
-
 			this.node.call(this.d3cola.drag); // node drag interaction
 
 			this.nodeHandler.bind(this.node);
@@ -314,19 +313,8 @@
 		nodetrix.gl.View.call(this, id, width, height);
 		nodetrix.model.Graph.call(this, id, width, height, config);
 
-			this.raycaster = new THREE.Raycaster(); this.raycaster.params.PointCloud.threshold = 0.1;
-			this.mouse = new THREE.Vector2();
-
-			var _this = this;
-			d3.select(this.id)
-				.on('mousemove', function() {
-					_this.mouse = d3.mouse(this); //console.log(_this.nodes.geometry.boundingBox);
-					_this.raycaster.setFromCamera(_this.mouse, _this.camera);
-					var intersects = _this.raycaster.intersectObject(_this.nodes);
-					if ( intersects.length > 0 ) console.log(intersects[0]);
-				})
-				.call(d3.behavior.drag().on('drag', function() { _this.mouse = d3.mouse(this); }));
-
+		this.raycaster = new THREE.Raycaster(); this.raycaster.params.PointCloud.threshold = this.config.nodeSize*2 / 2.0;
+		this.mouse = new THREE.Vector2();
 	};
 
 	// Inheritance
@@ -417,18 +405,14 @@ context.fillText( message, borderThickness, fontsize + borderThickness);
 				}
 			};
 
-			var uniforms = { rawsize: { type: "f", value: 25.0 }, texture: { type: "t", value: generateSprite() } };
+			var uniforms = { rawsize: { type: "f", value: this.config.nodeSize }, texture: { type: "t", value: generateSprite() } };
 			var vertexShader = "attribute float size; uniform float rawsize; varying vec3 vColor; void main() { vColor = color; gl_PointSize = size; gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }";
 			var fragmentShader = "uniform sampler2D texture; varying vec3 vColor; void main() { gl_FragColor = vec4(vColor, 1.0) * texture2D(texture, gl_PointCoord); }";
-
-			//var indices = new Uint16Array(this.visualgraph.nodes.length); for (var i = 0; i < this.visualgraph.nodes.length; i++) indices[i] = i;
 
 			var geometry = new THREE.BufferGeometry();
 			geometry.addAttribute('position', this.buffers.nodes.positions);
 			geometry.addAttribute('color', this.buffers.nodes.colors);
 			geometry.addAttribute('size', this.buffers.nodes.sizes);
-			//geometry.addAttribute('index', new THREE.BufferAttribute(indices, 1));
-			//geometry.offsets.push({ start: 0, count: this.visualgraph.nodes.length, index: 0 });
 			var material = new THREE.ShaderMaterial({
 				vertexColors: THREE.VertexColors, size: 0.05, sizeAttenuation: false, opacity: 1.0, transparent: true,
 				attributes: { size: { type: 'f', value: [] } }, uniforms: uniforms, vertexShader: vertexShader, fragmentShader: fragmentShader
@@ -453,39 +437,51 @@ context.fillText( message, borderThickness, fontsize + borderThickness);
 			animate();
 		}
 
+		var last = null;
+		d3.select(this.id)
+		.on('mousemove', function() {
+			_this.mouse.x = ( d3.mouse(this)[0] / _this.width ) * 2 - 1;
+			_this.mouse.y = - ( d3.mouse(this)[1] / _this.height ) * 2 + 1;
+			_this.raycaster.setFromCamera(_this.mouse, _this.camera);
+			var intersects = _this.raycaster.intersectObjects(_this.scene.children);
+			if ( intersects.length > 0 ) { last = _this.visualgraph.nodes[intersects[0].index]; _this.handler.mouseover(last); }
+			else { _this.handler.mouseout(last); last = null; }
+		})
+		//.call(d3.behavior.drag().on('drag', function() { _this.mouse = d3.mouse(this); }));
+
+		this.nodeHandler.bind(_this.handler);
+
 		nodetrix.model.Graph.prototype.update.call(this);
 	};
 
 	// Render
 	nodetrix.gl.Graph.prototype.render = function(width, height) {
-			var _this = this;
+		var _this = this;
 
-			this.visualgraph.nodes.forEach(function(d, i) {
-				_this.buffers.nodes.positions.array[3*i] = d.x, _this.buffers.nodes.positions.array[3*i+1] = d.y, _this.buffers.nodes.positions.array[3*i+2] = 0;
-				_this.buffers.nodes.colors.array[3*i] = d.fill().r/255.0, _this.buffers.nodes.colors.array[3*i+1] = d.fill().g/255.0, _this.buffers.nodes.colors.array[3*i+2] = d.fill().b/255.0;
-				_this.buffers.nodes.sizes.array[i] = 20.0;
-			});
-			this.buffers.nodes.positions.needsUpdate = true;
-			this.buffers.nodes.colors.needsUpdate = true;
-			this.buffers.nodes.sizes.needsUpdate = true;
-			//this.nodes.geometry.computeBoundingBox(); this.nodes.geometry.computeBoundingSphere();
+		this.camera.lookAt( this.scene.position );
+		this.camera.updateMatrixWorld();
 
-			this.visualgraph.links.forEach(function(d, i) {
-				_this.buffers.links.positions.array[6*i] = d.source.x, _this.buffers.links.positions.array[6*i+1] = d.source.y, _this.buffers.links.positions.array[6*i+2] = -1;
-				_this.buffers.links.positions.array[6*i+3] = d.target.x, _this.buffers.links.positions.array[6*i+4] = d.target.y, _this.buffers.links.positions.array[6*i+5] = -1;
-				_this.buffers.links.colors.array[6*i] = d.stroke().r/255.0, _this.buffers.links.colors.array[6*i+1] = d.stroke().g/255.0, _this.buffers.links.colors.array[6*i+2] = d.stroke().b/255.0;
-				_this.buffers.links.colors.array[6*i+3] = d.stroke().r/255.0, _this.buffers.links.colors.array[6*i+4] = d.stroke().g/255.0, _this.buffers.links.colors.array[6*i+5] = d.stroke().b/255.0;
-			});
-			this.buffers.links.positions.needsUpdate = true;
-			this.buffers.links.colors.needsUpdate = true;
-			//this.links.geometry.computeBoundingSphere();
+		this.visualgraph.nodes.forEach(function(d, i) {
+			_this.buffers.nodes.positions.array[3*i] = d.x, _this.buffers.nodes.positions.array[3*i+1] = d.y, _this.buffers.nodes.positions.array[3*i+2] = 0;
+			_this.buffers.nodes.colors.array[3*i] = d.fill().r/255.0, _this.buffers.nodes.colors.array[3*i+1] = d.fill().g/255.0, _this.buffers.nodes.colors.array[3*i+2] = d.fill().b/255.0;
+			_this.buffers.nodes.sizes.array[i] = d.size()*2;
+		});
+		this.buffers.nodes.positions.needsUpdate = true;
+		this.buffers.nodes.colors.needsUpdate = true;
+		this.buffers.nodes.sizes.needsUpdate = true;
 
-			this.camera.position.x = this.width / 2.0; this.camera.position.y = this.height / 2.0;
-			this.camera.updateMatrixWorld();
+		this.visualgraph.links.forEach(function(d, i) {
+			_this.buffers.links.positions.array[6*i] = d.source.x, _this.buffers.links.positions.array[6*i+1] = d.source.y, _this.buffers.links.positions.array[6*i+2] = -1;
+			_this.buffers.links.positions.array[6*i+3] = d.target.x, _this.buffers.links.positions.array[6*i+4] = d.target.y, _this.buffers.links.positions.array[6*i+5] = -1;
+			_this.buffers.links.colors.array[6*i] = d.stroke().r/255.0, _this.buffers.links.colors.array[6*i+1] = d.stroke().g/255.0, _this.buffers.links.colors.array[6*i+2] = d.stroke().b/255.0;
+			_this.buffers.links.colors.array[6*i+3] = d.stroke().r/255.0, _this.buffers.links.colors.array[6*i+4] = d.stroke().g/255.0, _this.buffers.links.colors.array[6*i+5] = d.stroke().b/255.0;
+		});
+		this.buffers.links.positions.needsUpdate = true;
+		this.buffers.links.colors.needsUpdate = true;
 
-			this.renderer.render(this.scene, this.camera);
+		this.renderer.render(this.scene, this.camera);
 
-			nodetrix.model.Graph.prototype.render.call(this);
+		nodetrix.model.Graph.prototype.render.call(this);
 	};
 
 

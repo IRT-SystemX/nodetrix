@@ -128,13 +128,41 @@
 		this.renderer.setClearColor( 0xffffff ); //0xffffff );
 		this.renderer.setPixelRatio( window.devicePixelRatio );
 		this.renderer.setSize(width, height);
+		this.renderer.sortObjects = false;
 		$(id).append(this.renderer.domElement);
 
-		this.camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, 1, 10000);
-		this.camera.position.z = 1000;
-
 		this.scene = new THREE.Scene();
-		this.scene.add(this.camera);
+		this.camera = new THREE.OrthographicCamera(0, width, 0, height, -500, 10000); this.camera.position.z = 1;
+
+		var _this = this;
+		this.handler = {
+			mousedown : function(d) { },
+			mouseup : function(d) { },
+			click : function(d) { },
+			dblclick : function(d) { },
+			dragstart : function(d) { },
+			drag : function(d) { },
+			dragend : function(d) { },
+			mouseenter : function(d) { },
+			mouseover : function(d) { },
+			mouseout : function(d) { },
+			mousemove : function(d) { },
+			mouseleave : function(d) { },
+			on: function(name, callback) {
+				if (name == "mousedown") { _this.handler.mousedown = callback; }
+				if (name == "mouseup") { _this.handler.mouseup = callback; }
+				if (name == "click") { _this.handler.click = callback; }
+				if (name == "dblclick") { _this.handler.dblclick = callback; }
+				if (name == "dragstart") { _this.handler.dragstart = callback; }
+				if (name == "drag") { _this.handler.drag = callback; }
+				if (name == "dragend") { _this.handler.dragend = callback; }
+				if (name == "mouseenter") { _this.handler.mouseenter = callback; }
+				if (name == "mouseover") { _this.handler.mouseover = callback; }
+				if (name == "mouseout") { _this.handler.mouseout = callback; }
+				if (name == "mousemove") { _this.handler.mousemove = callback; }
+				if (name == "mouseleave") { _this.handler.mouseleave = callback; }
+			}
+		};
 	};
 
 	// Inheritance
