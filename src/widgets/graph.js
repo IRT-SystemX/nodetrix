@@ -313,8 +313,7 @@
 		nodetrix.gl.View.call(this, id, width, height);
 		nodetrix.model.Graph.call(this, id, width, height, config);
 
-		this.raycaster = new THREE.Raycaster(); this.raycaster.params.PointCloud.threshold = this.config.nodeSize*2 / 2.0;
-		this.mouse = new THREE.Vector2();
+		this.raycaster.params.PointCloud.threshold = this.config.nodeSize*2 / 2.0;
 	};
 
 	// Inheritance
@@ -389,7 +388,7 @@ context.fillText( message, borderThickness, fontsize + borderThickness);
 	}
 
 	// Update
-	nodetrix.gl.Graph.prototype.update = function(width, height) {
+	nodetrix.gl.Graph.prototype.update = function() {
 		var _this = this;
 
 		if (! this.buffers) {
@@ -455,15 +454,12 @@ context.fillText( message, borderThickness, fontsize + borderThickness);
 	};
 
 	// Render
-	nodetrix.gl.Graph.prototype.render = function(width, height) {
+	nodetrix.gl.Graph.prototype.render = function() {
 		var _this = this;
 
-		this.camera.lookAt( this.scene.position );
-		this.camera.updateMatrixWorld();
-
 		this.visualgraph.nodes.forEach(function(d, i) {
-			_this.buffers.nodes.positions.array[3*i] = d.x, _this.buffers.nodes.positions.array[3*i+1] = d.y, _this.buffers.nodes.positions.array[3*i+2] = 0;
-			_this.buffers.nodes.colors.array[3*i] = d.fill().r/255.0, _this.buffers.nodes.colors.array[3*i+1] = d.fill().g/255.0, _this.buffers.nodes.colors.array[3*i+2] = d.fill().b/255.0;
+			_this.buffers.nodes.positions.array[3*i] = d.x; _this.buffers.nodes.positions.array[3*i+1] = d.y; _this.buffers.nodes.positions.array[3*i+2] = 0;
+			_this.buffers.nodes.colors.array[3*i] = d.fill().r/255.0; _this.buffers.nodes.colors.array[3*i+1] = d.fill().g/255.0; _this.buffers.nodes.colors.array[3*i+2] = d.fill().b/255.0;
 			_this.buffers.nodes.sizes.array[i] = d.size()*2;
 		});
 		this.buffers.nodes.positions.needsUpdate = true;
@@ -471,10 +467,10 @@ context.fillText( message, borderThickness, fontsize + borderThickness);
 		this.buffers.nodes.sizes.needsUpdate = true;
 
 		this.visualgraph.links.forEach(function(d, i) {
-			_this.buffers.links.positions.array[6*i] = d.source.x, _this.buffers.links.positions.array[6*i+1] = d.source.y, _this.buffers.links.positions.array[6*i+2] = -1;
-			_this.buffers.links.positions.array[6*i+3] = d.target.x, _this.buffers.links.positions.array[6*i+4] = d.target.y, _this.buffers.links.positions.array[6*i+5] = -1;
-			_this.buffers.links.colors.array[6*i] = d.stroke().r/255.0, _this.buffers.links.colors.array[6*i+1] = d.stroke().g/255.0, _this.buffers.links.colors.array[6*i+2] = d.stroke().b/255.0;
-			_this.buffers.links.colors.array[6*i+3] = d.stroke().r/255.0, _this.buffers.links.colors.array[6*i+4] = d.stroke().g/255.0, _this.buffers.links.colors.array[6*i+5] = d.stroke().b/255.0;
+			_this.buffers.links.positions.array[6*i] = d.source.x; _this.buffers.links.positions.array[6*i+1] = d.source.y; _this.buffers.links.positions.array[6*i+2] = -1;
+			_this.buffers.links.positions.array[6*i+3] = d.target.x; _this.buffers.links.positions.array[6*i+4] = d.target.y; _this.buffers.links.positions.array[6*i+5] = -1;
+			_this.buffers.links.colors.array[6*i] = d.stroke().r/255.0; _this.buffers.links.colors.array[6*i+1] = d.stroke().g/255.0; _this.buffers.links.colors.array[6*i+2] = d.stroke().b/255.0;
+			_this.buffers.links.colors.array[6*i+3] = d.stroke().r/255.0; _this.buffers.links.colors.array[6*i+4] = d.stroke().g/255.0; _this.buffers.links.colors.array[6*i+5] = d.stroke().b/255.0;
 		});
 		this.buffers.links.positions.needsUpdate = true;
 		this.buffers.links.colors.needsUpdate = true;

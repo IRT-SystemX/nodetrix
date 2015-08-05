@@ -3,6 +3,7 @@
 	<head>
 		<title></title>
 		<style type="text/css">
+			body { font-family: "Calibri"; font-size: 12px; }
 			.background { stroke: transparent; stroke-width: 1px; fill: white; }
 			.brush { fill: transparent; stroke: gray; strokeWidth: 1px; }
 			.node-label rect { fill: white; } .node-label text { font-size: 9px; } .node { opacity: 0.3; }
@@ -27,26 +28,20 @@
 		<script type="text/javascript" src="/src/interactions/zoom.js"></script>
 
 		<script type="text/javascript">
-		var renderer =  "d3"; //"gl";
+		var renderer =  "gl"; //"gl";
 
 		// interactions / visual encoding
 		var bindInteractions = function(data) {
-				var nodeHandler = $.context.widgets.matrix.cellHandler, groupHandler = $.context.widgets.clusterscale.groupHandler, viewHandler = $.context.widgets.matrix.viewHandler;
-
-				nodeHandler.click = function(event, widget, d) { if (widget.config.allowHighlight) $.context.highlight(d.raw); };
-				nodeHandler.mouseover = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.matrix.highlight($.context.highlighted.concat([d.raw])); };
-				nodeHandler.mouseout = function(event, widget, d) { if (widget.config.allowHighlight) $.context.widgets.matrix.highlight($.context.highlighted); };
-				nodeHandler.dblclick = function(event, widget, d) { d.fixed = d.sticky = !d.sticky; $.context.widgets.matrix.render(); };
-
-				var selectedGroup = $.context.widgets.clusterscale.selectedGroup;
-				groupHandler.click = function(event, widget, d) { if (widget.config.allowHighlight) d.items.forEach(function(node) { $.context.highlight(node); }); };
-				groupHandler.mouseover = function(event, widget, d) { if ($.inArray(d, selectedGroup) < 0) { d.isHighlighted = true; widget.render(); } };
-				groupHandler.mouseout = function(event, widget, d) { if ($.inArray(d, selectedGroup) < 0) { d.isHighlighted = false; widget.render(); } };
-				groupHandler.dblclick = function(event, widget, d) { var cluster = []; d.items.forEach(function(node) { cluster.push(data.nodes.indexOf(node)); }); $.context.widgets.matrix.createNodetrix(cluster); };
-
-				var keyDown = false; var panNzoom = new nodetrix[renderer].interaction.Zoom($.context.widgets.graph);
-				d3.select("body").on("keydown", function() { if (d3.event.altKey) { if (!keyDown) { keyDown = true; panNzoom.bind(); } } });
-				d3.select("body").on("keyup", function() { if (keyDown) { keyDown = false; panNzoom.unbind(); } });
+			$.context.widgets.matrix.cellHandler.mouseenter = function(event, widget, d) {
+				$.context.widgets.matrix.opacity = function(dd) { return dd.y === d.y || dd.x == d.y ? 1.0 : 0.2; };
+				$.context.widgets.matrix.stroke = function(dd) { return dd.y === d.y || dd.x == d.y ? "gray" : "white"; };
+				$.context.widgets.matrix.render();
+			};
+			$.context.widgets.matrix.cellHandler.mouseout = function(event, widget, d) {
+				$.context.widgets.matrix.opacity = function(dd) { return 1.0; };
+				$.context.widgets.matrix.stroke = function(dd) { return "white"; };
+				$.context.widgets.matrix.render();
+			};
 		};
 
 		// extract labels from data
@@ -59,68 +54,68 @@
 		// data loading
 		var load = function(data) {
 
-				$.context.clustering = {};
-				$.context.clustering.labels = index(data.nodes, function(d) { return d.group; });
-				$.currentClustering = "labels";
+			$.context.clustering = {};
+			$.context.clustering.labels = index(data.nodes, function(d) { return d.group; });
+			$.currentClustering = "labels";
 
-				var adjacency = [], nodes = [];
-				data.nodes.forEach(function(d, i) { adjacency[i] = d3.range(data.nodes.length).map(function(j) { return { x: j, y: i, z: 0 }; }); adjacency[i][i].z = data.nodes[i].group; adjacency[i][i].node = data.nodes[i]; nodes.push(i); });
-				var minD = d3.min(data.links, function(d) { return d.value; });
-				var maxD = d3.max(data.links, function(d) { return d.value; });
-				data.links.forEach(function(link) {
-					var source = $.inArray(link.source, nodes); var target = $.inArray(link.target, nodes);
-					if (source < 0 || target < 0) throw "Linking error: from "+source+" to "+target;
-					if (source != target) { adjacency[source][target].z += (link.value - minD) / (maxD - minD); adjacency[target][source].z += (link.value - minD) / (maxD - minD); }
-					else
-						{ if (link.value != 0) console.log(link); adjacency[source][target].z += link.value; adjacency[target][source].z += link.value; }
-				});
-				//console.log(adjacency)
+			var adjacency = [], nodes = [];
+			data.nodes.forEach(function(d, i) { adjacency[i] = d3.range(data.nodes.length).map(function(j) { return { x: j, y: i, z: 0 }; }); adjacency[i][i].z = data.nodes[i].group; adjacency[i][i].node = data.nodes[i]; nodes.push(i); });
+			var minD = d3.min(data.links, function(d) { return d.value; });
+			var maxD = d3.max(data.links, function(d) { return d.value; });
+			data.links.forEach(function(link) {
+				var source = $.inArray(link.source, nodes); var target = $.inArray(link.target, nodes);
+				if (source < 0 || target < 0) throw "Linking error: from "+source+" to "+target;
+				if (source != target) { adjacency[source][target].z += (link.value - minD) / (maxD - minD); adjacency[target][source].z += (link.value - minD) / (maxD - minD); }
+				else
+					{ if (link.value != 0) console.log(link); adjacency[source][target].z += link.value; adjacency[target][source].z += link.value; }
+			});
+			//console.log(adjacency)
 
-				var ordering = { labels: d3.range(adjacency.length), clustering: d3.range(adjacency.length) };
-				var idx = 0; for (var key in $.context.clustering.labels.index) { $.context.clustering.labels.index[key].forEach(function(d) { ordering.labels[idx] = data.nodes.indexOf(d); idx++; }); }
+			var ordering = { labels: d3.range(adjacency.length), clustering: d3.range(adjacency.length) };
+			var idx = 0; for (var key in $.context.clustering.labels.index) { $.context.clustering.labels.index[key].forEach(function(d) { ordering.labels[idx] = data.nodes.indexOf(d); idx++; }); }
 
-				var adjacencyTmp = adjacency.map(function(row) { return row.map(function(cell) { return cell.x == cell.y ? 0 : cell.z; }); });
-				var leafOrder = reorder.leafOrder().distance(science.stats.distance.manhattan)(adjacencyTmp);
-				leafOrder.forEach(function(lo, i) { ordering.clustering[i] = lo; });
+			var adjacencyTmp = adjacency.map(function(row) { return row.map(function(cell) { return cell.x == cell.y ? 0 : cell.z; }); });
+			var leafOrder = reorder.leafOrder().distance(science.stats.distance.manhattan)(adjacencyTmp);
+			leafOrder.forEach(function(lo, i) { ordering.clustering[i] = lo; });
 
-				var labels = []; data.nodes.forEach(function(d) { labels.push(d.name); });
+			var labels = []; data.nodes.forEach(function(d) { labels.push(d.name); });
 
-				$.context.widgets.matrix.bind(adjacency, labels, ordering);
+			$.context.widgets.matrix.bind(adjacency, labels, ordering);
 
-				//bindInteractions(data); >> TODO: gl layer for interactions ???
+			bindInteractions(data);
 
-				$.context.setLoaded();
+			$.context.setLoaded();
 		};
 
 		$.context = new nodetrix.Context(function() { d3.json("/data/miserables.json", function (data) { console.log(data); load(data); }); });
 		$.context.waitLoaded(function() {
 
-				var updateClustering = function() {
-					$.context.widgets.legend.bind($.context.clustering[$.currentClustering].index);
-					//$.context.widgets.matrix.cells.forEach(function(d) { d.label = $.context.clustering[$.currentClustering].reversed[d.name]; });
-					//$.context.widgets.matrix.fill = function(d) { return d.x == d.y ? $.context.widgets.clusterscale.coloring( d.z ) : d.z ? $.context.widgets.matrix.config.cellColorLink : $.context.widgets.matrix.config.cellColor; };
-					$.context.widgets.matrix.fill = function(d) { return d.x == d.y ? $.context.widgets.legend.coloring( d.z ) : $.context.widgets.colorscale.coloring( d.z ); };
-					$.context.widgets.matrix.render();
-				};
-				updateClustering();
+			var updateClustering = function() {
+				$.context.widgets.legend.bind($.context.clustering[$.currentClustering].index);
+				//$.context.widgets.matrix.cells.forEach(function(d) { d.label = $.context.clustering[$.currentClustering].reversed[d.name]; });
+				//$.context.widgets.matrix.fill = function(d) { return d.x == d.y ? $.context.widgets.clusterscale.coloring( d.z ) : d.z ? $.context.widgets.matrix.config.cellColorLink : $.context.widgets.matrix.config.cellColor; };
+				$.context.widgets.matrix.fill = function(d) { if (d) return d.x == d.y ? $.context.widgets.legend.coloring( d.z ) : $.context.widgets.colorscale.coloring( d.z ); else return d3.rgb("white"); };
+				$.context.widgets.matrix.render();
+			};
+			updateClustering();
 
-				// Clustering selector
-				switchClustering = function(selector) { $.currentClustering = selector.value; updateClustering(); }
+			// Clustering selector
+			switchClustering = function(selector) { $.currentClustering = selector.value; updateClustering(); }
 
-				var updateOrdering = function() {
-					//$.context.widgets.nodetrix.graph.nodes.forEach(function(d) { d.label = $.context.clustering[$.currentClustering].reversed[d.raw.name]; });
-					$.context.widgets.matrix.config.ordering = $.currentOrdering
-					$.context.widgets.matrix.update();
-					$.context.widgets.matrix.svg.selectAll(".cell").on("mouseover", function(d) { if (d.node) $("#sel").text(d.node.name); });
-				};
-				$.currentOrdering = "labels";
-				updateOrdering();
+			var updateOrdering = function() {
+				//$.context.widgets.nodetrix.graph.nodes.forEach(function(d) { d.label = $.context.clustering[$.currentClustering].reversed[d.raw.name]; });
+				$.context.widgets.matrix.config.ordering = $.currentOrdering
+				$.context.widgets.matrix.update();
+				//$.context.widgets.matrix.svg.selectAll(".cell").on("mouseover", function(d) { if (d.node) $("#sel").text(d.node.name); });
+			};
+			$.currentOrdering = "labels";
+			updateOrdering();
 
-				switchOrdering = function(selector) { $.currentOrdering = selector.value; updateOrdering(); }
+			switchOrdering = function(selector) { $.currentOrdering = selector.value; updateOrdering(); }
 		});
 
 		// Bind d3 widget to div elements
-		$.context.createWidget("matrix", nodetrix[renderer].Matrix, $("#matrix").width(), $("#matrix").height(), { nodesize: 10, cellsize: 18, round: 100, cellstrokewidth: 0.0, allowlabels: true });
+		$.context.createWidget("matrix", nodetrix[renderer].Matrix, $("#matrix").width(), $("#matrix").height(), { nodesize: 10, cellsize: 5.5, round: 100, cellstrokewidth: 0.0, allowlabels: true });
 		$.context.createWidget("legend", nodetrix.d3.Legend, $("#legend").width(), $("#legend").height(), { hue: 220 });
 		$.context.createWidget("colorscale", nodetrix.d3.Colorscale, $("#colorscale").width(), $("#colorscale").height(), {  hueMin: 0, hueMax: 220  });
 		</script>

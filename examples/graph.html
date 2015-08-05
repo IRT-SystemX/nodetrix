@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js" charset="utf-8"></script>
+		<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
 
 		<script type="text/javascript" src="/lib/d3.min.js"></script>
 
@@ -80,12 +81,19 @@
 			};
 			$.currentClustering = "labels"; updateClustering();
 
+			if (renderer == "gl") {
+				stats = new Stats(); stats.domElement.style.position = 'absolute'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement);
+				var render = $.context.widgets.graph.render;
+				$.context.widgets.graph.render = function() {
+					render.call(this);
+					stats.update();
+				};
+			}
 		});
 
 		// Bind d3 widget to div elements
 		$.context.createWidget("graph", nodetrix[renderer].Graph, $("#graph").width(), $("#graph").height(), { nodecolor: "lightGray", nodestroke: "gray", linkstroke: "lightGray", allowlabels: true, nodesize: 10, cellsize: 12, round: 100, nodestrokewidth: 1 });
 		$.context.createWidget("colorscale", nodetrix.d3.Legend, $("#colorscale").width(), $("#colorscale").height(), { hue: 220 });
-
 		</script>
 
 	</body>

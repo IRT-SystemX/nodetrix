@@ -57,7 +57,7 @@
 	// Extra methods
 	nodetrix.model.Matrix.prototype.size = function(d) { return this.config.cellSize; };
 
-	nodetrix.model.Matrix.prototype.fill = function(d) { return d.x == d.y ? this.config.cellColorDiag : d.z ?  this.config.cellColorLink : this.config.cellColor; };
+	nodetrix.model.Matrix.prototype.fill = function(d) { if (d) return d3.rgb(d.x == d.y ? this.config.cellColorDiag : d.z ?  this.config.cellColorLink : this.config.cellColor); else return d3.rgb(this.config.cellColor); };
 
 	nodetrix.model.Matrix.prototype.stroke = function(d) { return this.config.cellStroke; };
 
@@ -182,21 +182,95 @@
 		nodetrix.gl.View.call(this, id, width, height);
 		nodetrix.model.Matrix.call(this, id, width, height, config);
 
+		this.raycaster.params.PointCloud.threshold = this.config.cellSize / 2.0;
 	};
 
 	// Inheritance
 	for (var proto in nodetrix.model.Matrix.prototype) nodetrix.gl.Matrix.prototype[proto] = nodetrix.model.Matrix.prototype[proto];
 
-	// Update
-	nodetrix.gl.Matrix.prototype.update = function(width, height) {
+	function generateSprite() {
+		var canvas = document.createElement( 'canvas' );
+		canvas.width = 128; canvas.height = 128;
+		var context = canvas.getContext( '2d' );
+		var centerX = canvas.width / 2.0, centerY = canvas.height / 2.0;
+		var radius = canvas.width / 4.0;
+		context.beginPath();
+		context.fillStyle = 'rgba(255,255,255,1)';
+		context.fillRect(0, 0, canvas.width, canvas.height);
+		context.fill();
+		context.lineWidth = 1.0; //canvas.width / 10.0;
+		context.strokeStyle = '#000000';
+		context.strokeRect(0, 0, canvas.width, canvas.height);
+		var texture = new THREE.Texture(canvas)
+		texture.needsUpdate = true;
+		return texture;
+	}
 
-			nodetrix.model.Matrix.prototype.update.call(this);
+	// Update
+	nodetrix.gl.Matrix.prototype.update = function() {
+		var _this = this;
+
+		if (! this.buffers) {
+			this.buffers = {
+				cells: {
+					positions: new THREE.BufferAttribute(new Float32Array(this.submatrix.length*this.submatrix.length * 3), 3),
+					colors: new THREE.BufferAttribute(new Float32Array(this.submatrix.length*this.submatrix.length * 3), 3),
+					sizes: new THREE.BufferAttribute(new Float32Array(this.submatrix.length*this.submatrix.length), 1)
+				}
+			};
+
+			var uniforms = { rawsize: { type: "f", value: this.config.cellSize }, texture: { type: "t", value: generateSprite() } };
+			var vertexShader = "attribute float size; uniform float rawsize; varying vec3 vColor; void main() { vColor = color; gl_PointSize = size; gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }";
+			var fragmentShader = "uniform sampler2D texture; varying vec3 vColor; void main() { gl_FragColor = vec4(vColor, 1.0) * texture2D(texture, gl_PointCoord); }";
+
+			var geometry = new THREE.BufferGeometry();
+			geometry.addAttribute('position', this.buffers.cells.positions);
+			geometry.addAttribute('color', this.buffers.cells.colors);
+			geometry.addAttribute('size', this.buffers.cells.sizes);
+			var material = new THREE.ShaderMaterial({
+				vertexColors: THREE.VertexColors, size: 0.05, sizeAttenuation: false, opacity: 1.0, transparent: true,
+				attributes: { size: { type: 'f', value: [] } }, uniforms: uniforms, vertexShader: vertexShader, fragmentShader: fragmentShader
+			});
+			this.cells = new THREE.PointCloud(geometry, material);
+
+			this.scene.add(this.cells);
+		}
+
+		var last = null;
+		d3.select(this.id)
+		.on('mousemove', function() {
+			_this.mouse.x = ( d3.mouse(this)[0] / _this.width ) * 2 - 1;
+			_this.mouse.y = - ( d3.mouse(this)[1] / _this.height ) * 2 + 1;
+			_this.raycaster.setFromCamera(_this.mouse, _this.camera);
+			var intersects = _this.raycaster.intersectObjects(_this.scene.children);
+			if ( intersects.length > 0 ) { last = _this.submatrix[intersects[0].index % _this.submatrix.length, intersects[0].index - ((intersects[0].index % _this.submatrix.length) * _this.submatrix.length)]; _this.handler.mouseover(last); }
+			else { _this.handler.mouseout(last); last = null; }
+		})
+		//.call(d3.behavior.drag().on('drag', function() { _this.mouse = d3.mouse(this); }));
+
+		this.cellHandler.bind(this.handler);
+
+		nodetrix.model.Matrix.prototype.update.call(this);
 	};
 
 	// Render
-	nodetrix.gl.Matrix.prototype.render = function(width, height) {
+	nodetrix.gl.Matrix.prototype.render = function() {
+		var _this = this;
 
-			nodetrix.model.Matrix.prototype.render.call(this);
+		for(var i = 0, len = this.submatrix.length; i < len; i++) {
+			for(var j = 0; j < len; j++) {
+				_this.buffers.cells.positions.array[i*len*3+3*j] = _this.scale.rangeBand()+_this.scale(this.submatrix[i][j].x); _this.buffers.cells.positions.array[i*len*3+3*j+1] = _this.scale.rangeBand()+_this.scale(this.submatrix[i][j].y); _this.buffers.cells.positions.array[i*len*3+3*j+2] = 0;
+				_this.buffers.cells.colors.array[i*len*3+3*j] = _this.fill(this.submatrix[i][j]).r/255.0; _this.buffers.cells.colors.array[i*len*3+3*j+1] = _this.fill(this.submatrix[i][j]).g/255.0; _this.buffers.cells.colors.array[i*len*3+3*j+2] = _this.fill(this.submatrix[i][j]).b/255.0;
+				_this.buffers.cells.sizes.array[i*len+j] = _this.scale.rangeBand();
+			}
+		}
+		this.buffers.cells.positions.needsUpdate = true;
+		this.buffers.cells.colors.needsUpdate = true;
+		this.buffers.cells.sizes.needsUpdate = true;
+
+		this.renderer.render(this.scene, this.camera);
+
+		nodetrix.model.Matrix.prototype.render.call(this);
 	};
 
 })

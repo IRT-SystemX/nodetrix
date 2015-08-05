@@ -134,6 +134,9 @@
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.OrthographicCamera(0, width, 0, height, -500, 10000); this.camera.position.z = 1;
 
+		this.raycaster = new THREE.Raycaster();
+		this.mouse = new THREE.Vector2();
+		
 		var _this = this;
 		this.handler = {
 			mousedown : function(d) { },
