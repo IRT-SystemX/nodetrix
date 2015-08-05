@@ -1,1 +1,4414 @@
-{"nodes": [{"type": "author", "group": "apis", "name": "Kaufmann, Beno\u00eet", "index": 0}, {"type": "team", "group": "apis", "name": "apis", "index": 1}, {"type": "author", "group": "leo", "name": "Katsifodimos, Asterios", "index": 2}, {"type": "team", "group": "leo", "name": "leo", "index": 3}, {"type": "author", "group": "leo", "name": "Khemiri, Wael", "index": 4}, {"type": "team", "group": "gemo", "name": "gemo", "index": 5}, {"type": "author", "group": "in-situ", "name": "Riche, Yann", "index": 6}, {"type": "team", "group": "in-situ", "name": "in-situ", "index": 7}, {"type": "author", "group": "aviz", "name": "Isenberg, Tobias", "index": 8}, {"type": "team", "group": "aviz", "name": "aviz", "index": 9}, {"type": "author", "group": "aviz", "name": "Elmqvist, Niklas", "index": 10}, {"type": "author", "group": "aviz", "name": "H\u00e9mery, Pierre-Luc", "index": 11}, {"type": "author", "group": "in-situ", "name": "Bezerianos, Anastasia", "index": 12}, {"type": "author", "group": "aviz", "name": "Jansen, Yvonne", "index": 13}, {"type": "author", "group": "in-situ", "name": "Beaudouin-Lafon, Michel", "index": 14}, {"type": "author", "group": "aviz", "name": "Goodell, Howard", "index": 15}, {"type": "author", "group": "aviz", "name": "Fekete, Jean-Daniel", "index": 16}, {"type": "author", "group": "tao", "name": "Schoenauer, Marc", "index": 17}, {"type": "team", "group": "tao", "name": "tao", "index": 18}, {"type": "author", "group": "aviz", "name": "Henry, Nathalie", "index": 19}, {"type": "author", "group": "aviz", "name": "Moscovich, Tomer", "index": 20}, {"type": "author", "group": "aviz", "name": "Isenberg, Petra", "index": 21}, {"type": "author", "group": "in-situ", "name": "Chapuis, Olivier", "index": 22}, {"type": "author", "group": "aviz", "name": "Cancino Ticona, Waldo Gonzalo", "index": 23}, {"type": "author", "group": "aviz", "name": "Do, Thanh-Nghi", "index": 24}, {"type": "author", "group": "aviz", "name": "Dragicevic, Pierre", "index": 25}, {"type": "author", "group": "leo", "name": "Manolescu, Ioana", "index": 26}, {"type": "author", "group": "aviz", "name": "Vuillemot, Romain", "index": 27}, {"type": "author", "group": "in-situ", "name": "Appert, Caroline", "index": 28}, {"type": "author", "group": "tao", "name": "Germain-Renaud, C\u00e9cile", "index": 29}, {"type": "author", "group": "aviz", "name": "Bach, Benjamin", "index": 30}, {"type": "author", "group": "aviz", "name": "Perin, Charles", "index": 31}, {"type": "author", "group": "in-situ", "name": "Huot, St\u00e9phane", "index": 32}, {"type": "author", "group": "in-situ", "name": "Pietriga, Emmanuel", "index": 33}, {"type": "author", "group": "aviz", "name": "Lutton, Evelyne", "index": 34}, {"type": "author", "group": "aviz", "name": "Boukhelifa, Nadia", "index": 35}, {"type": "author", "group": "aviz", "name": "Chevalier, Fanny", "index": 36}, {"type": "author", "group": "aviz", "name": "Micallef, Luana", "index": 37}, {"type": "author", "group": "aviz", "name": "Huron, Samuel", "index": 38}, {"type": "author", "group": "other", "name": "Von Zadow, Ulrich", "index": 39}, {"type": "author", "group": "other", "name": "Tang, Anthony", "index": 40}, {"type": "author", "group": "other", "name": "Lee, Bongshin", "index": 41}, {"type": "author", "group": "other", "name": "Hesselmann, Tobias", "index": 42}, {"type": "author", "group": "other", "name": "Bertini, Enrico", "index": 43}, {"type": "author", "group": "other", "name": "Fuchs, Johannes", "index": 44}, {"type": "author", "group": "other", "name": "Fischer, Fabian", "index": 45}, {"type": "author", "group": "other", "name": "Carpendale, Sheelagh", "index": 46}, {"type": "author", "group": "other", "name": "Mansmann, Florian", "index": 47}, {"type": "author", "group": "other", "name": "Plaisant, Catherine", "index": 48}, {"type": "author", "group": "other", "name": "Lam, Heidi", "index": 49}, {"type": "author", "group": "other", "name": "Vernier, Fr\u00e9d\u00e9ric", "index": 50}, {"type": "author", "group": "other", "name": "Le Grand, B\u00e9n\u00e9dicte", "index": 51}, {"type": "author", "group": "other", "name": "Poulet, Fran\u00e7ois", "index": 52}, {"type": "author", "group": "other", "name": "Benzaken, V\u00e9ronique", "index": 53}, {"type": "author", "group": "other", "name": "Foucquier, Julie", "index": 54}, {"type": "author", "group": "other", "name": "Louchet, Jean", "index": 55}, {"type": "author", "group": "other", "name": "Perrot, Nathalie", "index": 56}, {"type": "author", "group": "other", "name": "Klein, Tijmen", "index": 57}, {"type": "author", "group": "other", "name": "Pastur, Luc", "index": 58}, {"type": "author", "group": "other", "name": "Gu\u00e9niat, Florimond", "index": 59}, {"type": "author", "group": "other", "name": "Jens, Geelhaar", "index": 60}, {"type": "author", "group": "other", "name": "Kolski, Christophe", "index": 61}, {"type": "author", "group": "other", "name": "Castet, Julien", "index": 62}, {"type": "author", "group": "other", "name": "Lepreux, Sophie", "index": 63}, {"type": "author", "group": "other", "name": "Legardeur, J\u00e9r\u00e9my", "index": 64}, {"type": "author", "group": "other", "name": "Coutrix, C\u00e9line", "index": 65}, {"type": "author", "group": "other", "name": "Kubicki, Sebastien", "index": 66}, {"type": "author", "group": "other", "name": "Brygg, Ullmer", "index": 67}, {"type": "author", "group": "other", "name": "Takouachet, Nawel", "index": 68}, {"type": "author", "group": "other", "name": "Reuter, Patrick", "index": 69}, {"type": "author", "group": "other", "name": "Riviere, Guillaume", "index": 70}, {"type": "author", "group": "other", "name": "Bouadid, Amira", "index": 71}, {"type": "author", "group": "other", "name": "Borgiel, Katarzyna", "index": 72}, {"type": "author", "group": "other", "name": "Couture, Nadine", "index": 73}, {"type": "author", "group": "other", "name": "Tremblay, Luc", "index": 74}, {"type": "author", "group": "other", "name": "Mcguffin, Michael", "index": 75}, {"type": "author", "group": "other", "name": "Rautek, Peter", "index": 76}, {"type": "author", "group": "other", "name": "Gr\u00f6ller, Eduard", "index": 77}, {"type": "author", "group": "other", "name": "Gerl, Moritz", "index": 78}, {"type": "author", "group": "other", "name": "Barri\u00e8re, Olivier", "index": 79}, {"type": "author", "group": "other", "name": "Wuillemin, Pierre-Henri", "index": 80}, {"type": "author", "group": "other", "name": "Keefe, Daniel F.", "index": 81}, {"type": "author", "group": "other", "name": "Efstathiou, Konstantinos", "index": 82}, {"type": "author", "group": "other", "name": "Yu, Lingyun", "index": 83}, {"type": "author", "group": "other", "name": "Hasco\u00ebt, Mountaz", "index": 84}, {"type": "author", "group": "other", "name": "Kuijper, Arjan", "index": 85}, {"type": "author", "group": "other", "name": "Kohlhammer, J\u00f6rn", "index": 86}, {"type": "author", "group": "other", "name": "Schreck, Tobias", "index": 87}, {"type": "author", "group": "other", "name": "Van Wijk, Jarke", "index": 88}, {"type": "author", "group": "other", "name": "Von Landesberger, Tatiana", "index": 89}, {"type": "author", "group": "other", "name": "Fellner, Dieter", "index": 90}, {"type": "author", "group": "other", "name": "Dumas, C\u00e9dric", "index": 91}, {"type": "author", "group": "other", "name": "H\u00e9gron, G\u00e9rard", "index": 92}, {"type": "author", "group": "other", "name": "Stasko, John", "index": 93}, {"type": "author", "group": "other", "name": "Baudel, Thomas", "index": 94}, {"type": "author", "group": "other", "name": "Holten, Danny", "index": 95}, {"type": "author", "group": "other", "name": "Di Battista, Giuseppe", "index": 96}, {"type": "author", "group": "other", "name": "Keim, Daniel", "index": 97}, {"type": "author", "group": "other", "name": "Andrienko, Gennady", "index": 98}, {"type": "author", "group": "other", "name": "G\u00f6rg, Carsten", "index": 99}, {"type": "author", "group": "other", "name": "Cady, Alain", "index": 100}, {"type": "author", "group": "other", "name": "Watson, Ben", "index": 101}, {"type": "author", "group": "other", "name": "Melan\u00e7on, Guy", "index": 102}, {"type": "author", "group": "other", "name": "Bae, Juhee", "index": 103}, {"type": "author", "group": "other", "name": "Ogilvie, Denise", "index": 104}, {"type": "author", "group": "other", "name": "Guiard, Yves", "index": 105}, {"type": "author", "group": "other", "name": "Silva, Claudio", "index": 106}, {"type": "author", "group": "other", "name": "Kerren, Andreas", "index": 107}, {"type": "author", "group": "other", "name": "Dachselt, Raimund", "index": 108}, {"type": "author", "group": "other", "name": "Spritzer, Andr\u00e9", "index": 109}, {"type": "author", "group": "other", "name": "Castagliola, Philippe", "index": 110}, {"type": "author", "group": "other", "name": "Wood, Jo", "index": 111}, {"type": "author", "group": "other", "name": "Javed, Waqas", "index": 112}, {"type": "author", "group": "other", "name": "Klum, Stefanie", "index": 113}, {"type": "author", "group": "other", "name": "Grinstein, Georges", "index": 114}, {"type": "author", "group": "other", "name": "North, Chris", "index": 115}, {"type": "author", "group": "other", "name": "Ghoniem, Mohammad", "index": 116}, {"type": "author", "group": "other", "name": "Qu, Huamin", "index": 117}, {"type": "author", "group": "other", "name": "Langner, Ricardo", "index": 118}, {"type": "author", "group": "other", "name": "Alper, Basak", "index": 119}, {"type": "author", "group": "other", "name": "Bekker, Henk", "index": 120}, {"type": "author", "group": "other", "name": "Verstappen, Roel W. C. P.", "index": 121}, {"type": "author", "group": "other", "name": "Roerdink, Jos B. T. M.", "index": 122}, {"type": "author", "group": "other", "name": "Lueks, Wouter", "index": 123}, {"type": "author", "group": "other", "name": "Everts, Maarten", "index": 124}, {"type": "author", "group": "other", "name": "Viola, Ivan", "index": 125}, {"type": "author", "group": "other", "name": "Van Der Zwan, Matthew", "index": 126}, {"type": "author", "group": "other", "name": "Fernandez De Vega, Francisco", "index": 127}, {"type": "author", "group": "other", "name": "Clemente, Eddie", "index": 128}, {"type": "author", "group": "other", "name": "Dozal, Leon", "index": 129}, {"type": "author", "group": "other", "name": "Trujillo, Leonardo", "index": 130}, {"type": "author", "group": "other", "name": "Olague, Gustavo", "index": 131}, {"type": "author", "group": "other", "name": "Ma, Kwan-Liu", "index": 132}, {"type": "author", "group": "other", "name": "Scholtz, Jean", "index": 133}, {"type": "author", "group": "other", "name": "Hagen, Hans", "index": 134}, {"type": "author", "group": "other", "name": "Cernea, Daniel", "index": 135}, {"type": "author", "group": "other", "name": "Telea, Alexandru", "index": 136}, {"type": "author", "group": "other", "name": "Vidal, Franck", "index": 137}, {"type": "author", "group": "other", "name": "Villard, Pierre-Fr\u00e9d\u00e9ric", "index": 138}, {"type": "author", "group": "other", "name": "Rocchisani, Jean-Marie", "index": 139}, {"type": "author", "group": "other", "name": "Dykes, Jason", "index": 140}, {"type": "author", "group": "other", "name": "Slingsby, Aidan", "index": 141}, {"type": "author", "group": "other", "name": "Wang, Tinghuai", "index": 142}, {"type": "author", "group": "other", "name": "Kyprianidis, Jan Eric", "index": 143}, {"type": "author", "group": "other", "name": "Collomosse, John", "index": 144}, {"type": "author", "group": "other", "name": "Chaboissier, Jonathan", "index": 145}, {"type": "author", "group": "other", "name": "Fisher, Danyel", "index": 146}, {"type": "author", "group": "other", "name": "Inkpen, Kori", "index": 147}, {"type": "author", "group": "other", "name": "Czerwinski, Mary", "index": 148}, {"type": "author", "group": "other", "name": "Ringel Morris, Meredith", "index": 149}, {"type": "author", "group": "other", "name": "Paul, Sharoda", "index": 150}, {"type": "author", "group": "other", "name": "Luz\u00f3n, M. Victoria", "index": 151}, {"type": "author", "group": "other", "name": "Arroyo, Germ\u00e1n", "index": 152}, {"type": "author", "group": "other", "name": "Sezgin, T. Metin", "index": 153}, {"type": "author", "group": "other", "name": "Mart\u00edn, Domingo", "index": 154}, {"type": "author", "group": "other", "name": "Svetachov, Pjotr", "index": 155}, {"type": "author", "group": "other", "name": "Asente, Paul", "index": 156}, {"type": "author", "group": "other", "name": "Deussen, Oliver", "index": 157}, {"type": "author", "group": "other", "name": "Spencer, S.", "index": 158}, {"type": "author", "group": "other", "name": "Hancock, Mark", "index": 159}, {"type": "author", "group": "other", "name": "Cunningham, Douglas W.", "index": 160}, {"type": "author", "group": "other", "name": "Mesmoudi, Salma", "index": 161}, {"type": "author", "group": "other", "name": "Reuillon, Romain", "index": 162}, {"type": "author", "group": "other", "name": "Bourgine, Paul", "index": 163}, {"type": "author", "group": "other", "name": "Hao, Jin-Kao", "index": 164}, {"type": "author", "group": "other", "name": "Collet, Pierre", "index": 165}, {"type": "author", "group": "other", "name": "Monmarch\u00e9, Nicolas", "index": 166}, {"type": "author", "group": "other", "name": "Legrand, Pierrick", "index": 167}, {"type": "author", "group": "other", "name": "L\u00e9vy V\u00e9hel, Jacques", "index": 168}, {"type": "author", "group": "other", "name": "Mendivil, Franklin", "index": 169}, {"type": "author", "group": "other", "name": "Shi, Yuanchun", "index": 170}, {"type": "author", "group": "other", "name": "Tonda, Alberto", "index": 171}, {"type": "author", "group": "other", "name": "Squillero, Giovanni", "index": 172}, {"type": "author", "group": "other", "name": "Hurter, Christophe", "index": 173}, {"type": "author", "group": "other", "name": "Balakrishnan, Ravin", "index": 174}, {"type": "author", "group": "other", "name": "Chu, Gerry", "index": 175}, {"type": "author", "group": "other", "name": "Sedlmair, Michael", "index": 176}, {"type": "author", "group": "other", "name": "Pigorsch, Christian", "index": 177}, {"type": "author", "group": "other", "name": "Mauerer, Michael", "index": 178}, {"type": "author", "group": "other", "name": "Butz, Andreas", "index": 179}, {"type": "author", "group": "other", "name": "Baur, Dominikus", "index": 180}], "links": [{"source": 0, "target": 1, "value": 1}, {"source": 2, "target": 3, "value": 1}, {"source": 4, "target": 3, "value": 1}, {"source": 4, "target": 5, "value": 1}, {"source": 6, "target": 7, "value": 1}, {"source": 8, "target": 9, "value": 1}, {"source": 10, "target": 9, "value": 1}, {"source": 11, "target": 9, "value": 1}, {"source": 12, "target": 7, "value": 1}, {"source": 13, "target": 9, "value": 1}, {"source": 14, "target": 7, "value": 1}, {"source": 15, "target": 9, "value": 1}, {"source": 16, "target": 9, "value": 1}, {"source": 16, "target": 7, "value": 1}, {"source": 17, "target": 18, "value": 1}, {"source": 19, "target": 9, "value": 1}, {"source": 20, "target": 9, "value": 1}, {"source": 21, "target": 9, "value": 1}, {"source": 22, "target": 7, "value": 1}, {"source": 23, "target": 9, "value": 1}, {"source": 24, "target": 9, "value": 1}, {"source": 25, "target": 9, "value": 1}, {"source": 26, "target": 3, "value": 1}, {"source": 26, "target": 5, "value": 1}, {"source": 27, "target": 9, "value": 1}, {"source": 28, "target": 7, "value": 1}, {"source": 29, "target": 18, "value": 1}, {"source": 30, "target": 9, "value": 1}, {"source": 31, "target": 9, "value": 1}, {"source": 32, "target": 7, "value": 1}, {"source": 33, "target": 7, "value": 1}, {"source": 34, "target": 9, "value": 1}, {"source": 35, "target": 9, "value": 1}, {"source": 36, "target": 9, "value": 1}, {"source": 37, "target": 9, "value": 1}, {"source": 38, "target": 9, "value": 1}, {"source": 39, "target": 40, "value": 2}, {"source": 39, "target": 41, "value": 2}, {"source": 39, "target": 42, "value": 2}, {"source": 39, "target": 21, "value": 2}, {"source": 39, "target": 8, "value": 2}, {"source": 43, "target": 44, "value": 2}, {"source": 43, "target": 21, "value": 2}, {"source": 43, "target": 45, "value": 2}, {"source": 43, "target": 46, "value": 2}, {"source": 43, "target": 47, "value": 2}, {"source": 43, "target": 48, "value": 2}, {"source": 43, "target": 49, "value": 2}, {"source": 31, "target": 50, "value": 2}, {"source": 31, "target": 16, "value": 2}, {"source": 51, "target": 52, "value": 2}, {"source": 51, "target": 24, "value": 2}, {"source": 4, "target": 16, "value": 2}, {"source": 3, "target": 9, "value": 5}, {"source": 4, "target": 26, "value": 2}, {"source": 4, "target": 11, "value": 2}, {"source": 4, "target": 53, "value": 2}, {"source": 54, "target": 55, "value": 2}, {"source": 54, "target": 16, "value": 2}, {"source": 54, "target": 34, "value": 2}, {"source": 54, "target": 56, "value": 2}, {"source": 57, "target": 50, "value": 2}, {"source": 57, "target": 58, "value": 2}, {"source": 57, "target": 59, "value": 2}, {"source": 57, "target": 8, "value": 2}, {"source": 60, "target": 61, "value": 2}, {"source": 60, "target": 62, "value": 2}, {"source": 60, "target": 63, "value": 2}, {"source": 60, "target": 64, "value": 2}, {"source": 60, "target": 65, "value": 2}, {"source": 60, "target": 66, "value": 2}, {"source": 60, "target": 67, "value": 2}, {"source": 60, "target": 68, "value": 2}, {"source": 60, "target": 69, "value": 2}, {"source": 60, "target": 13, "value": 2}, {"source": 60, "target": 70, "value": 2}, {"source": 60, "target": 71, "value": 2}, {"source": 60, "target": 72, "value": 2}, {"source": 60, "target": 73, "value": 2}, {"source": 74, "target": 75, "value": 2}, {"source": 74, "target": 25, "value": 2}, {"source": 76, "target": 8, "value": 2}, {"source": 76, "target": 77, "value": 2}, {"source": 76, "target": 78, "value": 2}, {"source": 79, "target": 80, "value": 2}, {"source": 79, "target": 34, "value": 2}, {"source": 22, "target": 32, "value": 2}, {"source": 22, "target": 25, "value": 2}, {"source": 7, "target": 9, "value": 22}, {"source": 44, "target": 45, "value": 2}, {"source": 44, "target": 21, "value": 2}, {"source": 44, "target": 47, "value": 2}, {"source": 81, "target": 8, "value": 2}, {"source": 82, "target": 83, "value": 2}, {"source": 82, "target": 21, "value": 2}, {"source": 82, "target": 8, "value": 2}, {"source": 84, "target": 25, "value": 2}, {"source": 85, "target": 86, "value": 2}, {"source": 85, "target": 87, "value": 2}, {"source": 85, "target": 88, "value": 2}, {"source": 85, "target": 89, "value": 2}, {"source": 85, "target": 16, "value": 2}, {"source": 85, "target": 90, "value": 2}, {"source": 13, "target": 66, "value": 2}, {"source": 13, "target": 61, "value": 2}, {"source": 13, "target": 62, "value": 2}, {"source": 13, "target": 63, "value": 2}, {"source": 13, "target": 64, "value": 2}, {"source": 13, "target": 65, "value": 2}, {"source": 13, "target": 25, "value": 2}, {"source": 13, "target": 67, "value": 2}, {"source": 13, "target": 68, "value": 2}, {"source": 13, "target": 69, "value": 2}, {"source": 13, "target": 70, "value": 2}, {"source": 13, "target": 71, "value": 2}, {"source": 13, "target": 16, "value": 2}, {"source": 13, "target": 72, "value": 2}, {"source": 13, "target": 73, "value": 2}, {"source": 47, "target": 45, "value": 2}, {"source": 47, "target": 21, "value": 2}, {"source": 91, "target": 16, "value": 2}, {"source": 91, "target": 25, "value": 2}, {"source": 91, "target": 32, "value": 2}, {"source": 91, "target": 92, "value": 2}, {"source": 15, "target": 10, "value": 2}, {"source": 15, "target": 16, "value": 2}, {"source": 15, "target": 24, "value": 2}, {"source": 15, "target": 19, "value": 2}, {"source": 16, "target": 93, "value": 2}, {"source": 16, "target": 94, "value": 2}, {"source": 16, "target": 95, "value": 2}, {"source": 16, "target": 96, "value": 2}, {"source": 16, "target": 97, "value": 2}, {"source": 16, "target": 2, "value": 2}, {"source": 16, "target": 87, "value": 2}, {"source": 16, "target": 55, "value": 2}, {"source": 16, "target": 53, "value": 2}, {"source": 16, "target": 98, "value": 2}, {"source": 16, "target": 99, "value": 2}, {"source": 16, "target": 100, "value": 2}, {"source": 16, "target": 101, "value": 2}, {"source": 16, "target": 35, "value": 2}, {"source": 16, "target": 6, "value": 2}, {"source": 16, "target": 8, "value": 2}, {"source": 16, "target": 10, "value": 2}, {"source": 16, "target": 102, "value": 2}, {"source": 16, "target": 86, "value": 2}, {"source": 16, "target": 11, "value": 2}, {"source": 16, "target": 50, "value": 2}, {"source": 16, "target": 103, "value": 2}, {"source": 16, "target": 104, "value": 2}, {"source": 16, "target": 12, "value": 2}, {"source": 16, "target": 105, "value": 2}, {"source": 16, "target": 106, "value": 2}, {"source": 16, "target": 88, "value": 2}, {"source": 16, "target": 107, "value": 2}, {"source": 16, "target": 108, "value": 2}, {"source": 16, "target": 92, "value": 2}, {"source": 16, "target": 37, "value": 2}, {"source": 16, "target": 20, "value": 2}, {"source": 16, "target": 109, "value": 2}, {"source": 16, "target": 110, "value": 2}, {"source": 16, "target": 111, "value": 2}, {"source": 16, "target": 21, "value": 2}, {"source": 16, "target": 75, "value": 2}, {"source": 16, "target": 52, "value": 2}, {"source": 16, "target": 24, "value": 2}, {"source": 16, "target": 25, "value": 2}, {"source": 16, "target": 26, "value": 2}, {"source": 16, "target": 112, "value": 2}, {"source": 16, "target": 27, "value": 2}, {"source": 16, "target": 56, "value": 2}, {"source": 16, "target": 113, "value": 2}, {"source": 16, "target": 114, "value": 2}, {"source": 16, "target": 29, "value": 2}, {"source": 9, "target": 18, "value": 2}, {"source": 16, "target": 90, "value": 2}, {"source": 16, "target": 30, "value": 2}, {"source": 16, "target": 115, "value": 2}, {"source": 16, "target": 32, "value": 2}, {"source": 16, "target": 116, "value": 2}, {"source": 16, "target": 38, "value": 2}, {"source": 16, "target": 33, "value": 2}, {"source": 16, "target": 34, "value": 2}, {"source": 16, "target": 117, "value": 2}, {"source": 16, "target": 46, "value": 2}, {"source": 16, "target": 118, "value": 2}, {"source": 16, "target": 89, "value": 2}, {"source": 16, "target": 36, "value": 2}, {"source": 16, "target": 19, "value": 2}, {"source": 16, "target": 119, "value": 2}, {"source": 16, "target": 48, "value": 2}, {"source": 120, "target": 121, "value": 2}, {"source": 120, "target": 122, "value": 2}, {"source": 120, "target": 123, "value": 2}, {"source": 120, "target": 124, "value": 2}, {"source": 120, "target": 125, "value": 2}, {"source": 120, "target": 126, "value": 2}, {"source": 120, "target": 8, "value": 2}, {"source": 59, "target": 50, "value": 2}, {"source": 59, "target": 58, "value": 2}, {"source": 59, "target": 8, "value": 2}, {"source": 19, "target": 30, "value": 2}, {"source": 19, "target": 10, "value": 2}, {"source": 19, "target": 21, "value": 2}, {"source": 19, "target": 33, "value": 2}, {"source": 19, "target": 75, "value": 2}, {"source": 19, "target": 24, "value": 2}, {"source": 19, "target": 41, "value": 2}, {"source": 19, "target": 12, "value": 2}, {"source": 19, "target": 46, "value": 2}, {"source": 19, "target": 119, "value": 2}, {"source": 19, "target": 36, "value": 2}, {"source": 19, "target": 20, "value": 2}, {"source": 19, "target": 6, "value": 2}, {"source": 19, "target": 8, "value": 2}, {"source": 97, "target": 98, "value": 2}, {"source": 97, "target": 86, "value": 2}, {"source": 97, "target": 99, "value": 2}, {"source": 97, "target": 102, "value": 2}, {"source": 127, "target": 128, "value": 2}, {"source": 127, "target": 129, "value": 2}, {"source": 127, "target": 34, "value": 2}, {"source": 127, "target": 130, "value": 2}, {"source": 127, "target": 131, "value": 2}, {"source": 132, "target": 10, "value": 2}, {"source": 132, "target": 133, "value": 2}, {"source": 132, "target": 134, "value": 2}, {"source": 132, "target": 21, "value": 2}, {"source": 132, "target": 135, "value": 2}, {"source": 14, "target": 28, "value": 2}, {"source": 14, "target": 25, "value": 2}, {"source": 14, "target": 32, "value": 2}, {"source": 134, "target": 10, "value": 2}, {"source": 134, "target": 133, "value": 2}, {"source": 134, "target": 21, "value": 2}, {"source": 134, "target": 135, "value": 2}, {"source": 27, "target": 38, "value": 2}, {"source": 114, "target": 48, "value": 2}, {"source": 133, "target": 10, "value": 2}, {"source": 133, "target": 21, "value": 2}, {"source": 133, "target": 135, "value": 2}, {"source": 73, "target": 61, "value": 2}, {"source": 73, "target": 62, "value": 2}, {"source": 73, "target": 63, "value": 2}, {"source": 73, "target": 64, "value": 2}, {"source": 73, "target": 65, "value": 2}, {"source": 73, "target": 66, "value": 2}, {"source": 73, "target": 67, "value": 2}, {"source": 73, "target": 68, "value": 2}, {"source": 73, "target": 69, "value": 2}, {"source": 73, "target": 70, "value": 2}, {"source": 73, "target": 71, "value": 2}, {"source": 73, "target": 72, "value": 2}, {"source": 77, "target": 8, "value": 2}, {"source": 77, "target": 78, "value": 2}, {"source": 33, "target": 30, "value": 2}, {"source": 33, "target": 20, "value": 2}, {"source": 33, "target": 36, "value": 2}, {"source": 64, "target": 61, "value": 2}, {"source": 64, "target": 62, "value": 2}, {"source": 64, "target": 63, "value": 2}, {"source": 64, "target": 65, "value": 2}, {"source": 64, "target": 66, "value": 2}, {"source": 64, "target": 67, "value": 2}, {"source": 64, "target": 68, "value": 2}, {"source": 64, "target": 69, "value": 2}, {"source": 64, "target": 70, "value": 2}, {"source": 64, "target": 71, "value": 2}, {"source": 64, "target": 72, "value": 2}, {"source": 66, "target": 61, "value": 2}, {"source": 66, "target": 62, "value": 2}, {"source": 66, "target": 63, "value": 2}, {"source": 66, "target": 65, "value": 2}, {"source": 66, "target": 67, "value": 2}, {"source": 66, "target": 68, "value": 2}, {"source": 66, "target": 69, "value": 2}, {"source": 66, "target": 70, "value": 2}, {"source": 66, "target": 71, "value": 2}, {"source": 66, "target": 72, "value": 2}, {"source": 46, "target": 21, "value": 2}, {"source": 46, "target": 49, "value": 2}, {"source": 46, "target": 42, "value": 2}, {"source": 46, "target": 41, "value": 2}, {"source": 46, "target": 12, "value": 2}, {"source": 46, "target": 8, "value": 2}, {"source": 46, "target": 48, "value": 2}, {"source": 92, "target": 25, "value": 2}, {"source": 92, "target": 32, "value": 2}, {"source": 126, "target": 125, "value": 2}, {"source": 126, "target": 136, "value": 2}, {"source": 126, "target": 123, "value": 2}, {"source": 126, "target": 8, "value": 2}, {"source": 119, "target": 30, "value": 2}, {"source": 119, "target": 8, "value": 2}, {"source": 49, "target": 48, "value": 2}, {"source": 49, "target": 21, "value": 2}, {"source": 121, "target": 122, "value": 2}, {"source": 121, "target": 124, "value": 2}, {"source": 121, "target": 8, "value": 2}, {"source": 137, "target": 138, "value": 2}, {"source": 137, "target": 55, "value": 2}, {"source": 137, "target": 34, "value": 2}, {"source": 137, "target": 139, "value": 2}, {"source": 140, "target": 141, "value": 2}, {"source": 140, "target": 35, "value": 2}, {"source": 140, "target": 21, "value": 2}, {"source": 140, "target": 111, "value": 2}, {"source": 140, "target": 8, "value": 2}, {"source": 96, "target": 117, "value": 2}, {"source": 142, "target": 8, "value": 2}, {"source": 142, "target": 143, "value": 2}, {"source": 142, "target": 144, "value": 2}, {"source": 87, "target": 86, "value": 2}, {"source": 87, "target": 88, "value": 2}, {"source": 87, "target": 89, "value": 2}, {"source": 87, "target": 90, "value": 2}, {"source": 68, "target": 61, "value": 2}, {"source": 68, "target": 62, "value": 2}, {"source": 68, "target": 63, "value": 2}, {"source": 68, "target": 65, "value": 2}, {"source": 68, "target": 67, "value": 2}, {"source": 68, "target": 69, "value": 2}, {"source": 68, "target": 70, "value": 2}, {"source": 68, "target": 71, "value": 2}, {"source": 68, "target": 72, "value": 2}, {"source": 50, "target": 145, "value": 2}, {"source": 50, "target": 58, "value": 2}, {"source": 50, "target": 8, "value": 2}, {"source": 98, "target": 86, "value": 2}, {"source": 98, "target": 99, "value": 2}, {"source": 98, "target": 102, "value": 2}, {"source": 146, "target": 147, "value": 2}, {"source": 146, "target": 148, "value": 2}, {"source": 146, "target": 149, "value": 2}, {"source": 146, "target": 150, "value": 2}, {"source": 146, "target": 21, "value": 2}, {"source": 99, "target": 102, "value": 2}, {"source": 99, "target": 86, "value": 2}, {"source": 78, "target": 8, "value": 2}, {"source": 71, "target": 61, "value": 2}, {"source": 71, "target": 62, "value": 2}, {"source": 71, "target": 63, "value": 2}, {"source": 71, "target": 65, "value": 2}, {"source": 71, "target": 67, "value": 2}, {"source": 71, "target": 69, "value": 2}, {"source": 71, "target": 70, "value": 2}, {"source": 71, "target": 72, "value": 2}, {"source": 58, "target": 8, "value": 2}, {"source": 6, "target": 10, "value": 2}, {"source": 8, "target": 151, "value": 2}, {"source": 8, "target": 152, "value": 2}, {"source": 8, "target": 144, "value": 2}, {"source": 8, "target": 153, "value": 2}, {"source": 8, "target": 136, "value": 2}, {"source": 8, "target": 12, "value": 2}, {"source": 8, "target": 143, "value": 2}, {"source": 8, "target": 111, "value": 2}, {"source": 8, "target": 154, "value": 2}, {"source": 8, "target": 145, "value": 2}, {"source": 8, "target": 155, "value": 2}, {"source": 8, "target": 141, "value": 2}, {"source": 8, "target": 21, "value": 2}, {"source": 8, "target": 42, "value": 2}, {"source": 8, "target": 123, "value": 2}, {"source": 8, "target": 156, "value": 2}, {"source": 8, "target": 124, "value": 2}, {"source": 8, "target": 125, "value": 2}, {"source": 8, "target": 83, "value": 2}, {"source": 8, "target": 157, "value": 2}, {"source": 8, "target": 30, "value": 2}, {"source": 8, "target": 40, "value": 2}, {"source": 8, "target": 158, "value": 2}, {"source": 8, "target": 159, "value": 2}, {"source": 8, "target": 41, "value": 2}, {"source": 8, "target": 35, "value": 2}, {"source": 8, "target": 122, "value": 2}, {"source": 8, "target": 160, "value": 2}, {"source": 147, "target": 149, "value": 2}, {"source": 147, "target": 148, "value": 2}, {"source": 147, "target": 150, "value": 2}, {"source": 147, "target": 21, "value": 2}, {"source": 161, "target": 162, "value": 2}, {"source": 161, "target": 34, "value": 2}, {"source": 161, "target": 56, "value": 2}, {"source": 161, "target": 163, "value": 2}, {"source": 164, "target": 165, "value": 2}, {"source": 164, "target": 166, "value": 2}, {"source": 164, "target": 17, "value": 2}, {"source": 164, "target": 167, "value": 2}, {"source": 164, "target": 34, "value": 2}, {"source": 165, "target": 166, "value": 2}, {"source": 165, "target": 34, "value": 2}, {"source": 165, "target": 17, "value": 2}, {"source": 165, "target": 167, "value": 2}, {"source": 111, "target": 11, "value": 2}, {"source": 111, "target": 21, "value": 2}, {"source": 111, "target": 35, "value": 2}, {"source": 111, "target": 94, "value": 2}, {"source": 111, "target": 141, "value": 2}, {"source": 154, "target": 151, "value": 2}, {"source": 154, "target": 152, "value": 2}, {"source": 168, "target": 169, "value": 2}, {"source": 168, "target": 34, "value": 2}, {"source": 107, "target": 93, "value": 2}, {"source": 107, "target": 115, "value": 2}, {"source": 129, "target": 128, "value": 2}, {"source": 129, "target": 34, "value": 2}, {"source": 129, "target": 130, "value": 2}, {"source": 129, "target": 131, "value": 2}, {"source": 166, "target": 34, "value": 2}, {"source": 166, "target": 17, "value": 2}, {"source": 166, "target": 167, "value": 2}, {"source": 61, "target": 62, "value": 2}, {"source": 61, "target": 63, "value": 2}, {"source": 61, "target": 65, "value": 2}, {"source": 61, "target": 67, "value": 2}, {"source": 61, "target": 69, "value": 2}, {"source": 61, "target": 70, "value": 2}, {"source": 61, "target": 72, "value": 2}, {"source": 167, "target": 17, "value": 2}, {"source": 167, "target": 34, "value": 2}, {"source": 11, "target": 94, "value": 2}, {"source": 11, "target": 53, "value": 2}, {"source": 11, "target": 26, "value": 2}, {"source": 10, "target": 21, "value": 2}, {"source": 10, "target": 135, "value": 2}, {"source": 10, "target": 24, "value": 2}, {"source": 10, "target": 25, "value": 2}, {"source": 10, "target": 12, "value": 2}, {"source": 10, "target": 112, "value": 2}, {"source": 10, "target": 105, "value": 2}, {"source": 10, "target": 36, "value": 2}, {"source": 63, "target": 62, "value": 2}, {"source": 63, "target": 65, "value": 2}, {"source": 63, "target": 67, "value": 2}, {"source": 63, "target": 69, "value": 2}, {"source": 63, "target": 70, "value": 2}, {"source": 63, "target": 72, "value": 2}, {"source": 52, "target": 24, "value": 2}, {"source": 170, "target": 25, "value": 2}, {"source": 53, "target": 26, "value": 2}, {"source": 162, "target": 171, "value": 2}, {"source": 162, "target": 163, "value": 2}, {"source": 162, "target": 80, "value": 2}, {"source": 162, "target": 34, "value": 2}, {"source": 162, "target": 56, "value": 2}, {"source": 162, "target": 172, "value": 2}, {"source": 83, "target": 155, "value": 2}, {"source": 83, "target": 124, "value": 2}, {"source": 83, "target": 21, "value": 2}, {"source": 90, "target": 86, "value": 2}, {"source": 90, "target": 88, "value": 2}, {"source": 90, "target": 89, "value": 2}, {"source": 109, "target": 30, "value": 2}, {"source": 109, "target": 34, "value": 2}, {"source": 40, "target": 41, "value": 2}, {"source": 40, "target": 42, "value": 2}, {"source": 40, "target": 21, "value": 2}, {"source": 32, "target": 25, "value": 2}, {"source": 32, "target": 36, "value": 2}, {"source": 32, "target": 28, "value": 2}, {"source": 163, "target": 34, "value": 2}, {"source": 163, "target": 56, "value": 2}, {"source": 116, "target": 110, "value": 2}, {"source": 34, "target": 0, "value": 2}, {"source": 9, "target": 1, "value": 1}, {"source": 34, "target": 128, "value": 2}, {"source": 34, "target": 55, "value": 2}, {"source": 34, "target": 139, "value": 2}, {"source": 34, "target": 171, "value": 2}, {"source": 34, "target": 130, "value": 2}, {"source": 34, "target": 138, "value": 2}, {"source": 34, "target": 17, "value": 2}, {"source": 34, "target": 23, "value": 2}, {"source": 34, "target": 56, "value": 2}, {"source": 34, "target": 30, "value": 2}, {"source": 34, "target": 80, "value": 2}, {"source": 34, "target": 131, "value": 2}, {"source": 34, "target": 172, "value": 2}, {"source": 34, "target": 35, "value": 2}, {"source": 34, "target": 169, "value": 2}, {"source": 45, "target": 21, "value": 2}, {"source": 89, "target": 86, "value": 2}, {"source": 89, "target": 88, "value": 2}, {"source": 135, "target": 21, "value": 2}, {"source": 160, "target": 158, "value": 2}, {"source": 150, "target": 149, "value": 2}, {"source": 150, "target": 148, "value": 2}, {"source": 150, "target": 21, "value": 2}, {"source": 152, "target": 151, "value": 2}, {"source": 173, "target": 25, "value": 2}, {"source": 173, "target": 36, "value": 2}, {"source": 55, "target": 139, "value": 2}, {"source": 55, "target": 0, "value": 2}, {"source": 55, "target": 56, "value": 2}, {"source": 100, "target": 29, "value": 2}, {"source": 100, "target": 2, "value": 2}, {"source": 171, "target": 172, "value": 2}, {"source": 171, "target": 80, "value": 2}, {"source": 102, "target": 86, "value": 2}, {"source": 153, "target": 144, "value": 2}, {"source": 153, "target": 156, "value": 2}, {"source": 130, "target": 128, "value": 2}, {"source": 130, "target": 131, "value": 2}, {"source": 12, "target": 21, "value": 2}, {"source": 12, "target": 103, "value": 2}, {"source": 12, "target": 112, "value": 2}, {"source": 12, "target": 35, "value": 2}, {"source": 12, "target": 25, "value": 2}, {"source": 12, "target": 36, "value": 2}, {"source": 12, "target": 101, "value": 2}, {"source": 143, "target": 144, "value": 2}, {"source": 69, "target": 62, "value": 2}, {"source": 69, "target": 65, "value": 2}, {"source": 69, "target": 67, "value": 2}, {"source": 69, "target": 70, "value": 2}, {"source": 69, "target": 72, "value": 2}, {"source": 108, "target": 113, "value": 2}, {"source": 108, "target": 118, "value": 2}, {"source": 108, "target": 21, "value": 2}, {"source": 141, "target": 35, "value": 2}, {"source": 141, "target": 21, "value": 2}, {"source": 20, "target": 174, "value": 2}, {"source": 20, "target": 36, "value": 2}, {"source": 20, "target": 175, "value": 2}, {"source": 149, "target": 148, "value": 2}, {"source": 149, "target": 21, "value": 2}, {"source": 21, "target": 176, "value": 2}, {"source": 21, "target": 177, "value": 2}, {"source": 21, "target": 178, "value": 2}, {"source": 21, "target": 155, "value": 2}, {"source": 21, "target": 95, "value": 2}, {"source": 21, "target": 42, "value": 2}, {"source": 21, "target": 179, "value": 2}, {"source": 21, "target": 25, "value": 2}, {"source": 21, "target": 124, "value": 2}, {"source": 21, "target": 113, "value": 2}, {"source": 21, "target": 180, "value": 2}, {"source": 21, "target": 148, "value": 2}, {"source": 21, "target": 41, "value": 2}, {"source": 21, "target": 35, "value": 2}, {"source": 21, "target": 118, "value": 2}, {"source": 21, "target": 88, "value": 2}, {"source": 21, "target": 48, "value": 2}, {"source": 23, "target": 35, "value": 2}, {"source": 25, "target": 28, "value": 2}, {"source": 25, "target": 103, "value": 2}, {"source": 25, "target": 112, "value": 2}, {"source": 25, "target": 75, "value": 2}, {"source": 25, "target": 36, "value": 2}, {"source": 25, "target": 101, "value": 2}, {"source": 25, "target": 37, "value": 2}, {"source": 125, "target": 123, "value": 2}, {"source": 180, "target": 179, "value": 2}, {"source": 180, "target": 176, "value": 2}, {"source": 180, "target": 178, "value": 2}, {"source": 180, "target": 177, "value": 2}, {"source": 122, "target": 124, "value": 2}, {"source": 179, "target": 176, "value": 2}, {"source": 179, "target": 178, "value": 2}, {"source": 179, "target": 177, "value": 2}, {"source": 62, "target": 65, "value": 2}, {"source": 62, "target": 67, "value": 2}, {"source": 62, "target": 70, "value": 2}, {"source": 62, "target": 72, "value": 2}, {"source": 65, "target": 72, "value": 2}, {"source": 65, "target": 70, "value": 2}, {"source": 65, "target": 67, "value": 2}, {"source": 172, "target": 80, "value": 2}, {"source": 88, "target": 86, "value": 2}, {"source": 88, "target": 115, "value": 2}, {"source": 88, "target": 95, "value": 2}, {"source": 88, "target": 93, "value": 2}, {"source": 178, "target": 176, "value": 2}, {"source": 178, "target": 177, "value": 2}, {"source": 128, "target": 131, "value": 2}, {"source": 176, "target": 177, "value": 2}, {"source": 2, "target": 29, "value": 2}, {"source": 3, "target": 18, "value": 1}, {"source": 70, "target": 72, "value": 2}, {"source": 70, "target": 67, "value": 2}, {"source": 144, "target": 156, "value": 2}, {"source": 101, "target": 103, "value": 2}, {"source": 115, "target": 93, "value": 2}, {"source": 155, "target": 124, "value": 2}, {"source": 175, "target": 174, "value": 2}, {"source": 36, "target": 41, "value": 2}, {"source": 36, "target": 35, "value": 2}, {"source": 42, "target": 41, "value": 2}, {"source": 113, "target": 118, "value": 2}, {"source": 72, "target": 67, "value": 2}]}
+{
+    "links": [
+        {
+            "source": 0,
+            "target": 1,
+            "value": 1
+        },
+        {
+            "source": 2,
+            "target": 3,
+            "value": 1
+        },
+        {
+            "source": 4,
+            "target": 3,
+            "value": 1
+        },
+        {
+            "source": 4,
+            "target": 5,
+            "value": 1
+        },
+        {
+            "source": 6,
+            "target": 7,
+            "value": 1
+        },
+        {
+            "source": 8,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 10,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 11,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 12,
+            "target": 7,
+            "value": 1
+        },
+        {
+            "source": 13,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 14,
+            "target": 7,
+            "value": 1
+        },
+        {
+            "source": 15,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 16,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 16,
+            "target": 7,
+            "value": 1
+        },
+        {
+            "source": 17,
+            "target": 18,
+            "value": 1
+        },
+        {
+            "source": 19,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 20,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 21,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 22,
+            "target": 7,
+            "value": 1
+        },
+        {
+            "source": 23,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 24,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 25,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 26,
+            "target": 3,
+            "value": 1
+        },
+        {
+            "source": 26,
+            "target": 5,
+            "value": 1
+        },
+        {
+            "source": 27,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 28,
+            "target": 7,
+            "value": 1
+        },
+        {
+            "source": 29,
+            "target": 18,
+            "value": 1
+        },
+        {
+            "source": 30,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 31,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 32,
+            "target": 7,
+            "value": 1
+        },
+        {
+            "source": 33,
+            "target": 7,
+            "value": 1
+        },
+        {
+            "source": 34,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 35,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 36,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 37,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 38,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 39,
+            "target": 40,
+            "value": 2
+        },
+        {
+            "source": 39,
+            "target": 41,
+            "value": 2
+        },
+        {
+            "source": 39,
+            "target": 42,
+            "value": 2
+        },
+        {
+            "source": 39,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 39,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 43,
+            "target": 44,
+            "value": 2
+        },
+        {
+            "source": 43,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 43,
+            "target": 45,
+            "value": 2
+        },
+        {
+            "source": 43,
+            "target": 46,
+            "value": 2
+        },
+        {
+            "source": 43,
+            "target": 47,
+            "value": 2
+        },
+        {
+            "source": 43,
+            "target": 48,
+            "value": 2
+        },
+        {
+            "source": 43,
+            "target": 49,
+            "value": 2
+        },
+        {
+            "source": 31,
+            "target": 50,
+            "value": 2
+        },
+        {
+            "source": 31,
+            "target": 16,
+            "value": 2
+        },
+        {
+            "source": 51,
+            "target": 52,
+            "value": 2
+        },
+        {
+            "source": 51,
+            "target": 24,
+            "value": 2
+        },
+        {
+            "source": 4,
+            "target": 16,
+            "value": 2
+        },
+        {
+            "source": 3,
+            "target": 9,
+            "value": 5
+        },
+        {
+            "source": 4,
+            "target": 26,
+            "value": 2
+        },
+        {
+            "source": 4,
+            "target": 11,
+            "value": 2
+        },
+        {
+            "source": 4,
+            "target": 53,
+            "value": 2
+        },
+        {
+            "source": 54,
+            "target": 55,
+            "value": 2
+        },
+        {
+            "source": 54,
+            "target": 16,
+            "value": 2
+        },
+        {
+            "source": 54,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 54,
+            "target": 56,
+            "value": 2
+        },
+        {
+            "source": 57,
+            "target": 50,
+            "value": 2
+        },
+        {
+            "source": 57,
+            "target": 58,
+            "value": 2
+        },
+        {
+            "source": 57,
+            "target": 59,
+            "value": 2
+        },
+        {
+            "source": 57,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 61,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 62,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 63,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 64,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 66,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 68,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 69,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 13,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 71,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 60,
+            "target": 73,
+            "value": 2
+        },
+        {
+            "source": 74,
+            "target": 75,
+            "value": 2
+        },
+        {
+            "source": 74,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 76,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 76,
+            "target": 77,
+            "value": 2
+        },
+        {
+            "source": 76,
+            "target": 78,
+            "value": 2
+        },
+        {
+            "source": 79,
+            "target": 80,
+            "value": 2
+        },
+        {
+            "source": 79,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 22,
+            "target": 32,
+            "value": 2
+        },
+        {
+            "source": 22,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 7,
+            "target": 9,
+            "value": 22
+        },
+        {
+            "source": 44,
+            "target": 45,
+            "value": 2
+        },
+        {
+            "source": 44,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 44,
+            "target": 47,
+            "value": 2
+        },
+        {
+            "source": 81,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 82,
+            "target": 83,
+            "value": 2
+        },
+        {
+            "source": 82,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 82,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 84,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 85,
+            "target": 86,
+            "value": 2
+        },
+        {
+            "source": 85,
+            "target": 87,
+            "value": 2
+        },
+        {
+            "source": 85,
+            "target": 88,
+            "value": 2
+        },
+        {
+            "source": 85,
+            "target": 89,
+            "value": 2
+        },
+        {
+            "source": 85,
+            "target": 16,
+            "value": 2
+        },
+        {
+            "source": 85,
+            "target": 90,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 66,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 61,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 62,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 63,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 64,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 68,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 69,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 71,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 16,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 13,
+            "target": 73,
+            "value": 2
+        },
+        {
+            "source": 47,
+            "target": 45,
+            "value": 2
+        },
+        {
+            "source": 47,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 91,
+            "target": 16,
+            "value": 2
+        },
+        {
+            "source": 91,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 91,
+            "target": 32,
+            "value": 2
+        },
+        {
+            "source": 91,
+            "target": 92,
+            "value": 2
+        },
+        {
+            "source": 15,
+            "target": 10,
+            "value": 2
+        },
+        {
+            "source": 15,
+            "target": 16,
+            "value": 2
+        },
+        {
+            "source": 15,
+            "target": 24,
+            "value": 2
+        },
+        {
+            "source": 15,
+            "target": 19,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 93,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 94,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 95,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 96,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 97,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 2,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 87,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 55,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 53,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 98,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 99,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 100,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 101,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 35,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 6,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 10,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 102,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 86,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 11,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 50,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 103,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 104,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 12,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 105,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 106,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 88,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 107,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 108,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 92,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 37,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 20,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 109,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 110,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 111,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 75,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 52,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 24,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 26,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 112,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 27,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 56,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 113,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 114,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 29,
+            "value": 2
+        },
+        {
+            "source": 9,
+            "target": 18,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 90,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 30,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 115,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 32,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 116,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 38,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 33,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 117,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 46,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 118,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 89,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 36,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 19,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 119,
+            "value": 2
+        },
+        {
+            "source": 16,
+            "target": 48,
+            "value": 2
+        },
+        {
+            "source": 120,
+            "target": 121,
+            "value": 2
+        },
+        {
+            "source": 120,
+            "target": 122,
+            "value": 2
+        },
+        {
+            "source": 120,
+            "target": 123,
+            "value": 2
+        },
+        {
+            "source": 120,
+            "target": 124,
+            "value": 2
+        },
+        {
+            "source": 120,
+            "target": 125,
+            "value": 2
+        },
+        {
+            "source": 120,
+            "target": 126,
+            "value": 2
+        },
+        {
+            "source": 120,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 59,
+            "target": 50,
+            "value": 2
+        },
+        {
+            "source": 59,
+            "target": 58,
+            "value": 2
+        },
+        {
+            "source": 59,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 30,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 10,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 33,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 75,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 24,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 41,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 12,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 46,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 119,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 36,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 20,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 6,
+            "value": 2
+        },
+        {
+            "source": 19,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 97,
+            "target": 98,
+            "value": 2
+        },
+        {
+            "source": 97,
+            "target": 86,
+            "value": 2
+        },
+        {
+            "source": 97,
+            "target": 99,
+            "value": 2
+        },
+        {
+            "source": 97,
+            "target": 102,
+            "value": 2
+        },
+        {
+            "source": 127,
+            "target": 128,
+            "value": 2
+        },
+        {
+            "source": 127,
+            "target": 129,
+            "value": 2
+        },
+        {
+            "source": 127,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 127,
+            "target": 130,
+            "value": 2
+        },
+        {
+            "source": 127,
+            "target": 131,
+            "value": 2
+        },
+        {
+            "source": 132,
+            "target": 10,
+            "value": 2
+        },
+        {
+            "source": 132,
+            "target": 133,
+            "value": 2
+        },
+        {
+            "source": 132,
+            "target": 134,
+            "value": 2
+        },
+        {
+            "source": 132,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 132,
+            "target": 135,
+            "value": 2
+        },
+        {
+            "source": 14,
+            "target": 28,
+            "value": 2
+        },
+        {
+            "source": 14,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 14,
+            "target": 32,
+            "value": 2
+        },
+        {
+            "source": 134,
+            "target": 10,
+            "value": 2
+        },
+        {
+            "source": 134,
+            "target": 133,
+            "value": 2
+        },
+        {
+            "source": 134,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 134,
+            "target": 135,
+            "value": 2
+        },
+        {
+            "source": 27,
+            "target": 38,
+            "value": 2
+        },
+        {
+            "source": 114,
+            "target": 48,
+            "value": 2
+        },
+        {
+            "source": 133,
+            "target": 10,
+            "value": 2
+        },
+        {
+            "source": 133,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 133,
+            "target": 135,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 61,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 62,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 63,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 64,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 66,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 68,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 69,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 71,
+            "value": 2
+        },
+        {
+            "source": 73,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 77,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 77,
+            "target": 78,
+            "value": 2
+        },
+        {
+            "source": 33,
+            "target": 30,
+            "value": 2
+        },
+        {
+            "source": 33,
+            "target": 20,
+            "value": 2
+        },
+        {
+            "source": 33,
+            "target": 36,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 61,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 62,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 63,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 66,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 68,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 69,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 71,
+            "value": 2
+        },
+        {
+            "source": 64,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 66,
+            "target": 61,
+            "value": 2
+        },
+        {
+            "source": 66,
+            "target": 62,
+            "value": 2
+        },
+        {
+            "source": 66,
+            "target": 63,
+            "value": 2
+        },
+        {
+            "source": 66,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 66,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 66,
+            "target": 68,
+            "value": 2
+        },
+        {
+            "source": 66,
+            "target": 69,
+            "value": 2
+        },
+        {
+            "source": 66,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 66,
+            "target": 71,
+            "value": 2
+        },
+        {
+            "source": 66,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 46,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 46,
+            "target": 49,
+            "value": 2
+        },
+        {
+            "source": 46,
+            "target": 42,
+            "value": 2
+        },
+        {
+            "source": 46,
+            "target": 41,
+            "value": 2
+        },
+        {
+            "source": 46,
+            "target": 12,
+            "value": 2
+        },
+        {
+            "source": 46,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 46,
+            "target": 48,
+            "value": 2
+        },
+        {
+            "source": 92,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 92,
+            "target": 32,
+            "value": 2
+        },
+        {
+            "source": 126,
+            "target": 125,
+            "value": 2
+        },
+        {
+            "source": 126,
+            "target": 136,
+            "value": 2
+        },
+        {
+            "source": 126,
+            "target": 123,
+            "value": 2
+        },
+        {
+            "source": 126,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 119,
+            "target": 30,
+            "value": 2
+        },
+        {
+            "source": 119,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 49,
+            "target": 48,
+            "value": 2
+        },
+        {
+            "source": 49,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 121,
+            "target": 122,
+            "value": 2
+        },
+        {
+            "source": 121,
+            "target": 124,
+            "value": 2
+        },
+        {
+            "source": 121,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 137,
+            "target": 138,
+            "value": 2
+        },
+        {
+            "source": 137,
+            "target": 55,
+            "value": 2
+        },
+        {
+            "source": 137,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 137,
+            "target": 139,
+            "value": 2
+        },
+        {
+            "source": 140,
+            "target": 141,
+            "value": 2
+        },
+        {
+            "source": 140,
+            "target": 35,
+            "value": 2
+        },
+        {
+            "source": 140,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 140,
+            "target": 111,
+            "value": 2
+        },
+        {
+            "source": 140,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 96,
+            "target": 117,
+            "value": 2
+        },
+        {
+            "source": 142,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 142,
+            "target": 143,
+            "value": 2
+        },
+        {
+            "source": 142,
+            "target": 144,
+            "value": 2
+        },
+        {
+            "source": 87,
+            "target": 86,
+            "value": 2
+        },
+        {
+            "source": 87,
+            "target": 88,
+            "value": 2
+        },
+        {
+            "source": 87,
+            "target": 89,
+            "value": 2
+        },
+        {
+            "source": 87,
+            "target": 90,
+            "value": 2
+        },
+        {
+            "source": 68,
+            "target": 61,
+            "value": 2
+        },
+        {
+            "source": 68,
+            "target": 62,
+            "value": 2
+        },
+        {
+            "source": 68,
+            "target": 63,
+            "value": 2
+        },
+        {
+            "source": 68,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 68,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 68,
+            "target": 69,
+            "value": 2
+        },
+        {
+            "source": 68,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 68,
+            "target": 71,
+            "value": 2
+        },
+        {
+            "source": 68,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 50,
+            "target": 145,
+            "value": 2
+        },
+        {
+            "source": 50,
+            "target": 58,
+            "value": 2
+        },
+        {
+            "source": 50,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 98,
+            "target": 86,
+            "value": 2
+        },
+        {
+            "source": 98,
+            "target": 99,
+            "value": 2
+        },
+        {
+            "source": 98,
+            "target": 102,
+            "value": 2
+        },
+        {
+            "source": 146,
+            "target": 147,
+            "value": 2
+        },
+        {
+            "source": 146,
+            "target": 148,
+            "value": 2
+        },
+        {
+            "source": 146,
+            "target": 149,
+            "value": 2
+        },
+        {
+            "source": 146,
+            "target": 150,
+            "value": 2
+        },
+        {
+            "source": 146,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 99,
+            "target": 102,
+            "value": 2
+        },
+        {
+            "source": 99,
+            "target": 86,
+            "value": 2
+        },
+        {
+            "source": 78,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 71,
+            "target": 61,
+            "value": 2
+        },
+        {
+            "source": 71,
+            "target": 62,
+            "value": 2
+        },
+        {
+            "source": 71,
+            "target": 63,
+            "value": 2
+        },
+        {
+            "source": 71,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 71,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 71,
+            "target": 69,
+            "value": 2
+        },
+        {
+            "source": 71,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 71,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 58,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 6,
+            "target": 10,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 151,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 152,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 144,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 153,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 136,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 12,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 143,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 111,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 154,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 145,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 155,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 141,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 42,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 123,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 156,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 124,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 125,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 83,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 157,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 30,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 40,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 158,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 159,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 41,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 35,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 122,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 160,
+            "value": 2
+        },
+        {
+            "source": 147,
+            "target": 149,
+            "value": 2
+        },
+        {
+            "source": 147,
+            "target": 148,
+            "value": 2
+        },
+        {
+            "source": 147,
+            "target": 150,
+            "value": 2
+        },
+        {
+            "source": 147,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 161,
+            "target": 162,
+            "value": 2
+        },
+        {
+            "source": 161,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 161,
+            "target": 56,
+            "value": 2
+        },
+        {
+            "source": 161,
+            "target": 163,
+            "value": 2
+        },
+        {
+            "source": 164,
+            "target": 165,
+            "value": 2
+        },
+        {
+            "source": 164,
+            "target": 166,
+            "value": 2
+        },
+        {
+            "source": 164,
+            "target": 17,
+            "value": 2
+        },
+        {
+            "source": 164,
+            "target": 167,
+            "value": 2
+        },
+        {
+            "source": 164,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 165,
+            "target": 166,
+            "value": 2
+        },
+        {
+            "source": 165,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 165,
+            "target": 17,
+            "value": 2
+        },
+        {
+            "source": 165,
+            "target": 167,
+            "value": 2
+        },
+        {
+            "source": 111,
+            "target": 11,
+            "value": 2
+        },
+        {
+            "source": 111,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 111,
+            "target": 35,
+            "value": 2
+        },
+        {
+            "source": 111,
+            "target": 94,
+            "value": 2
+        },
+        {
+            "source": 111,
+            "target": 141,
+            "value": 2
+        },
+        {
+            "source": 154,
+            "target": 151,
+            "value": 2
+        },
+        {
+            "source": 154,
+            "target": 152,
+            "value": 2
+        },
+        {
+            "source": 168,
+            "target": 169,
+            "value": 2
+        },
+        {
+            "source": 168,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 107,
+            "target": 93,
+            "value": 2
+        },
+        {
+            "source": 107,
+            "target": 115,
+            "value": 2
+        },
+        {
+            "source": 129,
+            "target": 128,
+            "value": 2
+        },
+        {
+            "source": 129,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 129,
+            "target": 130,
+            "value": 2
+        },
+        {
+            "source": 129,
+            "target": 131,
+            "value": 2
+        },
+        {
+            "source": 166,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 166,
+            "target": 17,
+            "value": 2
+        },
+        {
+            "source": 166,
+            "target": 167,
+            "value": 2
+        },
+        {
+            "source": 61,
+            "target": 62,
+            "value": 2
+        },
+        {
+            "source": 61,
+            "target": 63,
+            "value": 2
+        },
+        {
+            "source": 61,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 61,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 61,
+            "target": 69,
+            "value": 2
+        },
+        {
+            "source": 61,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 61,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 167,
+            "target": 17,
+            "value": 2
+        },
+        {
+            "source": 167,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 11,
+            "target": 94,
+            "value": 2
+        },
+        {
+            "source": 11,
+            "target": 53,
+            "value": 2
+        },
+        {
+            "source": 11,
+            "target": 26,
+            "value": 2
+        },
+        {
+            "source": 10,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 10,
+            "target": 135,
+            "value": 2
+        },
+        {
+            "source": 10,
+            "target": 24,
+            "value": 2
+        },
+        {
+            "source": 10,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 10,
+            "target": 12,
+            "value": 2
+        },
+        {
+            "source": 10,
+            "target": 112,
+            "value": 2
+        },
+        {
+            "source": 10,
+            "target": 105,
+            "value": 2
+        },
+        {
+            "source": 10,
+            "target": 36,
+            "value": 2
+        },
+        {
+            "source": 63,
+            "target": 62,
+            "value": 2
+        },
+        {
+            "source": 63,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 63,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 63,
+            "target": 69,
+            "value": 2
+        },
+        {
+            "source": 63,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 63,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 52,
+            "target": 24,
+            "value": 2
+        },
+        {
+            "source": 170,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 53,
+            "target": 26,
+            "value": 2
+        },
+        {
+            "source": 162,
+            "target": 171,
+            "value": 2
+        },
+        {
+            "source": 162,
+            "target": 163,
+            "value": 2
+        },
+        {
+            "source": 162,
+            "target": 80,
+            "value": 2
+        },
+        {
+            "source": 162,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 162,
+            "target": 56,
+            "value": 2
+        },
+        {
+            "source": 162,
+            "target": 172,
+            "value": 2
+        },
+        {
+            "source": 83,
+            "target": 155,
+            "value": 2
+        },
+        {
+            "source": 83,
+            "target": 124,
+            "value": 2
+        },
+        {
+            "source": 83,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 90,
+            "target": 86,
+            "value": 2
+        },
+        {
+            "source": 90,
+            "target": 88,
+            "value": 2
+        },
+        {
+            "source": 90,
+            "target": 89,
+            "value": 2
+        },
+        {
+            "source": 109,
+            "target": 30,
+            "value": 2
+        },
+        {
+            "source": 109,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 40,
+            "target": 41,
+            "value": 2
+        },
+        {
+            "source": 40,
+            "target": 42,
+            "value": 2
+        },
+        {
+            "source": 40,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 32,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 32,
+            "target": 36,
+            "value": 2
+        },
+        {
+            "source": 32,
+            "target": 28,
+            "value": 2
+        },
+        {
+            "source": 163,
+            "target": 34,
+            "value": 2
+        },
+        {
+            "source": 163,
+            "target": 56,
+            "value": 2
+        },
+        {
+            "source": 116,
+            "target": 110,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 0,
+            "value": 2
+        },
+        {
+            "source": 9,
+            "target": 1,
+            "value": 1
+        },
+        {
+            "source": 34,
+            "target": 128,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 55,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 139,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 171,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 130,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 138,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 17,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 23,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 56,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 30,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 80,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 131,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 172,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 35,
+            "value": 2
+        },
+        {
+            "source": 34,
+            "target": 169,
+            "value": 2
+        },
+        {
+            "source": 45,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 89,
+            "target": 86,
+            "value": 2
+        },
+        {
+            "source": 89,
+            "target": 88,
+            "value": 2
+        },
+        {
+            "source": 135,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 160,
+            "target": 158,
+            "value": 2
+        },
+        {
+            "source": 150,
+            "target": 149,
+            "value": 2
+        },
+        {
+            "source": 150,
+            "target": 148,
+            "value": 2
+        },
+        {
+            "source": 150,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 152,
+            "target": 151,
+            "value": 2
+        },
+        {
+            "source": 173,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 173,
+            "target": 36,
+            "value": 2
+        },
+        {
+            "source": 55,
+            "target": 139,
+            "value": 2
+        },
+        {
+            "source": 55,
+            "target": 0,
+            "value": 2
+        },
+        {
+            "source": 55,
+            "target": 56,
+            "value": 2
+        },
+        {
+            "source": 100,
+            "target": 29,
+            "value": 2
+        },
+        {
+            "source": 100,
+            "target": 2,
+            "value": 2
+        },
+        {
+            "source": 171,
+            "target": 172,
+            "value": 2
+        },
+        {
+            "source": 171,
+            "target": 80,
+            "value": 2
+        },
+        {
+            "source": 102,
+            "target": 86,
+            "value": 2
+        },
+        {
+            "source": 153,
+            "target": 144,
+            "value": 2
+        },
+        {
+            "source": 153,
+            "target": 156,
+            "value": 2
+        },
+        {
+            "source": 130,
+            "target": 128,
+            "value": 2
+        },
+        {
+            "source": 130,
+            "target": 131,
+            "value": 2
+        },
+        {
+            "source": 12,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 12,
+            "target": 103,
+            "value": 2
+        },
+        {
+            "source": 12,
+            "target": 112,
+            "value": 2
+        },
+        {
+            "source": 12,
+            "target": 35,
+            "value": 2
+        },
+        {
+            "source": 12,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 12,
+            "target": 36,
+            "value": 2
+        },
+        {
+            "source": 12,
+            "target": 101,
+            "value": 2
+        },
+        {
+            "source": 143,
+            "target": 144,
+            "value": 2
+        },
+        {
+            "source": 69,
+            "target": 62,
+            "value": 2
+        },
+        {
+            "source": 69,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 69,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 69,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 69,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 108,
+            "target": 113,
+            "value": 2
+        },
+        {
+            "source": 108,
+            "target": 118,
+            "value": 2
+        },
+        {
+            "source": 108,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 141,
+            "target": 35,
+            "value": 2
+        },
+        {
+            "source": 141,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 20,
+            "target": 174,
+            "value": 2
+        },
+        {
+            "source": 20,
+            "target": 36,
+            "value": 2
+        },
+        {
+            "source": 20,
+            "target": 175,
+            "value": 2
+        },
+        {
+            "source": 149,
+            "target": 148,
+            "value": 2
+        },
+        {
+            "source": 149,
+            "target": 21,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 176,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 177,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 178,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 155,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 95,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 42,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 179,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 25,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 124,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 113,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 180,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 148,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 41,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 35,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 118,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 88,
+            "value": 2
+        },
+        {
+            "source": 21,
+            "target": 48,
+            "value": 2
+        },
+        {
+            "source": 23,
+            "target": 35,
+            "value": 2
+        },
+        {
+            "source": 25,
+            "target": 28,
+            "value": 2
+        },
+        {
+            "source": 25,
+            "target": 103,
+            "value": 2
+        },
+        {
+            "source": 25,
+            "target": 112,
+            "value": 2
+        },
+        {
+            "source": 25,
+            "target": 75,
+            "value": 2
+        },
+        {
+            "source": 25,
+            "target": 36,
+            "value": 2
+        },
+        {
+            "source": 25,
+            "target": 101,
+            "value": 2
+        },
+        {
+            "source": 25,
+            "target": 37,
+            "value": 2
+        },
+        {
+            "source": 125,
+            "target": 123,
+            "value": 2
+        },
+        {
+            "source": 180,
+            "target": 179,
+            "value": 2
+        },
+        {
+            "source": 180,
+            "target": 176,
+            "value": 2
+        },
+        {
+            "source": 180,
+            "target": 178,
+            "value": 2
+        },
+        {
+            "source": 180,
+            "target": 177,
+            "value": 2
+        },
+        {
+            "source": 122,
+            "target": 124,
+            "value": 2
+        },
+        {
+            "source": 179,
+            "target": 176,
+            "value": 2
+        },
+        {
+            "source": 179,
+            "target": 178,
+            "value": 2
+        },
+        {
+            "source": 179,
+            "target": 177,
+            "value": 2
+        },
+        {
+            "source": 62,
+            "target": 65,
+            "value": 2
+        },
+        {
+            "source": 62,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 62,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 62,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 65,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 65,
+            "target": 70,
+            "value": 2
+        },
+        {
+            "source": 65,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 172,
+            "target": 80,
+            "value": 2
+        },
+        {
+            "source": 88,
+            "target": 86,
+            "value": 2
+        },
+        {
+            "source": 88,
+            "target": 115,
+            "value": 2
+        },
+        {
+            "source": 88,
+            "target": 95,
+            "value": 2
+        },
+        {
+            "source": 88,
+            "target": 93,
+            "value": 2
+        },
+        {
+            "source": 178,
+            "target": 176,
+            "value": 2
+        },
+        {
+            "source": 178,
+            "target": 177,
+            "value": 2
+        },
+        {
+            "source": 128,
+            "target": 131,
+            "value": 2
+        },
+        {
+            "source": 176,
+            "target": 177,
+            "value": 2
+        },
+        {
+            "source": 2,
+            "target": 29,
+            "value": 2
+        },
+        {
+            "source": 3,
+            "target": 18,
+            "value": 1
+        },
+        {
+            "source": 70,
+            "target": 72,
+            "value": 2
+        },
+        {
+            "source": 70,
+            "target": 67,
+            "value": 2
+        },
+        {
+            "source": 144,
+            "target": 156,
+            "value": 2
+        },
+        {
+            "source": 101,
+            "target": 103,
+            "value": 2
+        },
+        {
+            "source": 115,
+            "target": 93,
+            "value": 2
+        },
+        {
+            "source": 155,
+            "target": 124,
+            "value": 2
+        },
+        {
+            "source": 175,
+            "target": 174,
+            "value": 2
+        },
+        {
+            "source": 36,
+            "target": 41,
+            "value": 2
+        },
+        {
+            "source": 36,
+            "target": 35,
+            "value": 2
+        },
+        {
+            "source": 42,
+            "target": 41,
+            "value": 2
+        },
+        {
+            "source": 113,
+            "target": 118,
+            "value": 2
+        },
+        {
+            "source": 72,
+            "target": 67,
+            "value": 2
+        }
+    ],
+    "nodes": [
+        {
+            "group": "apis",
+            "index": 0,
+            "name": "Kaufmann, Benoît",
+            "type": "author",
+            "x": 426.47912173074246,
+            "y": 206.56847410742097
+        },
+        {
+            "group": "apis",
+            "index": 1,
+            "name": "apis",
+            "type": "team",
+            "x": 368.86277612136405,
+            "y": 223.11696777189164
+        },
+        {
+            "group": "leo",
+            "index": 2,
+            "name": "Katsifodimos, Asterios",
+            "type": "author",
+            "x": 317.102043472412,
+            "y": 110.7939066841455
+        },
+        {
+            "group": "leo",
+            "index": 3,
+            "name": "leo",
+            "type": "team",
+            "x": 343.51388628747867,
+            "y": 140.75861746536478
+        },
+        {
+            "group": "leo",
+            "index": 4,
+            "name": "Khemiri, Wael",
+            "type": "author",
+            "x": 303.6275038011522,
+            "y": 106.00335724505693
+        },
+        {
+            "group": "gemo",
+            "index": 5,
+            "name": "gemo",
+            "type": "team",
+            "x": 342.2026619672261,
+            "y": 46.05127069405947
+        },
+        {
+            "group": "in-situ",
+            "index": 6,
+            "name": "Riche, Yann",
+            "type": "author",
+            "x": 222.3471345455168,
+            "y": 211.59963029338195
+        },
+        {
+            "group": "in-situ",
+            "index": 7,
+            "name": "in-situ",
+            "type": "team",
+            "x": 211.85899448377268,
+            "y": 177.77357287190785
+        },
+        {
+            "group": "aviz",
+            "index": 8,
+            "name": "Isenberg, Tobias",
+            "type": "author",
+            "x": 215.62089833952118,
+            "y": 303.4428157616764
+        },
+        {
+            "group": "aviz",
+            "index": 9,
+            "name": "aviz",
+            "type": "team",
+            "x": 268.25096746210164,
+            "y": 207.39333428628257
+        },
+        {
+            "group": "aviz",
+            "index": 10,
+            "name": "Elmqvist, Niklas",
+            "type": "author",
+            "x": 232.2614953663531,
+            "y": 249.59045813155186
+        },
+        {
+            "group": "aviz",
+            "index": 11,
+            "name": "Hémery, Pierre-Luc",
+            "type": "author",
+            "x": 300.80123117367066,
+            "y": 171.4198904694227
+        },
+        {
+            "group": "in-situ",
+            "index": 12,
+            "name": "Bezerianos, Anastasia",
+            "type": "author",
+            "x": 222.60719092345153,
+            "y": 242.7244723622014
+        },
+        {
+            "group": "aviz",
+            "index": 13,
+            "name": "Jansen, Yvonne",
+            "type": "author",
+            "x": 143.4225700165938,
+            "y": 32.62449890106117
+        },
+        {
+            "group": "in-situ",
+            "index": 14,
+            "name": "Beaudouin-Lafon, Michel",
+            "type": "author",
+            "x": 155.45290534034623,
+            "y": 137.5748197848327
+        },
+        {
+            "group": "aviz",
+            "index": 15,
+            "name": "Goodell, Howard",
+            "type": "author",
+            "x": 236.53841445923493,
+            "y": 207.7382708177169
+        },
+        {
+            "group": "aviz",
+            "index": 16,
+            "name": "Fekete, Jean-Daniel",
+            "type": "author",
+            "x": 261.42556140421175,
+            "y": 188.602916661681
+        },
+        {
+            "group": "tao",
+            "index": 17,
+            "name": "Schoenauer, Marc",
+            "type": "author",
+            "x": 445.28487359318257,
+            "y": 224.16405787037496
+        },
+        {
+            "group": "tao",
+            "index": 18,
+            "name": "tao",
+            "type": "team",
+            "x": 366.85121929679735,
+            "y": 188.23701285912318
+        },
+        {
+            "group": "aviz",
+            "index": 19,
+            "name": "Henry, Nathalie",
+            "type": "author",
+            "x": 251.45061297264056,
+            "y": 246.57176205215208
+        },
+        {
+            "group": "aviz",
+            "index": 20,
+            "name": "Moscovich, Tomer",
+            "type": "author",
+            "x": 301.4400402914184,
+            "y": 221.35736915844726
+        },
+        {
+            "group": "aviz",
+            "index": 21,
+            "name": "Isenberg, Petra",
+            "type": "author",
+            "x": 277.94945921613765,
+            "y": 290.71709224527905
+        },
+        {
+            "group": "in-situ",
+            "index": 22,
+            "name": "Chapuis, Olivier",
+            "type": "author",
+            "x": 151.82883592064692,
+            "y": 151.53332620994075
+        },
+        {
+            "group": "aviz",
+            "index": 23,
+            "name": "Cancino Ticona, Waldo Gonzalo",
+            "type": "author",
+            "x": 345.005000551499,
+            "y": 222.67990104032893
+        },
+        {
+            "group": "aviz",
+            "index": 24,
+            "name": "Do, Thanh-Nghi",
+            "type": "author",
+            "x": 211.4589310671284,
+            "y": 207.04784302373918
+        },
+        {
+            "group": "aviz",
+            "index": 25,
+            "name": "Dragicevic, Pierre",
+            "type": "author",
+            "x": 207.2066516369639,
+            "y": 187.35369791159846
+        },
+        {
+            "group": "leo",
+            "index": 26,
+            "name": "Manolescu, Ioana",
+            "type": "author",
+            "x": 327.7492162080665,
+            "y": 114.73292845215425
+        },
+        {
+            "group": "aviz",
+            "index": 27,
+            "name": "Vuillemot, Romain",
+            "type": "author",
+            "x": 288.98251513140053,
+            "y": 160.1124833365357
+        },
+        {
+            "group": "in-situ",
+            "index": 28,
+            "name": "Appert, Caroline",
+            "type": "author",
+            "x": 144.25493723004,
+            "y": 164.3415482052595
+        },
+        {
+            "group": "tao",
+            "index": 29,
+            "name": "Germain-Renaud, Cécile",
+            "type": "author",
+            "x": 331.6843303424229,
+            "y": 137.0667848264163
+        },
+        {
+            "group": "aviz",
+            "index": 30,
+            "name": "Bach, Benjamin",
+            "type": "author",
+            "x": 299.5083299572727,
+            "y": 235.26538347073551
+        },
+        {
+            "group": "aviz",
+            "index": 31,
+            "name": "Perin, Charles",
+            "type": "author",
+            "x": 213.78856286008377,
+            "y": 225.56871096688351
+        },
+        {
+            "group": "in-situ",
+            "index": 32,
+            "name": "Huot, Stéphane",
+            "type": "author",
+            "x": 187.3597430701909,
+            "y": 165.64992497706518
+        },
+        {
+            "group": "in-situ",
+            "index": 33,
+            "name": "Pietriga, Emmanuel",
+            "type": "author",
+            "x": 259.25023812006566,
+            "y": 214.2049792186908
+        },
+        {
+            "group": "aviz",
+            "index": 34,
+            "name": "Lutton, Evelyne",
+            "type": "author",
+            "x": 396.06393894950804,
+            "y": 190.40070038299132
+        },
+        {
+            "group": "aviz",
+            "index": 35,
+            "name": "Boukhelifa, Nadia",
+            "type": "author",
+            "x": 284.52058576901044,
+            "y": 248.70573695939996
+        },
+        {
+            "group": "aviz",
+            "index": 36,
+            "name": "Chevalier, Fanny",
+            "type": "author",
+            "x": 235.6979620320877,
+            "y": 220.63412590863567
+        },
+        {
+            "group": "aviz",
+            "index": 37,
+            "name": "Micallef, Luana",
+            "type": "author",
+            "x": 232.7286656278123,
+            "y": 163.7792248787365
+        },
+        {
+            "group": "aviz",
+            "index": 38,
+            "name": "Huron, Samuel",
+            "type": "author",
+            "x": 258.9739812140016,
+            "y": 153.9825209884874
+        },
+        {
+            "group": "other",
+            "index": 39,
+            "name": "Von Zadow, Ulrich",
+            "type": "author",
+            "x": 239.19935425678267,
+            "y": 341.30462004906053
+        },
+        {
+            "group": "other",
+            "index": 40,
+            "name": "Tang, Anthony",
+            "type": "author",
+            "x": 266.72382426243763,
+            "y": 343.8543721203284
+        },
+        {
+            "group": "other",
+            "index": 41,
+            "name": "Lee, Bongshin",
+            "type": "author",
+            "x": 243.99889318391888,
+            "y": 295.3824540010022
+        },
+        {
+            "group": "other",
+            "index": 42,
+            "name": "Hesselmann, Tobias",
+            "type": "author",
+            "x": 259.0206404424217,
+            "y": 327.88613636855786
+        },
+        {
+            "group": "other",
+            "index": 43,
+            "name": "Bertini, Enrico",
+            "type": "author",
+            "x": 325.4625272314168,
+            "y": 319.57353207292766
+        },
+        {
+            "group": "other",
+            "index": 44,
+            "name": "Fuchs, Johannes",
+            "type": "author",
+            "x": 311.6472617953353,
+            "y": 357.4994628677948
+        },
+        {
+            "group": "other",
+            "index": 45,
+            "name": "Fischer, Fabian",
+            "type": "author",
+            "x": 330.57976375899625,
+            "y": 362.10787651449147
+        },
+        {
+            "group": "other",
+            "index": 46,
+            "name": "Carpendale, Sheelagh",
+            "type": "author",
+            "x": 263.46968674245437,
+            "y": 275.4371281810941
+        },
+        {
+            "group": "other",
+            "index": 47,
+            "name": "Mansmann, Florian",
+            "type": "author",
+            "x": 342.28238390495864,
+            "y": 343.2030841815907
+        },
+        {
+            "group": "other",
+            "index": 48,
+            "name": "Plaisant, Catherine",
+            "type": "author",
+            "x": 307.9209451919114,
+            "y": 273.501367513102
+        },
+        {
+            "group": "other",
+            "index": 49,
+            "name": "Lam, Heidi",
+            "type": "author",
+            "x": 305.96078182531426,
+            "y": 322.0763974136979
+        },
+        {
+            "group": "other",
+            "index": 50,
+            "name": "Vernier, Frédéric",
+            "type": "author",
+            "x": 178.31808103019736,
+            "y": 261.4350991275585
+        },
+        {
+            "group": "other",
+            "index": 51,
+            "name": "Le Grand, Bénédicte",
+            "type": "author",
+            "x": 111.80014945272819,
+            "y": 198.4612279543355
+        },
+        {
+            "group": "other",
+            "index": 52,
+            "name": "Poulet, François",
+            "type": "author",
+            "x": 168.2193682306009,
+            "y": 179.01012855290742
+        },
+        {
+            "group": "other",
+            "index": 53,
+            "name": "Benzaken, Véronique",
+            "type": "author",
+            "x": 292.6511211670089,
+            "y": 130.09684632402207
+        },
+        {
+            "group": "other",
+            "index": 54,
+            "name": "Foucquier, Julie",
+            "type": "author",
+            "x": 349.15411954169457,
+            "y": 169.14704691361442
+        },
+        {
+            "group": "other",
+            "index": 55,
+            "name": "Louchet, Jean",
+            "type": "author",
+            "x": 374.2061709813525,
+            "y": 170.91250831523533
+        },
+        {
+            "group": "other",
+            "index": 56,
+            "name": "Perrot, Nathalie",
+            "type": "author",
+            "x": 374.8400203339551,
+            "y": 143.99735927782723
+        },
+        {
+            "group": "other",
+            "index": 57,
+            "name": "Klein, Tijmen",
+            "type": "author",
+            "x": 153.82836503459282,
+            "y": 308.8510735599252
+        },
+        {
+            "group": "other",
+            "index": 58,
+            "name": "Pastur, Luc",
+            "type": "author",
+            "x": 128.9557108723634,
+            "y": 299.0693113515709
+        },
+        {
+            "group": "other",
+            "index": 59,
+            "name": "Guéniat, Florimond",
+            "type": "author",
+            "x": 134.0046618873647,
+            "y": 280.5427377633974
+        },
+        {
+            "group": "other",
+            "index": 60,
+            "name": "Jens, Geelhaar",
+            "type": "author",
+            "x": 102.53218669305124,
+            "y": -20.89337698648019
+        },
+        {
+            "group": "other",
+            "index": 61,
+            "name": "Kolski, Christophe",
+            "type": "author",
+            "x": 84.26305608954885,
+            "y": -11.635526636819517
+        },
+        {
+            "group": "other",
+            "index": 62,
+            "name": "Castet, Julien",
+            "type": "author",
+            "x": 110.4977731805531,
+            "y": -53.992214293128136
+        },
+        {
+            "group": "other",
+            "index": 63,
+            "name": "Lepreux, Sophie",
+            "type": "author",
+            "x": 100.03826343794529,
+            "y": -40.87623144120469
+        },
+        {
+            "group": "other",
+            "index": 64,
+            "name": "Legardeur, Jérémy",
+            "type": "author",
+            "x": 89.11833354377745,
+            "y": -28.26527632893811
+        },
+        {
+            "group": "other",
+            "index": 65,
+            "name": "Coutrix, Céline",
+            "type": "author",
+            "x": 94.40868526499,
+            "y": -53.34612194779493
+        },
+        {
+            "group": "other",
+            "index": 66,
+            "name": "Kubicki, Sebastien",
+            "type": "author",
+            "x": 113.58851301266809,
+            "y": -32.889760565238646
+        },
+        {
+            "group": "other",
+            "index": 67,
+            "name": "Brygg, Ullmer",
+            "type": "author",
+            "x": 113.00831577536007,
+            "y": -10.238357598474607
+        },
+        {
+            "group": "other",
+            "index": 68,
+            "name": "Takouachet, Nawel",
+            "type": "author",
+            "x": 122.70537722343934,
+            "y": -47.28568493758148
+        },
+        {
+            "group": "other",
+            "index": 69,
+            "name": "Reuter, Patrick",
+            "type": "author",
+            "x": 124.51251118421385,
+            "y": -20.337493370915745
+        },
+        {
+            "group": "other",
+            "index": 70,
+            "name": "Riviere, Guillaume",
+            "type": "author",
+            "x": 97.5017816543837,
+            "y": -5.788078999458551
+        },
+        {
+            "group": "other",
+            "index": 71,
+            "name": "Bouadid, Amira",
+            "type": "author",
+            "x": 81.67725390802899,
+            "y": -42.43426047388592
+        },
+        {
+            "group": "other",
+            "index": 72,
+            "name": "Borgiel, Katarzyna",
+            "type": "author",
+            "x": 129.3080546438154,
+            "y": -34.662447569380184
+        },
+        {
+            "group": "other",
+            "index": 73,
+            "name": "Couture, Nadine",
+            "type": "author",
+            "x": 76.35491448687146,
+            "y": -25.281500714109285
+        },
+        {
+            "group": "other",
+            "index": 74,
+            "name": "Tremblay, Luc",
+            "type": "author",
+            "x": 130.61829547784131,
+            "y": 189.15902291421048
+        },
+        {
+            "group": "other",
+            "index": 75,
+            "name": "Mcguffin, Michael",
+            "type": "author",
+            "x": 193.0825734830225,
+            "y": 207.71015004367152
+        },
+        {
+            "group": "other",
+            "index": 76,
+            "name": "Rautek, Peter",
+            "type": "author",
+            "x": 118.16581681164003,
+            "y": 348.1037952749066
+        },
+        {
+            "group": "other",
+            "index": 77,
+            "name": "Gröller, Eduard",
+            "type": "author",
+            "x": 108.21869360903855,
+            "y": 317.24941438528333
+        },
+        {
+            "group": "other",
+            "index": 78,
+            "name": "Gerl, Moritz",
+            "type": "author",
+            "x": 140.7176025254232,
+            "y": 331.12186436261254
+        },
+        {
+            "group": "other",
+            "index": 79,
+            "name": "Barrière, Olivier",
+            "type": "author",
+            "x": 454.8979053032935,
+            "y": 146.34021619423817
+        },
+        {
+            "group": "other",
+            "index": 80,
+            "name": "Wuillemin, Pierre-Henri",
+            "type": "author",
+            "x": 460.6124278010168,
+            "y": 111.65880134440457
+        },
+        {
+            "group": "other",
+            "index": 81,
+            "name": "Keefe, Daniel F.",
+            "type": "author",
+            "x": 125.86811686684175,
+            "y": 322.9141083584981
+        },
+        {
+            "group": "other",
+            "index": 82,
+            "name": "Efstathiou, Konstantinos",
+            "type": "author",
+            "x": 251.726571340267,
+            "y": 353.9826671783548
+        },
+        {
+            "group": "other",
+            "index": 83,
+            "name": "Yu, Lingyun",
+            "type": "author",
+            "x": 226.7092675458248,
+            "y": 348.31295259595754
+        },
+        {
+            "group": "other",
+            "index": 84,
+            "name": "Hascoët, Mountaz",
+            "type": "author",
+            "x": 114.85206319687535,
+            "y": 146.74563442904554
+        },
+        {
+            "group": "other",
+            "index": 85,
+            "name": "Kuijper, Arjan",
+            "type": "author",
+            "x": 246.6216735927108,
+            "y": 134.3220468469956
+        },
+        {
+            "group": "other",
+            "index": 86,
+            "name": "Kohlhammer, Jörn",
+            "type": "author",
+            "x": 260.4890328262499,
+            "y": 103.94559870940299
+        },
+        {
+            "group": "other",
+            "index": 87,
+            "name": "Schreck, Tobias",
+            "type": "author",
+            "x": 239.57194238355487,
+            "y": 117.38130245982559
+        },
+        {
+            "group": "other",
+            "index": 88,
+            "name": "Van Wijk, Jarke",
+            "type": "author",
+            "x": 269.7060731723411,
+            "y": 169.5628971934539
+        },
+        {
+            "group": "other",
+            "index": 89,
+            "name": "Von Landesberger, Tatiana",
+            "type": "author",
+            "x": 270.68155829248093,
+            "y": 131.8269611746877
+        },
+        {
+            "group": "other",
+            "index": 90,
+            "name": "Fellner, Dieter",
+            "type": "author",
+            "x": 277.0398276473638,
+            "y": 115.04463103716608
+        },
+        {
+            "group": "other",
+            "index": 91,
+            "name": "Dumas, Cédric",
+            "type": "author",
+            "x": 187.04855362159313,
+            "y": 142.79927406724116
+        },
+        {
+            "group": "other",
+            "index": 92,
+            "name": "Hégron, Gérard",
+            "type": "author",
+            "x": 207.6373238856673,
+            "y": 144.15649963171694
+        },
+        {
+            "group": "other",
+            "index": 93,
+            "name": "Stasko, John",
+            "type": "author",
+            "x": 254.8123698151973,
+            "y": 121.23467045860937
+        },
+        {
+            "group": "other",
+            "index": 94,
+            "name": "Baudel, Thomas",
+            "type": "author",
+            "x": 307.48714868869087,
+            "y": 204.06835856103135
+        },
+        {
+            "group": "other",
+            "index": 95,
+            "name": "Holten, Danny",
+            "type": "author",
+            "x": 282.4956755969705,
+            "y": 223.69168515399895
+        },
+        {
+            "group": "other",
+            "index": 96,
+            "name": "Di Battista, Giuseppe",
+            "type": "author",
+            "x": 304.6163302367835,
+            "y": 121.99486343916622
+        },
+        {
+            "group": "other",
+            "index": 97,
+            "name": "Keim, Daniel",
+            "type": "author",
+            "x": 238.20678744818494,
+            "y": 91.97989808820111
+        },
+        {
+            "group": "other",
+            "index": 98,
+            "name": "Andrienko, Gennady",
+            "type": "author",
+            "x": 245.16575867621566,
+            "y": 75.34214396465157
+        },
+        {
+            "group": "other",
+            "index": 99,
+            "name": "Görg, Carsten",
+            "type": "author",
+            "x": 265.45714541549637,
+            "y": 73.26570456620972
+        },
+        {
+            "group": "other",
+            "index": 100,
+            "name": "Cady, Alain",
+            "type": "author",
+            "x": 310.4729054118328,
+            "y": 90.35739117544526
+        },
+        {
+            "group": "other",
+            "index": 101,
+            "name": "Watson, Ben",
+            "type": "author",
+            "x": 185.40317093753566,
+            "y": 189.1347205319028
+        },
+        {
+            "group": "other",
+            "index": 102,
+            "name": "Melançon, Guy",
+            "type": "author",
+            "x": 278.92254954282623,
+            "y": 85.80976612007106
+        },
+        {
+            "group": "other",
+            "index": 103,
+            "name": "Bae, Juhee",
+            "type": "author",
+            "x": 178.77146939779763,
+            "y": 209.5848217987857
+        },
+        {
+            "group": "other",
+            "index": 104,
+            "name": "Ogilvie, Denise",
+            "type": "author",
+            "x": 309.80594051520745,
+            "y": 139.14646182112017
+        },
+        {
+            "group": "other",
+            "index": 105,
+            "name": "Guiard, Yves",
+            "type": "author",
+            "x": 189.69355716677157,
+            "y": 233.3335670010842
+        },
+        {
+            "group": "other",
+            "index": 106,
+            "name": "Silva, Claudio",
+            "type": "author",
+            "x": 192.10391844213,
+            "y": 121.62698239624686
+        },
+        {
+            "group": "other",
+            "index": 107,
+            "name": "Kerren, Andreas",
+            "type": "author",
+            "x": 219.03919886965534,
+            "y": 108.95618812314997
+        },
+        {
+            "group": "other",
+            "index": 108,
+            "name": "Dachselt, Raimund",
+            "type": "author",
+            "x": 317.3869896714147,
+            "y": 240.44009109821775
+        },
+        {
+            "group": "other",
+            "index": 109,
+            "name": "Spritzer, André",
+            "type": "author",
+            "x": 340.8876644496073,
+            "y": 197.95250560370783
+        },
+        {
+            "group": "other",
+            "index": 110,
+            "name": "Castagliola, Philippe",
+            "type": "author",
+            "x": 217.808925593825,
+            "y": 90.68589704838828
+        },
+        {
+            "group": "other",
+            "index": 111,
+            "name": "Wood, Jo",
+            "type": "author",
+            "x": 264.3318897739901,
+            "y": 256.2210667379982
+        },
+        {
+            "group": "other",
+            "index": 112,
+            "name": "Javed, Waqas",
+            "type": "author",
+            "x": 196.20683119337068,
+            "y": 220.33214060064196
+        },
+        {
+            "group": "other",
+            "index": 113,
+            "name": "Klum, Stefanie",
+            "type": "author",
+            "x": 300.4465578151574,
+            "y": 256.06879815381586
+        },
+        {
+            "group": "other",
+            "index": 114,
+            "name": "Grinstein, Georges",
+            "type": "author",
+            "x": 292.2582018319269,
+            "y": 234.58102002591426
+        },
+        {
+            "group": "other",
+            "index": 115,
+            "name": "North, Chris",
+            "type": "author",
+            "x": 229.10652657539111,
+            "y": 136.61817242534886
+        },
+        {
+            "group": "other",
+            "index": 116,
+            "name": "Ghoniem, Mohammad",
+            "type": "author",
+            "x": 197.35529877281596,
+            "y": 107.12798813239982
+        },
+        {
+            "group": "other",
+            "index": 117,
+            "name": "Qu, Huamin",
+            "type": "author",
+            "x": 322.34162580158636,
+            "y": 155.57141066738774
+        },
+        {
+            "group": "other",
+            "index": 118,
+            "name": "Langner, Ricardo",
+            "type": "author",
+            "x": 323.1418741051206,
+            "y": 259.711189664739
+        },
+        {
+            "group": "other",
+            "index": 119,
+            "name": "Alper, Basak",
+            "type": "author",
+            "x": 241.6659263391957,
+            "y": 261.6981243500216
+        },
+        {
+            "group": "other",
+            "index": 120,
+            "name": "Bekker, Henk",
+            "type": "author",
+            "x": 230.28141309960193,
+            "y": 405.09132885366427
+        },
+        {
+            "group": "other",
+            "index": 121,
+            "name": "Verstappen, Roel W. C. P.",
+            "type": "author",
+            "x": 200.5462105065787,
+            "y": 376.8435701238111
+        },
+        {
+            "group": "other",
+            "index": 122,
+            "name": "Roerdink, Jos B. T. M.",
+            "type": "author",
+            "x": 213.94376741414408,
+            "y": 390.00443809625403
+        },
+        {
+            "group": "other",
+            "index": 123,
+            "name": "Lueks, Wouter",
+            "type": "author",
+            "x": 195.147449741802,
+            "y": 397.41143423712964
+        },
+        {
+            "group": "other",
+            "index": 124,
+            "name": "Everts, Maarten",
+            "type": "author",
+            "x": 239.68238693757712,
+            "y": 367.8507418572103
+        },
+        {
+            "group": "other",
+            "index": 125,
+            "name": "Viola, Ivan",
+            "type": "author",
+            "x": 214.27331796283494,
+            "y": 423.20622264862646
+        },
+        {
+            "group": "other",
+            "index": 126,
+            "name": "Van Der Zwan, Matthew",
+            "type": "author",
+            "x": 189.9699534836294,
+            "y": 419.3259571570636
+        },
+        {
+            "group": "other",
+            "index": 127,
+            "name": "Fernandez De Vega, Francisco",
+            "type": "author",
+            "x": 503.0599807023933,
+            "y": 203.9112001088634
+        },
+        {
+            "group": "other",
+            "index": 128,
+            "name": "Clemente, Eddie",
+            "type": "author",
+            "x": 483.3897222452056,
+            "y": 207.9746909104431
+        },
+        {
+            "group": "other",
+            "index": 129,
+            "name": "Dozal, Leon",
+            "type": "author",
+            "x": 491.17023845443623,
+            "y": 167.48652500392643
+        },
+        {
+            "group": "other",
+            "index": 130,
+            "name": "Trujillo, Leonardo",
+            "type": "author",
+            "x": 504.9045713337952,
+            "y": 181.75346642436472
+        },
+        {
+            "group": "other",
+            "index": 131,
+            "name": "Olague, Gustavo",
+            "type": "author",
+            "x": 478.4787067103504,
+            "y": 187.66551744515644
+        },
+        {
+            "group": "other",
+            "index": 132,
+            "name": "Ma, Kwan-Liu",
+            "type": "author",
+            "x": 205.46230900626466,
+            "y": 296.9593135645466
+        },
+        {
+            "group": "other",
+            "index": 133,
+            "name": "Scholtz, Jean",
+            "type": "author",
+            "x": 240.54827566052526,
+            "y": 317.30563350812275
+        },
+        {
+            "group": "other",
+            "index": 134,
+            "name": "Hagen, Hans",
+            "type": "author",
+            "x": 228.11212667893668,
+            "y": 296.005200257652
+        },
+        {
+            "group": "other",
+            "index": 135,
+            "name": "Cernea, Daniel",
+            "type": "author",
+            "x": 219.25605433155636,
+            "y": 319.77067461336463
+        },
+        {
+            "group": "other",
+            "index": 136,
+            "name": "Telea, Alexandru",
+            "type": "author",
+            "x": 213.78844844324078,
+            "y": 405.46001559078485
+        },
+        {
+            "group": "other",
+            "index": 137,
+            "name": "Vidal, Franck",
+            "type": "author",
+            "x": 433.4109889199078,
+            "y": 158.7774988005987
+        },
+        {
+            "group": "other",
+            "index": 138,
+            "name": "Villard, Pierre-Frédéric",
+            "type": "author",
+            "x": 460.54667791844406,
+            "y": 187.9731091803992
+        },
+        {
+            "group": "other",
+            "index": 139,
+            "name": "Rocchisani, Jean-Marie",
+            "type": "author",
+            "x": 436.5844079857054,
+            "y": 181.8019184257426
+        },
+        {
+            "group": "other",
+            "index": 140,
+            "name": "Dykes, Jason",
+            "type": "author",
+            "x": 278.14209881361234,
+            "y": 313.4562623819181
+        },
+        {
+            "group": "other",
+            "index": 141,
+            "name": "Slingsby, Aidan",
+            "type": "author",
+            "x": 258.7762435264205,
+            "y": 306.2294671290151
+        },
+        {
+            "group": "other",
+            "index": 142,
+            "name": "Wang, Tinghuai",
+            "type": "author",
+            "x": 108.65801766996066,
+            "y": 337.1671493926937
+        },
+        {
+            "group": "other",
+            "index": 143,
+            "name": "Kyprianidis, Jan Eric",
+            "type": "author",
+            "x": 134.07653256154117,
+            "y": 359.80992883558383
+        },
+        {
+            "group": "other",
+            "index": 144,
+            "name": "Collomosse, John",
+            "type": "author",
+            "x": 113.20425421430903,
+            "y": 367.6218240494704
+        },
+        {
+            "group": "other",
+            "index": 145,
+            "name": "Chaboissier, Jonathan",
+            "type": "author",
+            "x": 146.87770234851297,
+            "y": 294.44675759661334
+        },
+        {
+            "group": "other",
+            "index": 146,
+            "name": "Fisher, Danyel",
+            "type": "author",
+            "x": 323.94277056249484,
+            "y": 380.2967582382075
+        },
+        {
+            "group": "other",
+            "index": 147,
+            "name": "Inkpen, Kori",
+            "type": "author",
+            "x": 330.32169326032454,
+            "y": 397.784384105225
+        },
+        {
+            "group": "other",
+            "index": 148,
+            "name": "Czerwinski, Mary",
+            "type": "author",
+            "x": 302.2873725205556,
+            "y": 379.88680461319984
+        },
+        {
+            "group": "other",
+            "index": 149,
+            "name": "Ringel Morris, Meredith",
+            "type": "author",
+            "x": 309.9476599732561,
+            "y": 406.80939169587515
+        },
+        {
+            "group": "other",
+            "index": 150,
+            "name": "Paul, Sharoda",
+            "type": "author",
+            "x": 291.29055519481966,
+            "y": 397.4454516948424
+        },
+        {
+            "group": "other",
+            "index": 151,
+            "name": "Luzón, M. Victoria",
+            "type": "author",
+            "x": 162.48551700288385,
+            "y": 404.68347003991147
+        },
+        {
+            "group": "other",
+            "index": 152,
+            "name": "Arroyo, Germán",
+            "type": "author",
+            "x": 140.2016213597184,
+            "y": 395.0158676688342
+        },
+        {
+            "group": "other",
+            "index": 153,
+            "name": "Sezgin, T. Metin",
+            "type": "author",
+            "x": 142.65772439632522,
+            "y": 349.42770392438354
+        },
+        {
+            "group": "other",
+            "index": 154,
+            "name": "Martín, Domingo",
+            "type": "author",
+            "x": 154.2104847504839,
+            "y": 371.6720297516559
+        },
+        {
+            "group": "other",
+            "index": 155,
+            "name": "Svetachov, Pjotr",
+            "type": "author",
+            "x": 263.20914605980903,
+            "y": 358.5797576914763
+        },
+        {
+            "group": "other",
+            "index": 156,
+            "name": "Asente, Paul",
+            "type": "author",
+            "x": 138.2940880544415,
+            "y": 379.67232643740715
+        },
+        {
+            "group": "other",
+            "index": 157,
+            "name": "Deussen, Oliver",
+            "type": "author",
+            "x": 164.29337175363216,
+            "y": 349.18657108872753
+        },
+        {
+            "group": "other",
+            "index": 158,
+            "name": "Spencer, S.",
+            "type": "author",
+            "x": 176.82330346560113,
+            "y": 396.7832483056436
+        },
+        {
+            "group": "other",
+            "index": 159,
+            "name": "Hancock, Mark",
+            "type": "author",
+            "x": 168.6681926479453,
+            "y": 381.3876790574062
+        },
+        {
+            "group": "other",
+            "index": 160,
+            "name": "Cunningham, Douglas W.",
+            "type": "author",
+            "x": 176.95177236045842,
+            "y": 365.9967088144843
+        },
+        {
+            "group": "other",
+            "index": 161,
+            "name": "Mesmoudi, Salma",
+            "type": "author",
+            "x": 422.55695595153156,
+            "y": 139.13645241610644
+        },
+        {
+            "group": "other",
+            "index": 162,
+            "name": "Reuillon, Romain",
+            "type": "author",
+            "x": 438.9394172014571,
+            "y": 123.58143116059637
+        },
+        {
+            "group": "other",
+            "index": 163,
+            "name": "Bourgine, Paul",
+            "type": "author",
+            "x": 416.25158908448407,
+            "y": 114.07640255828986
+        },
+        {
+            "group": "other",
+            "index": 164,
+            "name": "Hao, Jin-Kao",
+            "type": "author",
+            "x": 477.00650009091464,
+            "y": 247.94687934894114
+        },
+        {
+            "group": "other",
+            "index": 165,
+            "name": "Collet, Pierre",
+            "type": "author",
+            "x": 486.6649683240963,
+            "y": 229.52358991197374
+        },
+        {
+            "group": "other",
+            "index": 166,
+            "name": "Monmarché, Nicolas",
+            "type": "author",
+            "x": 468.63144001464025,
+            "y": 219.77510841975956
+        },
+        {
+            "group": "other",
+            "index": 167,
+            "name": "Legrand, Pierrick",
+            "type": "author",
+            "x": 457.80722437293747,
+            "y": 248.9952523901159
+        },
+        {
+            "group": "other",
+            "index": 168,
+            "name": "Lévy Véhel, Jacques",
+            "type": "author",
+            "x": 463.2107580626702,
+            "y": 133.87402427406002
+        },
+        {
+            "group": "other",
+            "index": 169,
+            "name": "Mendivil, Franklin",
+            "type": "author",
+            "x": 471.0217840563333,
+            "y": 167.22015485226666
+        },
+        {
+            "group": "other",
+            "index": 170,
+            "name": "Shi, Yuanchun",
+            "type": "author",
+            "x": 106.3054026942178,
+            "y": 168.14348452987545
+        },
+        {
+            "group": "other",
+            "index": 171,
+            "name": "Tonda, Alberto",
+            "type": "author",
+            "x": 473.11133026670177,
+            "y": 146.82900118131516
+        },
+        {
+            "group": "other",
+            "index": 172,
+            "name": "Squillero, Giovanni",
+            "type": "author",
+            "x": 479.5293532799878,
+            "y": 126.20224441435215
+        },
+        {
+            "group": "other",
+            "index": 173,
+            "name": "Hurter, Christophe",
+            "type": "author",
+            "x": 153.37054078903682,
+            "y": 209.31143619394499
+        },
+        {
+            "group": "other",
+            "index": 174,
+            "name": "Balakrishnan, Ravin",
+            "type": "author",
+            "x": 387.2281749623151,
+            "y": 282.67098283251386
+        },
+        {
+            "group": "other",
+            "index": 175,
+            "name": "Chu, Gerry",
+            "type": "author",
+            "x": 392.2238487752126,
+            "y": 258.53782784686473
+        },
+        {
+            "group": "other",
+            "index": 176,
+            "name": "Sedlmair, Michael",
+            "type": "author",
+            "x": 373.01697439123643,
+            "y": 340.15917031363017
+        },
+        {
+            "group": "other",
+            "index": 177,
+            "name": "Pigorsch, Christian",
+            "type": "author",
+            "x": 371.58294229069605,
+            "y": 361.5679730500411
+        },
+        {
+            "group": "other",
+            "index": 178,
+            "name": "Mauerer, Michael",
+            "type": "author",
+            "x": 354.75703872661956,
+            "y": 337.25778150669913
+        },
+        {
+            "group": "other",
+            "index": 179,
+            "name": "Butz, Andreas",
+            "type": "author",
+            "x": 355.41811936651493,
+            "y": 377.2091685819571
+        },
+        {
+            "group": "other",
+            "index": 180,
+            "name": "Baur, Dominikus",
+            "type": "author",
+            "x": 345.43095361163444,
+            "y": 361.21828804684895
+        }
+    ]
+}

@@ -15,6 +15,7 @@
 
 		// data model
 		this.groups = [];
+		this.index = [];
 		this.reversed = {};
 		this.selectedGroup = [];
 
@@ -38,6 +39,7 @@
 	// Data binding
 	nodetrix.d3.Legend.prototype.bind = function(data) {
 		this.groups.splice(0, this.groups.length);
+		this.index = []; this.selectedGroup = [];
 		this.reversed = {};
 
 		var _this = this;
@@ -50,9 +52,10 @@
 				isHighlighted: false,
 				size: function() { return _this.nodeSize(this); },
 				strokeWidth: function() { return _this.nodeStrokeWidth(this); },
-				color: function() { return _this.coloring(this.id); }
+				color: function() { return _this.coloring(group); }
 			};
 			_this.groups.push(visualGroup);
+			_this.index.push(group);
 			data[group].forEach(function(node, i) { _this.reversed[node.name] = visualGroup; });
 		});
 
@@ -105,7 +108,7 @@
 
 	nodetrix.d3.Legend.prototype.nodeStrokeWidth = function(d) { return d.isHighlighted ? this.config.nodeStrokeWidth * 3 : this.config.nodeStrokeWidth; };
 
-	nodetrix.d3.Legend.prototype.coloring = function(val) { return this.config.colorscale ? this.config.colorscale.get(1-val) : d3.rgb("white"); };
+	nodetrix.d3.Legend.prototype.coloring = function(id) { return this.config.colorscale ? this.config.colorscale.get(this.index.indexOf(""+id)) : d3.rgb("white"); };
 
 })
 (this.nodetrix = this.nodetrix ? this.nodetrix : {});

@@ -39,7 +39,7 @@ nodetrix.d3.interaction.Lasso.prototype.update = function() {
 		//if (keyBinding) key(keyBinding, function() { $(event).css('cursor', 'crosshair'); });
 
 		var currentKey = keyBinding;
-		var isPressed = function(key) { return key == currentKey; }
+		var isPressed = function(key) { return key == currentKey; };
 
 		this.widget.viewHandler.mousedown = function(event, widget, d) {
 			if (!keyBinding || isPressed(keyBinding)) { _this.isMouseDown = true; }

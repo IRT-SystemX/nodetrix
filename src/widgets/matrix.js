@@ -74,14 +74,14 @@
 
 	// Constructor
 	nodetrix.d3.Matrix = function(id, width, height, config) {
-			nodetrix.d3.View.call(this, id, width, height);
-			nodetrix.model.Matrix.call(this, id, width, height, config);
+		nodetrix.d3.View.call(this, id, width, height);
+		nodetrix.model.Matrix.call(this, id, width, height, config);
 
-			// visual layers
-			this.edgesLayer = this.vis.append("g");
-			this.nodesLayer = this.vis.append("g");
-			this.node = this.nodesLayer.selectAll(".node");
-			this.link = this.edgesLayer.selectAll(".link");
+		// visual layers
+		this.edgesLayer = this.vis.append("g");
+		this.nodesLayer = this.vis.append("g");
+		this.node = this.nodesLayer.selectAll(".node");
+		this.link = this.edgesLayer.selectAll(".link");
 	};
 
 	// Inheritance
@@ -89,63 +89,74 @@
 
 	// Resize
 	nodetrix.d3.Matrix.prototype.resize = function(width, height) {
-			nodetrix.d3.View.prototype.resize.call(this);
+		nodetrix.d3.View.prototype.resize.call(this);
 
 	};
 
 	// Update
 	nodetrix.d3.Matrix.prototype.update = function(width, height) {
+		var _this = this;
 
-			var _this = this;
+		nodetrix.model.Matrix.prototype.update.call(this);
 
-			nodetrix.model.Matrix.prototype.update.call(this);
+		this.svg.selectAll(".cell").remove(); this.svg.selectAll(".row").remove(); this.svg.selectAll(".column").remove();
 
-			this.svg.selectAll(".cell").remove(); this.svg.selectAll(".row").remove(); this.svg.selectAll(".column").remove();
+		this.rows = this.svg.selectAll(".row").data(this.submatrix).enter()
+			.append("g").attr("class", "row").attr("transform", function(d, i) { return "translate("+(1)+","+(_this.scale(i)+1)+")"; })
+				.each(function(row) {
+					_this.cells.push( d3.select(this).selectAll(".cell").data(row)
+						.enter().append("rect").attr("class", "cell")
+						.attr("x", function(d) { return (_this.scale(d.x)); }).attr("width", _this.scale.rangeBand()).attr("height", _this.scale.rangeBand())
+					);
+				});
 
-			this.rows = this.svg.selectAll(".row").data(this.submatrix).enter()
-				.append("g").attr("class", "row").attr("transform", function(d, i) { return "translate("+(1)+","+(_this.scale(i)+1)+")"; })
-					.each(function(row) {
-						_this.cells.push( d3.select(this).selectAll(".cell").data(row)
-							.enter().append("rect").attr("class", "cell")
-							.attr("x", function(d) { return (_this.scale(d.x)); }).attr("width", _this.scale.rangeBand()).attr("height", _this.scale.rangeBand())
-						);
-					});
+		if (this.config.allowLabels) {
+			this.svg.selectAll('.cell-label').remove();
+			this.cellLabels = this.svg.selectAll(".cell-label").data(this.labels).enter().append('g').attr("class", "cell-label");
+			var mx = 0;
+			this.horizontalLabels = this.cellLabels.append("text")
+				.text(function(d, i) { return d; })
+				.attr("text-anchor", "end")
+				.attr("dy", function (d,i) { mx = mx < this.getBBox().width ? this.getBBox().width : mx; return _this.scale(i)+_this.scale.rangeBand()+1.0/2.0*(_this.scale.rangeBand()-this.getBBox().height); })
+				.attr("dx", function (d) { return -_this.scale.rangeBand()/2.0; })
+				//.attr("width", function(d) { return mx; }).attr("height", function (d) { return this.getBBox().height; })
+				.style("stroke", function(d) { return "white"; }).style("stroke-width", 0)
+				.style("font-size", function(d) { return 8; })
 
-			if (this.config.allowLabels) {
-				this.svg.selectAll('.cell-label').remove();
-				this.cellLabels = this.svg.selectAll(".cell-label").data(this.labels).enter().append('g').attr("class", "cell-label");
-				var mx = 0;
-				this.cellLabels.append("text")
-					.text(function(d, i) { return d; })
-					.attr("text-anchor", "end")
-					.attr("dy", function (d,i) { mx = mx < this.getBBox().width ? this.getBBox().width : mx; return _this.scale(i)+_this.scale.rangeBand()+1.0/2.0*(_this.scale.rangeBand()-this.getBBox().height); })
-					.attr("dx", function (d) { return -_this.scale.rangeBand()/2.0; })
-					//.attr("width", function(d) { return mx; }).attr("height", function (d) { return this.getBBox().height; })
-					.style("stroke", function(d) { return "white"; }).style("stroke-width", 0)
-					.style("font-size", function(d) { return 8; });
-			}
+			this.verticalLabels = this.cellLabels.append("text")
+				.text(function(d, i) { return d; })
+				.attr("text-anchor", "begin").attr("transform", function(d, i) { return "translate("+(0)+","+(0)+")rotate(-90)translate("+(_this.scale.rangeBand())+")"; })
+				.attr("dy", function (d,i) { mx = mx < this.getBBox().width ? this.getBBox().width : mx; return _this.scale(i)+_this.scale.rangeBand()+1.0/2.0*(_this.scale.rangeBand()-this.getBBox().height); })
+				.attr("dx", function (d) { return -_this.scale.rangeBand()/2.0; })
+				//.attr("width", function(d) { return mx; }).attr("height", function (d) { return this.getBBox().height; })
+				.style("stroke", function(d) { return "white"; }).style("stroke-width", 0)
+				.style("font-size", function(d) { return 8; })
+		}
 
-			/*		labels.insert("rect", ":first-child")
-				.attr("transform", function(d) { return "translate("+(-this.getBBox().width - scale.rangeBand()/2.0)+","+(2)+")"; })
-				.attr("width", function(d) { return this.getBBox().width+2; }).attr("height", function (d) { return this.getBBox().height; })
-				.style("fill", function(d) { return "red"; })
-				.style("stroke", function(d) { return "white"; }).style("stroke-width", function(d) { return 0; }); */
+		/*		labels.insert("rect", ":first-child")
+			.attr("transform", function(d) { return "translate("+(-this.getBBox().width - scale.rangeBand()/2.0)+","+(2)+")"; })
+			.attr("width", function(d) { return this.getBBox().width+2; }).attr("height", function (d) { return this.getBBox().height; })
+			.style("fill", function(d) { return "red"; })
+			.style("stroke", function(d) { return "white"; }).style("stroke-width", function(d) { return 0; }); */
 
-			this.cells.forEach(function(cell) { _this.cellHandler.bind(cell); });
-			//if (this.config.allowLabels) this.cellLabels.forEach(function(cell) { _this.cellHandler.bind(cell); });
+		this.cells.forEach(function(cell) { _this.cellHandler.bind(cell); });
+		//if (this.config.allowLabels) this.cellLabels.forEach(function(cell) { _this.cellHandler.bind(cell); });
 
-			this.svg.selectAll(".column").data(this.submatrix).enter().append("g").attr("class", "column").attr("transform", function(d, i) { return "translate("+(_this.scale(i))+","+(0)+")rotate(-90)"; });
+		this.svg.selectAll(".column").data(this.submatrix).enter().append("g").attr("class", "column").attr("transform", function(d, i) { return "translate("+(_this.scale(i))+","+(0)+")rotate(-90)"; });
 
-			this.render();
+		this.render();
 	};
 
 	// Render
 	nodetrix.d3.Matrix.prototype.render = function(width, height) {
-			var _this = this;
+		var _this = this;
 
-			this.cells.forEach(function(cell) { cell.style("stroke", function(d) { return _this.stroke(d); }).style("stroke-width", function(d) { return _this.strokeWidth(d); }).style("fill", function(d) { return _this.fill(d); }).style("opacity", function(d) { return _this.opacity(d); }); });
+		this.cells.forEach(function(cell) { cell.style("stroke", function(d) { return _this.stroke(d); }).style("stroke-width", function(d) { return _this.strokeWidth(d); }).style("fill", function(d) { return _this.fill(d); }).style("opacity", function(d) { return _this.opacity(d); }); });
 
-			nodetrix.model.Matrix.prototype.render.call(this);
+		if (this.horizontalLabels) this.horizontalLabels.style("opacity", function(d, i) { return _this.opacity({ x: i, y: i }); });
+		if (this.verticalLabels) this.verticalLabels.style("opacity", function(d, i) { return _this.opacity({ x: i, y: i }); });
+
+		nodetrix.model.Matrix.prototype.render.call(this);
 	};
 
 
@@ -201,7 +212,7 @@
 		context.lineWidth = 1.0; //canvas.width / 10.0;
 		context.strokeStyle = '#000000';
 		context.strokeRect(0, 0, canvas.width, canvas.height);
-		var texture = new THREE.Texture(canvas)
+		var texture = new THREE.Texture(canvas);
 		texture.needsUpdate = true;
 		return texture;
 	}
@@ -243,9 +254,12 @@
 			_this.mouse.y = - ( d3.mouse(this)[1] / _this.height ) * 2 + 1;
 			_this.raycaster.setFromCamera(_this.mouse, _this.camera);
 			var intersects = _this.raycaster.intersectObjects(_this.scene.children);
-			if ( intersects.length > 0 ) { last = _this.submatrix[intersects[0].index % _this.submatrix.length, intersects[0].index - ((intersects[0].index % _this.submatrix.length) * _this.submatrix.length)]; _this.handler.mouseover(last); }
+			if ( intersects.length > 0 ) {
+				var row = intersects[0].index % _this.submatrix.length; var col = intersects[0].index - ((intersects[0].index % _this.submatrix.length) * _this.submatrix.length);
+				last = _this.submatrix[row][col]; _this.handler.mouseover(last);
+			}
 			else { _this.handler.mouseout(last); last = null; }
-		})
+		});
 		//.call(d3.behavior.drag().on('drag', function() { _this.mouse = d3.mouse(this); }));
 
 		this.cellHandler.bind(this.handler);

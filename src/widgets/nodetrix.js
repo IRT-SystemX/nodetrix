@@ -31,7 +31,7 @@
 
 	// Data binding
 	nodetrix.model.NodeTrix.prototype.bind = function(data, labels, clustering) {
-			nodetrix.model.Graph.prototype.bind.call(this, data);
+		nodetrix.model.Graph.prototype.bind.call(this, data);
 
 	/*
 			this.svg.append("defs").append("svg:clipPath")
@@ -55,15 +55,19 @@
 			this.clip = function(d) { d.isHighlighted ? "url(#clip-highlight)" : "url(#clip)" };
 	*/
 
-			var _this = this;
-			this.labels = labels;
-			this.clustering = clustering;
-			if ('matrix' in data) data.matrix.forEach(function(d) { _this.createNodetrix(d.cluster, d.x, d.y); });
+		var _this = this;
+		this.submatrix = [];
+		this.viewmatrix = [];
+		this.viewbridges = [];
+		this.index = {};
+
+		this.labels = labels;
+		this.clustering = clustering;
+		if ('matrix' in data) data.matrix.forEach(function(d) { _this.createNodetrix(d.cluster, d.x, d.y); });
 	};
 
 	// Update
 	nodetrix.model.NodeTrix.prototype.update = function() {
-
 
 		nodetrix.model.Graph.prototype.update.call(this);
 	};
@@ -79,13 +83,13 @@
 	nodetrix.model.NodeTrixIDFactory = { count: -1, get: function() { this.count++; return this.count; } };
 
 	nodetrix.model.NodeTrix.prototype.updateAncor = function(nodeMatrix, anchorIndex, theta, margin, ancor, pivot) {
-			ancor.x = nodeMatrix.x - nodeMatrix.nodeSize/2.0;
-			ancor.y = nodeMatrix.y - nodeMatrix.nodeSize/2.0;
-			var delta = anchorIndex * nodeMatrix.nodeSize / nodeMatrix.subgraph.nodes.length + nodeMatrix.nodeSize / (2.0 * nodeMatrix.subgraph.nodes.length);
-			if (theta >= 0 && theta < 90) { ancor.x += nodeMatrix.nodeSize; ancor.y += delta; pivot.x = ancor.x + margin; pivot.y = ancor.y; }
-			if (theta >= 90 && theta < 180) { ancor.x += delta; ancor.y += nodeMatrix.nodeSize; pivot.x = ancor.x; pivot.y = ancor.y + margin; }
-			if (theta >= 180 && theta < 270) { ancor.y += delta; pivot.x = ancor.x - margin; pivot.y = ancor.y; }
-			if (theta >= 270 && theta < 360) { ancor.x += delta; pivot.x = ancor.x; pivot.y = ancor.y - margin; }
+		ancor.x = nodeMatrix.x - nodeMatrix.nodeSize/2.0;
+		ancor.y = nodeMatrix.y - nodeMatrix.nodeSize/2.0;
+		var delta = anchorIndex * nodeMatrix.nodeSize / nodeMatrix.subgraph.nodes.length + nodeMatrix.nodeSize / (2.0 * nodeMatrix.subgraph.nodes.length);
+		if (theta >= 0 && theta < 90) { ancor.x += nodeMatrix.nodeSize; ancor.y += delta; pivot.x = ancor.x + margin; pivot.y = ancor.y; }
+		if (theta >= 90 && theta < 180) { ancor.x += delta; ancor.y += nodeMatrix.nodeSize; pivot.x = ancor.x; pivot.y = ancor.y + margin; }
+		if (theta >= 180 && theta < 270) { ancor.y += delta; pivot.x = ancor.x - margin; pivot.y = ancor.y; }
+		if (theta >= 270 && theta < 360) { ancor.x += delta; pivot.x = ancor.x; pivot.y = ancor.y - margin; }
 	};
 
 	nodetrix.model.NodeTrix.prototype.createNodetrix = function(cluster, x, y) {
@@ -158,6 +162,7 @@
 			while (nodesToRemove.length > 0) { var nodeToRemove = nodesToRemove.pop(); this.forcegraph.nodes.splice(this.forcegraph.nodes.indexOf(nodeToRemove), 1); this.visualgraph.nodes.splice(this.visualgraph.nodes.indexOf(nodeToRemove), 1); }
 
 			this.update();
+			this.render();
 
 			return nodeMatrix;
 		}
@@ -210,21 +215,31 @@
 
 	// Constructor
 	nodetrix.d3.NodeTrix = function(id, width, height, config) {
-			nodetrix.d3.Graph.call(this, id, width, height, config);
-			nodetrix.model.NodeTrix.call(this, id, width, height, config);
+		nodetrix.d3.Graph.call(this, id, width, height, config);
+		nodetrix.model.NodeTrix.call(this, id, width, height, config);
 
-			// visual layers
-			this.layer.style("stroke", "gray").style("stroke-width", 1).attr("rx", 15).attr("ry", 15);
-			this.matrix = this.nodesLayer.selectAll(".matrix");
-			this.bridge = this.edgesLayer.selectAll(".bridge");
+		// visual layers
+		this.layer.style("stroke", "gray").style("stroke-width", 1).attr("rx", 15).attr("ry", 15);
+		this.matrix = this.nodesLayer.selectAll(".matrix");
+		this.bridge = this.edgesLayer.selectAll(".bridge");
 
-			this.line = d3.svg.line().x(function(d) { return d.x; }).y(function(d) { return d.y; }).interpolate("basis");
+		this.line = d3.svg.line().x(function(d) { return d.x; }).y(function(d) { return d.y; }).interpolate("basis");
 
-			this.matrixHandler = new nodetrix.Handler(this);
+		this.matrixHandler = new nodetrix.Handler(this);
 	};
 
 	// Inheritance
 	for (var proto in nodetrix.model.NodeTrix.prototype) nodetrix.d3.NodeTrix.prototype[proto] = nodetrix.model.NodeTrix.prototype[proto];
+
+	nodetrix.d3.NodeTrix.prototype.bind = function(data, labels, clustering) {
+		this.nodesLayer.selectAll(".node").remove();
+		this.edgesLayer.selectAll(".link").remove();
+
+		this.node = this.nodesLayer.selectAll(".node");
+		this.link = this.edgesLayer.selectAll(".link");
+
+		nodetrix.model.NodeTrix.prototype.bind.call(this, data, labels, clustering);
+	};
 
 	// Recenter
 	nodetrix.d3.NodeTrix.prototype.recenter = function() {
@@ -242,64 +257,64 @@
 
 	// Update
 	nodetrix.d3.NodeTrix.prototype.update = function(width, height) {
-			var _this = this;
+		var _this = this;
 
-			this.matrix = this.matrix.data(this.viewmatrix, function(d) { return d.id; });
-			this.matrix.enter().append('g').attr("class", "matrix").each(function(element) {
-				var submatrix = element.getSubmatrix();
-				var matrix = new nodetrix.d3.Matrix.SubMatrix(d3.select(this));
-				matrix.config = _this.config;
-				matrix.fill = function(cell) { return cell.x == cell.y ? _this.nodeColor(submatrix[cell.y][cell.x].node) : cell.z ? matrix.config.cellColorLink : matrix.config.cellColor; };
-				matrix.strokeWidth = function(cell) { return cell.x == cell.y ? submatrix[cell.y][cell.x].node.isHighlighted ? matrix.config.cellStrokeWidth * 1 : matrix.config.cellStrokeWidth : matrix.config.cellStrokeWidth; };
-				matrix.cellHandler = _this.matrixHandler;
+		this.matrix = this.matrix.data(this.viewmatrix, function(d) { return d.id; });
+		this.matrix.enter().append('g').attr("class", "matrix").each(function(element) {
+			var submatrix = element.getSubmatrix();
+			var matrix = new nodetrix.d3.Matrix.SubMatrix(d3.select(this));
+			matrix.config = _this.config;
+			matrix.fill = function(cell) { return cell.x == cell.y ? _this.nodeColor(submatrix[cell.y][cell.x].node) : cell.z ? matrix.config.cellColorLink : matrix.config.cellColor; };
+			matrix.strokeWidth = function(cell) { return cell.x == cell.y ? submatrix[cell.y][cell.x].node.isHighlighted ? matrix.config.cellStrokeWidth * 1 : matrix.config.cellStrokeWidth : matrix.config.cellStrokeWidth; };
+			matrix.cellHandler = _this.matrixHandler;
 
-				var ordering = { labels: d3.range(submatrix.length), clustering: d3.range(submatrix.length) };
-				var idx = 0, nodes = []; element.subgraph.nodes.forEach(function(d) { nodes.push(d.raw); });
-				Object.keys(_this.clustering).forEach(function(key) { _this.clustering[key].forEach(function(d) { var i = $.inArray(d, nodes); if (i >= 0) { ordering.labels[idx] = i; idx++; } }); });
+			var ordering = { labels: d3.range(submatrix.length), clustering: d3.range(submatrix.length) };
+			var idx = 0, nodes = []; element.subgraph.nodes.forEach(function(d) { nodes.push(d.raw); });
+			Object.keys(_this.clustering).forEach(function(key) { _this.clustering[key].forEach(function(d) { var i = $.inArray(d, nodes); if (i >= 0) { ordering.labels[idx] = i; idx++; } }); });
 
-				var adjacency = submatrix.map(function(row) { return row.map(function(cell) { return cell.x == cell.y ? 0 : cell.z; }); });
-				var leafOrder = reorder.leafOrder().distance(science.stats.distance.manhattan)(adjacency);
-				leafOrder.forEach(function(lo, i) { ordering.clustering[i] = lo; });
+			var adjacency = submatrix.map(function(row) { return row.map(function(cell) { return cell.x == cell.y ? 0 : cell.z; }); });
+			var leafOrder = reorder.leafOrder().distance(science.stats.distance.manhattan)(adjacency);
+			leafOrder.forEach(function(lo, i) { ordering.clustering[i] = lo; });
 
-				var labels = []; element.subgraph.nodes.forEach(function(d) { labels.push(_this.labels[$.inArray(d, _this.graph.nodes)]); });
+			var labels = []; element.subgraph.nodes.forEach(function(d) { labels.push(_this.labels[$.inArray(d, _this.graph.nodes)]); });
 
-				matrix.bind(submatrix, labels, ordering);
+			matrix.bind(submatrix, labels, ordering);
 
-				element.matrix = matrix;
-			});
-			this.matrix.transition().style("opacity", 1);
-			this.matrix.exit().transition().style("opacity", 0).remove();
+			element.matrix = matrix;
+		});
+		this.matrix.transition().style("opacity", 1);
+		this.matrix.exit().transition().style("opacity", 0).remove();
 
-			this.viewmatrix.forEach(function(element) { element.matrix.update(); });
+		this.viewmatrix.forEach(function(element) { element.matrix.update(); });
 
-			this.bridge = this.bridge.data(this.viewbridges, function(d) { return d.id; });
-			this.bridge.enter().append("svg:path").attr("class", "bridge");
-			this.bridge.transition().style("opacity", 1);
-			this.bridge.exit().transition().style("opacity", 0).remove();
+		this.bridge = this.bridge.data(this.viewbridges, function(d) { return d.id; });
+		this.bridge.enter().append("svg:path").attr("class", "bridge");
+		this.bridge.transition().style("opacity", 1);
+		this.bridge.exit().transition().style("opacity", 0).remove();
 
-			this.matrix.call(this.d3cola.drag);  // node drag interaction
+		this.matrix.call(this.d3cola.drag);  // node drag interaction
 
-			nodetrix.d3.Graph.prototype.update.call(this);
-			nodetrix.model.NodeTrix.prototype.update.call(this);
+		nodetrix.d3.Graph.prototype.update.call(this);
+		nodetrix.model.NodeTrix.prototype.update.call(this);
 	};
 
 	// Render
 	nodetrix.d3.NodeTrix.prototype.render = function(width, height) {
-			var _this = this;
-			nodetrix.model.NodeTrix.prototype.render.call(this);
-			nodetrix.d3.Graph.prototype.render.call(this);
+		var _this = this;
+		nodetrix.model.NodeTrix.prototype.render.call(this);
+		nodetrix.d3.Graph.prototype.render.call(this);
 
-			this.viewmatrix.forEach(function(d) { d.nodeSize = d.cluster.length * _this.config.cellSize; d.width = d.nodeSize + _this.config.margin; d.height = d.nodeSize + _this.config.margin; d.matrix.render(); });
+		this.viewmatrix.forEach(function(d) { d.nodeSize = d.cluster.length * _this.config.cellSize; d.width = d.nodeSize + _this.config.margin; d.height = d.nodeSize + _this.config.margin; d.matrix.render(); });
 
-			this.matrix.attr("transform", function(d, i) { return !isNaN(d.x) && !isNaN(d.y) ? "translate("+(d.x-d.nodeSize/2.0)+","+(d.y-d.nodeSize/2.0)+")" : "translate(0,0)"; });
+		this.matrix.attr("transform", function(d, i) { return !isNaN(d.x) && !isNaN(d.y) ? "translate("+(d.x-d.nodeSize/2.0)+","+(d.y-d.nodeSize/2.0)+")" : "translate(0,0)"; });
 
-			this.bridge.attr("d", function (d) {
-				var sourceAncor = { x: d.source.x, y: d.source.y }, sourcePivot = { x: d.source.x, y: d.source.y }, targetAncor = { x: d.target.x, y: d.target.y }, targetPivot = { x: d.target.x, y: d.target.y };
-				var dx = d.target.x - d.source.x, dy = d.target.y - d.source.y, dr = Math.sqrt(dx * dx + dy * dy), theta = dx !== 0 ? Math.atan(dy / dx) / (Math.PI/180.0) : dy >= 0 ? 90 : 270; theta = dx < 0 ? theta+180 : dy < 0 ? theta+360 : theta; theta = (theta + 45) % 360;
-				if ('subgraph' in d.source) { _this.updateAncor(d.source, $.inArray($.inArray(d.originalSource, d.source.subgraph.nodes), d.source.matrix.scale.domain()), theta, _this.config.margin, sourceAncor, sourcePivot); }
-				if ('subgraph' in d.target) { _this.updateAncor(d.target, $.inArray($.inArray(d.originalTarget, d.target.subgraph.nodes), d.target.matrix.scale.domain()), (theta + 180) % 360, _this.config.margin, targetAncor, targetPivot); }
-				return _this.line([sourceAncor, sourcePivot, targetPivot, targetAncor]);
-			}).style("fill", "transparent").style("stroke", function(d) { return _this.bridgeStroke(d); }).style("stroke-width", function(d) { return _this.bridgeStrokeWidth(d); });
+		this.bridge.attr("d", function (d) {
+			var sourceAncor = { x: d.source.x, y: d.source.y }, sourcePivot = { x: d.source.x, y: d.source.y }, targetAncor = { x: d.target.x, y: d.target.y }, targetPivot = { x: d.target.x, y: d.target.y };
+			var dx = d.target.x - d.source.x, dy = d.target.y - d.source.y, dr = Math.sqrt(dx * dx + dy * dy), theta = dx !== 0 ? Math.atan(dy / dx) / (Math.PI/180.0) : dy >= 0 ? 90 : 270; theta = dx < 0 ? theta+180 : dy < 0 ? theta+360 : theta; theta = (theta + 45) % 360;
+			if ('subgraph' in d.source) { _this.updateAncor(d.source, $.inArray($.inArray(d.originalSource, d.source.subgraph.nodes), d.source.matrix.scale.domain()), theta, _this.config.margin, sourceAncor, sourcePivot); }
+			if ('subgraph' in d.target) { _this.updateAncor(d.target, $.inArray($.inArray(d.originalTarget, d.target.subgraph.nodes), d.target.matrix.scale.domain()), (theta + 180) % 360, _this.config.margin, targetAncor, targetPivot); }
+			return _this.line([sourceAncor, sourcePivot, targetPivot, targetAncor]);
+		}).style("fill", "transparent").style("stroke", function(d) { return _this.bridgeStroke(d); }).style("stroke-width", function(d) { return _this.bridgeStrokeWidth(d); });
 	};
 
 })
@@ -324,19 +339,19 @@
 	// Resize
 	nodetrix.gl.NodeTrix.prototype.resize = function(width, height) {
 
-			this.update();
+		this.update();
 	};
 
 	// Update
 	nodetrix.gl.NodeTrix.prototype.update = function(width, height) {
 
-			nodetrix.model.NodeTrix.prototype.update.call(this);
+		nodetrix.model.NodeTrix.prototype.update.call(this);
 	};
 
 	// Render
 	nodetrix.gl.NodeTrix.prototype.render = function(width, height) {
 
-			nodetrix.model.NodeTrix.prototype.render.call(this);
+		nodetrix.model.NodeTrix.prototype.render.call(this);
 	};
 
 })
