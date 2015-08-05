@@ -134,9 +134,13 @@
 
 		this.layer = d3.select(this.id);
 
+		var aspectRatio = width / height, viewSize = width;
+		this.translate = [-width/4.0, -height/4.0];
 		this.scene = new THREE.Scene();
-		//this.camera = new THREE.OrthographicCamera(0, width, 0, height, -500, 10000); this.camera.position.z = 1;
-		this.camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, -500, 10000); this.camera.position.z = 1;
+		this.camera = new THREE.OrthographicCamera(-aspectRatio*viewSize/2.0, aspectRatio*viewSize/2.0, viewSize/2.0, -viewSize/2.0, -1000, 1000);
+		//this.camera = new THREE.PerspectiveCamera(70, aspectRatio, 0.1, 10000);
+		//this.camera.position.set(0, 0, 0);
+		//this.camera.updateProjectionMatrix();
 
 		this.raycaster = new THREE.Raycaster();
 		this.mouse = new THREE.Vector2();

@@ -393,6 +393,8 @@
 			material = new THREE.LineBasicMaterial({ linewidth: 1, vertexColors: THREE.VertexColors, dashSize: 0, gapSize: 0 });
 			this.links = new THREE.Line(geometry, material, THREE.LinePieces);
 
+			//this.scene.add(new THREE.Mesh( new THREE.BoxGeometry(_this.width, _this.height*4, 0), new THREE.MeshBasicMaterial({ color: 0xff0000 })));
+
 			this.scene.add(this.links);
 			this.scene.add(this.nodes);
 		}
@@ -416,7 +418,7 @@
 			}
 		}
 
-		var last = null;
+		var last = null, dx = 0, dy = 0;
 		d3.select(this.id)
 		.on('mousemove', function() {
 			_this.mouse.x = ( d3.mouse(this)[0] / _this.width ) * 2 - 1;
@@ -426,7 +428,7 @@
 			if ( intersects.length > 0 ) { last = _this.visualgraph.nodes[intersects[0].index]; if (last) _this.handler.mouseover(last); }
 			else { if (last) _this.handler.mouseout(last); last = null; }
 		})
-		//.call(d3.behavior.drag().on('drag', function() { console.log("drag"); _this.render(); }));
+		.call(d3.behavior.drag().on('drag', function() { if (last != null) { last.x = d3.event.x; last.y = _this.height-d3.event.y; } _this.render(); })); // TODO: fix zoom/translate
 
 		this.nodeHandler.bind(_this.handler);
 	};
@@ -436,7 +438,7 @@
 		var _this = this;
 
 		this.visualgraph.nodes.forEach(function(d, i) {
-			_this.buffers.nodes.positions.array[3*i] = d.x; _this.buffers.nodes.positions.array[3*i+1] = d.y; _this.buffers.nodes.positions.array[3*i+2] = 0;
+			_this.buffers.nodes.positions.array[3*i] = (d.x-_this.width/4.0)+_this.translate[0]; _this.buffers.nodes.positions.array[3*i+1] = (d.y-_this.height/4.0)+_this.translate[1]; _this.buffers.nodes.positions.array[3*i+2] = 0;
 			_this.buffers.nodes.colors.array[3*i] = d.fill().r/255.0; _this.buffers.nodes.colors.array[3*i+1] = d.fill().g/255.0; _this.buffers.nodes.colors.array[3*i+2] = d.fill().b/255.0;
 			_this.buffers.nodes.sizes.array[i] = d.size()*2;
 		});
@@ -445,8 +447,8 @@
 		this.buffers.nodes.sizes.needsUpdate = true;
 
 		this.visualgraph.links.forEach(function(d, i) {
-			_this.buffers.links.positions.array[6*i] = d.source.x; _this.buffers.links.positions.array[6*i+1] = d.source.y; _this.buffers.links.positions.array[6*i+2] = -1;
-			_this.buffers.links.positions.array[6*i+3] = d.target.x; _this.buffers.links.positions.array[6*i+4] = d.target.y; _this.buffers.links.positions.array[6*i+5] = -1;
+			_this.buffers.links.positions.array[6*i] = d.source.x-_this.width/4.0+_this.translate[0]; _this.buffers.links.positions.array[6*i+1] = d.source.y-_this.height/4.0+_this.translate[1]; _this.buffers.links.positions.array[6*i+2] = -1;
+			_this.buffers.links.positions.array[6*i+3] = d.target.x-_this.width/4.0+_this.translate[0]; _this.buffers.links.positions.array[6*i+4] = d.target.y-_this.height/4.0+_this.translate[1]; _this.buffers.links.positions.array[6*i+5] = -1;
 			_this.buffers.links.colors.array[6*i] = d.stroke().r/255.0; _this.buffers.links.colors.array[6*i+1] = d.stroke().g/255.0; _this.buffers.links.colors.array[6*i+2] = d.stroke().b/255.0;
 			_this.buffers.links.colors.array[6*i+3] = d.stroke().r/255.0; _this.buffers.links.colors.array[6*i+4] = d.stroke().g/255.0; _this.buffers.links.colors.array[6*i+5] = d.stroke().b/255.0;
 		});
