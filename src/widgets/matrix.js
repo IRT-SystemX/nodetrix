@@ -64,6 +64,21 @@
 	nodetrix.model.Matrix.prototype.strokeWidth = function(d) { return this.config.cellStrokeWidth; };
 
 	nodetrix.model.Matrix.prototype.opacity = function(d) { return 1.0; };
+
+	// Node matrix
+	nodetrix.model.Matrix.SubMatrix = function(id, width, height, config) {
+		nodetrix.model.Matrix.call(this, id, width, height, config);
+		this.config = {
+			cellSize: config && 'cellsize' in config ? config.cellsize : 10,
+			cellColor: config && 'cellcolor' in config ? config.cellcolor : "#FFFFFF",
+			cellColorLink: config && 'cellcolorlink' in config ? config.cellcolorlink : "#000000",
+			cellColorDiag: config && 'cellcolordiag' in config ? config.cellcolordiag : "#0000FF",
+			cellStroke: config && 'cellstroke' in config ? config.cellstroke : "#0000FF",
+			cellStrokeWidth: config && 'cellstrokewidth' in config ? config.cellstrokewidth : 1,
+			ordering: config && 'ordering' in config ? config.ordering : 'none',
+			allowLabels: config && 'allowlabels' in config ? config.allowlabels : false
+		};
+	};
 })
 (this.nodetrix = this.nodetrix ? this.nodetrix : {});
 
@@ -121,7 +136,7 @@
 				.attr("dx", function (d) { return -_this.scale.rangeBand()/2.0; })
 				//.attr("width", function(d) { return mx; }).attr("height", function (d) { return this.getBBox().height; })
 				.style("stroke", function(d) { return "white"; }).style("stroke-width", 0)
-				.style("font-size", function(d) { return 8; })
+				.style("font-size", function(d) { return 8; });
 
 			this.verticalLabels = this.cellLabels.append("text")
 				.text(function(d, i) { return d; })
@@ -130,7 +145,7 @@
 				.attr("dx", function (d) { return -_this.scale.rangeBand()/2.0; })
 				//.attr("width", function(d) { return mx; }).attr("height", function (d) { return this.getBBox().height; })
 				.style("stroke", function(d) { return "white"; }).style("stroke-width", 0)
-				.style("font-size", function(d) { return 8; })
+				.style("font-size", function(d) { return 8; });
 		}
 
 		/*		labels.insert("rect", ":first-child")
@@ -162,21 +177,9 @@
 
 	// Node matrix
 	nodetrix.d3.Matrix.SubMatrix = function(root, config) {
-
+		nodetrix.model.Matrix.SubMatrix.call(this, -1, 0, 0, config);
 		this.svg = root;
-
-		this.config = {
-			cellSize: config && 'cellsize' in config ? config.cellsize : 10,
-			cellColor: config && 'cellcolor' in config ? config.cellcolor : "#FFFFFF",
-			cellColorLink: config && 'cellcolorlink' in config ? config.cellcolorlink : "#000000",
-			cellColorDiag: config && 'cellcolordiag' in config ? config.cellcolordiag : "#0000FF",
-			cellStroke: config && 'cellstroke' in config ? config.cellstroke : "#0000FF",
-			cellStrokeWidth: config && 'cellstrokewidth' in config ? config.cellstrokewidth : 1,
-			ordering: config && 'ordering' in config ? config.ordering : 'none',
-			allowLabels: config && 'allowlabels' in config ? config.allowlabels : false
-		};
 	};
-
 	// Inheritance
 	for (proto in nodetrix.d3.Matrix.prototype) nodetrix.d3.Matrix.SubMatrix.prototype[proto] = nodetrix.d3.Matrix.prototype[proto];
 
@@ -273,9 +276,9 @@
 
 		for(var i = 0, len = this.submatrix.length; i < len; i++) {
 			for(var j = 0; j < len; j++) {
-				_this.buffers.cells.positions.array[i*len*3+3*j] = _this.scale.rangeBand()+_this.scale(this.submatrix[i][j].x); _this.buffers.cells.positions.array[i*len*3+3*j+1] = _this.scale.rangeBand()+_this.scale(this.submatrix[i][j].y); _this.buffers.cells.positions.array[i*len*3+3*j+2] = 0;
-				_this.buffers.cells.colors.array[i*len*3+3*j] = _this.fill(this.submatrix[i][j]).r/255.0; _this.buffers.cells.colors.array[i*len*3+3*j+1] = _this.fill(this.submatrix[i][j]).g/255.0; _this.buffers.cells.colors.array[i*len*3+3*j+2] = _this.fill(this.submatrix[i][j]).b/255.0;
-				_this.buffers.cells.sizes.array[i*len+j] = _this.scale.rangeBand();
+				this.buffers.cells.positions.array[i*len*3+3*j] = this.scale.rangeBand()+this.scale(this.submatrix[i][j].x)+this.translate[0]; this.buffers.cells.positions.array[i*len*3+3*j+1] = this.height-(this.scale.rangeBand()+this.scale(this.submatrix[i][j].y))+this.translate[1]; this.buffers.cells.positions.array[i*len*3+3*j+2] = 0;
+				this.buffers.cells.colors.array[i*len*3+3*j] = this.fill(this.submatrix[i][j]).r/255.0; this.buffers.cells.colors.array[i*len*3+3*j+1] = this.fill(this.submatrix[i][j]).g/255.0; this.buffers.cells.colors.array[i*len*3+3*j+2] = this.fill(this.submatrix[i][j]).b/255.0;
+				this.buffers.cells.sizes.array[i*len+j] = this.scale.rangeBand();
 			}
 		}
 		this.buffers.cells.positions.needsUpdate = true;
@@ -286,6 +289,22 @@
 
 		nodetrix.model.Matrix.prototype.render.call(this);
 	};
+
+	// Node matrix
+	nodetrix.gl.Matrix.SubMatrix = function(widget, config) {
+		nodetrix.model.Matrix.SubMatrix.call(this, widget.id, widget.width, widget.height, config);
+
+		this.renderer = widget.renderer;
+		this.layer = widget.layer;
+		this.translate = widget.translate;
+		this.scene = widget.scene;
+		this.camera = widget.camera;
+		this.raycaster = widget.raycaster;
+		this.mouse = widget.mouse;
+		this.handler = widget.handler;
+	};
+	// Inheritance
+	for (proto in nodetrix.gl.Matrix.prototype) nodetrix.gl.Matrix.SubMatrix.prototype[proto] = nodetrix.gl.Matrix.prototype[proto];
 
 })
 (this.nodetrix = this.nodetrix ? this.nodetrix : {});

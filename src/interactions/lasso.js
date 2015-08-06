@@ -24,7 +24,7 @@
 	};
 
 	// Update
-nodetrix.d3.interaction.Lasso.prototype.update = function() {
+	nodetrix.d3.interaction.Lasso.prototype.update = function() {
 		var _this = this;
 		this.lasso.remove();
 		this.lasso = this.lasso.data(this.points);
@@ -38,8 +38,9 @@ nodetrix.d3.interaction.Lasso.prototype.update = function() {
 
 		//if (keyBinding) key(keyBinding, function() { $(event).css('cursor', 'crosshair'); });
 
-		var currentKey = keyBinding;
-		var isPressed = function(key) { return key == currentKey; };
+		var currentKey = null, isPressed = function(key) { return key == currentKey; };
+		var keydown = d3.select("body").on("keydown"); d3.select("body").on("keydown", function() { currentKey = String.fromCharCode(d3.event.keyCode).toLowerCase(); keydown(); });
+		var keyup = d3.select("body").on("keyup"); d3.select("body").on("keyup", function() { currentKey = null; keyup(); });
 
 		this.widget.viewHandler.mousedown = function(event, widget, d) {
 			if (!keyBinding || isPressed(keyBinding)) { _this.isMouseDown = true; }

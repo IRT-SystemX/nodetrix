@@ -32,6 +32,10 @@
 
 		// interactions / visual encoding
 		var bindInteractions = function(data) {
+			var keyDown = false; var panNzoom = new nodetrix[renderer].interaction.Zoom($.context.widgets.matrix); panNzoom.bind();
+			//d3.select("body").on("keydown", function() { if (d3.event.altKey) { if (!keyDown) { keyDown = true; panNzoom.bind(); } } });
+			//d3.select("body").on("keyup", function() { if (keyDown) { keyDown = false; panNzoom.unbind(); } });
+
 			$.context.widgets.matrix.cellHandler.mouseenter = function(event, widget, d) {
 				$.context.widgets.matrix.opacity = function(dd) { return dd.y === d.y || dd.x == d.y ? 1.0 : 0.2; };
 				$.context.widgets.matrix.stroke = function(dd) { return dd.y === d.y || dd.x == d.y ? "gray" : "white"; };

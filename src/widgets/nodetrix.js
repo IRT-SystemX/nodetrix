@@ -24,6 +24,8 @@
 		this.viewmatrix = [];
 		this.viewbridges = [];
 		this.index = {};
+
+		this.matrixHandler = new nodetrix.Handler(this);
 	};
 
 	// Inheritance
@@ -123,15 +125,33 @@
 				nodeSize: cluster.length * _this.config.cellSize,
 				width: cluster.length * _this.config.cellSize + _this.config.margin, height: cluster.length * _this.config.cellSize + _this.config.margin, // size of the box to avoid overlap in d3cola and visual size
 				subgraph: { nodes: [], links: [] },
-				getSubmatrix: function() {
-					var data = [], obj = this;
-					this.subgraph.nodes.forEach(function(d, i) { data[i] = d3.range(obj.subgraph.nodes.length).map(function(j) { return { x: j, y: i, z: 0, parent: obj }; }); data[i][i].z = 1; data[i][i].node = obj.subgraph.nodes[i]; });
+				getSubmatrix: function(matrix) {
+					var submatrix = [], obj = this;
+					this.subgraph.nodes.forEach(function(d, i) { submatrix[i] = d3.range(obj.subgraph.nodes.length).map(function(j) { return { x: j, y: i, z: 0, parent: obj }; }); submatrix[i][i].z = 1; submatrix[i][i].node = obj.subgraph.nodes[i]; });
 					this.subgraph.links.forEach(function(link) {
 						var source = $.inArray(link.source, obj.subgraph.nodes); var target = $.inArray(link.target, obj.subgraph.nodes);
 						if (source < 0 || target < 0) throw "Linking error: from "+source+" to "+target;
-						data[source][target].z += link.raw.value; data[target][source].z += link.raw.value;
+						submatrix[source][target].z += link.raw.value; submatrix[target][source].z += link.raw.value;
 					});
-					return data;
+
+					matrix.config = _this.config;
+					matrix.fill = function(cell) { return cell.x == cell.y ? _this.nodeColor(submatrix[cell.y][cell.x].node) : cell.z ? matrix.config.cellColorLink : matrix.config.cellColor; };
+					matrix.strokeWidth = function(cell) { return cell.x == cell.y ? submatrix[cell.y][cell.x].node.isHighlighted ? matrix.config.cellStrokeWidth * 1 : matrix.config.cellStrokeWidth : matrix.config.cellStrokeWidth; };
+					matrix.cellHandler = _this.matrixHandler;
+
+					var ordering = { labels: d3.range(submatrix.length), clustering: d3.range(submatrix.length) };
+					var idx = 0, nodes = []; nodeMatrix.subgraph.nodes.forEach(function(d) { nodes.push(d.raw); });
+					Object.keys(_this.clustering).forEach(function(key) { _this.clustering[key].forEach(function(d) { var i = $.inArray(d, nodes); if (i >= 0) { ordering.labels[idx] = i; idx++; } }); });
+
+					var adjacency = submatrix.map(function(row) { return row.map(function(cell) { return cell.x == cell.y ? 0 : cell.z; }); });
+					var leafOrder = reorder.leafOrder().distance(science.stats.distance.manhattan)(adjacency);
+					leafOrder.forEach(function(lo, i) { ordering.clustering[i] = lo; });
+
+					var labels = []; nodeMatrix.subgraph.nodes.forEach(function(d) { labels.push(_this.labels[$.inArray(d, _this.graph.nodes)]); });
+
+					matrix.bind(submatrix, labels, ordering);
+
+					return matrix
 				}
 			};
 
@@ -225,7 +245,6 @@
 
 		this.line = d3.svg.line().x(function(d) { return d.x; }).y(function(d) { return d.y; }).interpolate("basis");
 
-		this.matrixHandler = new nodetrix.Handler(this);
 	};
 
 	// Inheritance
@@ -256,32 +275,11 @@
 	};
 
 	// Update
-	nodetrix.d3.NodeTrix.prototype.update = function(width, height) {
+	nodetrix.d3.NodeTrix.prototype.update = function() {
 		var _this = this;
 
 		this.matrix = this.matrix.data(this.viewmatrix, function(d) { return d.id; });
-		this.matrix.enter().append('g').attr("class", "matrix").each(function(element) {
-			var submatrix = element.getSubmatrix();
-			var matrix = new nodetrix.d3.Matrix.SubMatrix(d3.select(this));
-			matrix.config = _this.config;
-			matrix.fill = function(cell) { return cell.x == cell.y ? _this.nodeColor(submatrix[cell.y][cell.x].node) : cell.z ? matrix.config.cellColorLink : matrix.config.cellColor; };
-			matrix.strokeWidth = function(cell) { return cell.x == cell.y ? submatrix[cell.y][cell.x].node.isHighlighted ? matrix.config.cellStrokeWidth * 1 : matrix.config.cellStrokeWidth : matrix.config.cellStrokeWidth; };
-			matrix.cellHandler = _this.matrixHandler;
-
-			var ordering = { labels: d3.range(submatrix.length), clustering: d3.range(submatrix.length) };
-			var idx = 0, nodes = []; element.subgraph.nodes.forEach(function(d) { nodes.push(d.raw); });
-			Object.keys(_this.clustering).forEach(function(key) { _this.clustering[key].forEach(function(d) { var i = $.inArray(d, nodes); if (i >= 0) { ordering.labels[idx] = i; idx++; } }); });
-
-			var adjacency = submatrix.map(function(row) { return row.map(function(cell) { return cell.x == cell.y ? 0 : cell.z; }); });
-			var leafOrder = reorder.leafOrder().distance(science.stats.distance.manhattan)(adjacency);
-			leafOrder.forEach(function(lo, i) { ordering.clustering[i] = lo; });
-
-			var labels = []; element.subgraph.nodes.forEach(function(d) { labels.push(_this.labels[$.inArray(d, _this.graph.nodes)]); });
-
-			matrix.bind(submatrix, labels, ordering);
-
-			element.matrix = matrix;
-		});
+		this.matrix.enter().append('g').attr("class", "matrix").each(function(element) { element.matrix = element.getSubmatrix(  new nodetrix.d3.Matrix.SubMatrix( d3.select(this)) ); });
 		this.matrix.transition().style("opacity", 1);
 		this.matrix.exit().transition().style("opacity", 0).remove();
 
@@ -299,7 +297,7 @@
 	};
 
 	// Render
-	nodetrix.d3.NodeTrix.prototype.render = function(width, height) {
+	nodetrix.d3.NodeTrix.prototype.render = function() {
 		var _this = this;
 		nodetrix.model.NodeTrix.prototype.render.call(this);
 		nodetrix.d3.Graph.prototype.render.call(this);
@@ -337,20 +335,41 @@
 	for (var proto in nodetrix.model.NodeTrix.prototype) nodetrix.gl.NodeTrix.prototype[proto] = nodetrix.model.NodeTrix.prototype[proto];
 
 	// Resize
-	nodetrix.gl.NodeTrix.prototype.resize = function(width, height) {
-
-		this.update();
-	};
+	nodetrix.gl.NodeTrix.prototype.resize = function(width, height) { nodetrix.gl.Graph.prototype.resize.call(this, width, height); };
 
 	// Update
-	nodetrix.gl.NodeTrix.prototype.update = function(width, height) {
+	nodetrix.gl.NodeTrix.prototype.update = function() {
+		var _this = this;
 
+		this.matrix = [];
+		this.viewmatrix.forEach(function(element) {
+			var submatrix = new nodetrix.gl.Matrix.SubMatrix( _this );
+			_this.matrix.push(submatrix);
+			element.matrix = element.getSubmatrix(submatrix);
+			element.matrix.update();
+		});
+
+		nodetrix.gl.Graph.prototype.update.call(this);
 		nodetrix.model.NodeTrix.prototype.update.call(this);
 	};
 
 	// Render
-	nodetrix.gl.NodeTrix.prototype.render = function(width, height) {
+	nodetrix.gl.NodeTrix.prototype.render = function() {
+		var _this = this;
 
+		if (this.matrix)
+			this.matrix.forEach(function(submatrix, i) {
+				/*d.nodeSize = d.cluster.length * _this.config.cellSize;
+				d.width = d.nodeSize + _this.config.margin;
+				d.height = d.nodeSize + _this.config.margin;*/
+
+				// >> Translate according to the node position.
+
+				submatrix.x = _this.viewmatrix[i].x; submatrix.y = _this.viewmatrix[i].y;
+				submatrix.render();
+			});
+
+		nodetrix.gl.Graph.prototype.render.call(this);
 		nodetrix.model.NodeTrix.prototype.render.call(this);
 	};
 
