@@ -155,7 +155,7 @@
 			return { index: index, reversed: reversed };
 		};
 
-		$.context = new d3Context(function() { d3.json("/data/miserables.json", function (data) { load(data); }); });
+		$.context = new d3Context(function() { d3.json("data/miserables.json", function (data) { load(data); }); });
 		$.context.waitLoaded(function() {
 
 			// Compute a graph clustering
