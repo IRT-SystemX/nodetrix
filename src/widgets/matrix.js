@@ -56,10 +56,10 @@
 
 		this.cells = [];
 
-		this.svg.selectAll(".cell").remove(); this.svg.selectAll(".row").remove(); this.svg.selectAll(".column").remove();
+		this.svg.selectAll(".cell").remove(); this.svg.selectAll(".mrow").remove(); this.svg.selectAll(".column").remove();
 
-		this.rows = this.svg.selectAll(".row").data(this.submatrix).enter()
-			.append("g").attr("class", "row").attr("transform", function(d, i) { return "translate("+(1)+","+(_this.scale(i)+1)+")"; })
+		this.rows = this.svg.selectAll(".mrow").data(this.submatrix).enter()
+			.append("g").attr("class", "mrow").attr("transform", function(d, i) { return "translate("+(1)+","+(_this.scale(i)+1)+")"; })
 				.each(function(row) {
 					_this.cells.push( d3.select(this).selectAll(".cell").data(row)
 						.enter().append("rect").attr("class", "cell")
